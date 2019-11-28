@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+   <!--  <p th:text="'Hello, ' + ${name} + '!'" /> -->
+   
+   
+ <!--   <p id="demo"></p>   -->
+   <p id="box"></p>
+   <p id="frame"></p>
+
+	
+<script type="text/javascript">
+	
+	
+function iframef(message2){
+		
+  message2 = message2.replace("watch?v=","embed/");
+  document.getElementById('frame').innerHTML = "<iframe id='frame' width='420' height='315' src="+message2+"></iframe>";
+
+}; 
+
+$(document).ready(function() {
+		
+
+    var message = "[[${name}]]";
+ <!--    document.getElementById("demo").innerHTML = message; -->
+    
+    message = message.replace(']','');
+    message = message.replace('[','');
+    var nameArr = message.split(',')
+    
+    var html = "<table border='1|1'>";
+    for (var i = 0; i < nameArr.length; i++) {
+        html+="<tr>";
+        html+="<td>"+nameArr[i]+"</td>";
+        html+="</tr>";
+
+    }
+    html+="</table>";
+    
+    document.getElementById("box").innerHTML = html;
+    
+    var rows = document.getElementsByTagName("tr");
+    for (var i = 0; i < rows.length; i++)
+    {
+    	
+         rows[i].onclick = function() {
+        	
+        	        	        	
+        	message2 = $(event.target).text().replace('<td>','');
+        	message2 = message2.replace('</td>','');
+        <!-- 	document.getElementById("frame").src =message2; -->
+        	
+        	iframef(message2);
+        	       	
+        	
+        };
+    }
+    
+    var frame = " <iframe id='frame' width='420' height='315' src=";
+   
+    var message2 = rows[1].innerHTML.replace('<td>','');
+	message2 = message2.replace('</td>','');
+	message2 = message2.replace(/\s/g,'');
+	message2 = message2.replace("watch?v=","embed/");
+
+   frame+='"'+message2+'">';
+   frame+="</iframe>";
+
+   document.getElementById("frame").innerHTML = frame;
+  
+
+});
+  
+	
+
+   
+</script>
+</body>
+</html>
