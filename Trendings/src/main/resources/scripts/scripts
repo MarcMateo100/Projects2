@@ -1,0 +1,80 @@
+CREATE SEQUENCE table_youtube2018_id_seq;
+CREATE TABLE public.youtube2018
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube2018_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_youtube2019_id_seq;
+CREATE TABLE public.youtube2019
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube2019_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_music2019_id_seq;
+CREATE TABLE public.music2019
+(
+    id integer NOT NULL DEFAULT nextval('table_music2019_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
+CREATE SEQUENCE table_espanya2019_id_seq;
+CREATE TABLE public.espanya2019
+(
+    id integer NOT NULL DEFAULT nextval('table_espanya2019_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_japon2019_id_seq;
+CREATE TABLE public.japon2019
+(
+    id integer NOT NULL DEFAULT nextval('table_japon2019_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_youtube24_id_seq;
+CREATE TABLE public.youtube24
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube24_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_youtube7_id_seq;
+CREATE TABLE public.youtube7
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube7_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_youtube30_id_seq;
+CREATE TABLE public.youtube30
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube30_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)

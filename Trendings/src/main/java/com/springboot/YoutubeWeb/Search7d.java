@@ -32,18 +32,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 /**
  * Prints a list of videos based on a search term.
  *
  * @author Jeremy Walker
  */
-public class Search {
+public class Search7d {
 
   /** Global instance properties filename. */
   private static String PROPERTIES_FILENAME = "youtube.properties";
@@ -71,7 +75,7 @@ public class Search {
     // Read the developer key from youtube.properties
     Properties properties = new Properties();
     try {
-      InputStream in = Search.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
+      InputStream in = Search7d.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
       properties.load(in);
 
     } catch (IOException e) {
@@ -91,9 +95,7 @@ public class Search {
       }).setApplicationName("youtube-cmdline-search-sample").build();
 
       // Get query term from user.
-      String queryTerm = "";
-    		  
-    		  /*getInputQuery();*/
+      String queryTerm = " ";
 
       YouTube.Search.List search = youtube.search().list("id,snippet");
       /*
@@ -108,10 +110,23 @@ public class Search {
        * We are only searching for videos (not playlists or channels). If we were searching for
        * more, we would add them as a string like this: "video,playlist,channel".
        */
+    
       search.setType("video");
       search.setOrder("viewCount");
-      DateTime dt=DateTime.parseRfc3339("2019-01-01T00:00:00-00:00");
-     // DateTime dt2=DateTime.parseRfc3339("2019-01-01T00:00:00-00:00");
+      
+      Date d= new Date(System.currentTimeMillis());
+      GregorianCalendar cal = new GregorianCalendar();
+	  cal.setTime(d);
+	  cal.add(Calendar.DATE, -7);
+      d= cal.getTime();
+      
+      String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+      
+      System.out.println(simpleDateFormat.format(d));
+           
+      DateTime dt=DateTime.parseRfc3339( simpleDateFormat.format(d));
+      //DateTime dt2=DateTime.parseRfc3339("2019-01-01T00:00:00-00:00");
       search.setPublishedAfter(dt);
       //ESPAÑAsearch.setLocation("40.4165001,-3.7025599");
      // search.setPublishedBefore(dt2);
@@ -121,7 +136,7 @@ public class Search {
       //search.setLocation("43.4628005,-7.062646");
       //search.setLocationRadius("900km");
       //search.setRelevanceLanguage("es");
-      search.setRegionCode("ES");
+      //search.setRegionCode("ES");
       
       /*
        * This method reduces the info returned to only the fields we need and makes calls more
@@ -136,10 +151,14 @@ public class Search {
     //Create URLs      
       for (int i=0; i<NUMBER_OF_VIDEOS_RETURNED; i++) {
     	  
-    	  SearchResult result= searchResultList.get(i);            
-    	  ResourceId id1=result.getId();      
+    	  SearchResult result= searchResultList.get(i);
+            
+    	  ResourceId id1=result.getId();
+      
     	  id1.setVideoId(" https://www.youtube.com/watch?v=" + result.getId().getVideoId());
-          result.setId(id1);       
+          
+    	  result.setId(id1);
+       
     	  searchResultList.get(i).setId(id1);
       }
       //End
@@ -154,7 +173,9 @@ public class Search {
       System.err.println("There was an IO error: " + e.getCause() + " : " + e.getMessage());
     } catch (Throwable t) {
       t.printStackTrace();
-    }   
+    }
+    
+    
   }
 
   /*
@@ -198,8 +219,8 @@ public class Search {
 
       SearchResult singleVideo = iteratorSearchResults.next();
       ResourceId rId = singleVideo.getId();
-      
-     // Double checks the kind is video.
+
+      // Double checks the kind is video.
       if (rId.getKind().equals("youtube#video")) {
         Thumbnail thumbnail = (Thumbnail) singleVideo.getSnippet().getThumbnails().get("default");
 
@@ -212,27 +233,31 @@ public class Search {
       //Insert BD
 		try {
 			
-			Class.forName("org.postgresql.Driver");			
-			} catch (ClassNotFoundException e) {			
-				System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
-				e.printStackTrace();
-				return;
+			Class.forName("org.postgresql.Driver");
+			
+			} catch (ClassNotFoundException e) {
+			
+			System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
+			e.printStackTrace();
+			return;
 			}
 		
-			System.out.println("PostgreSQL JDBC Driver Registered!");			
+			System.out.println("PostgreSQL JDBC Driver Registered!");
+			
 			Connection connection = null;
 		
 			try {
 			
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-				"PostgresAdmin");
-				
-				System.out.println("PostgreSQL Connected!" + connection);
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
+			"PostgresAdmin");
 			
-			} catch (SQLException e) {			
-				System.out.println("Connection Failed! Check output console");
-				e.printStackTrace();
-				return;	
+			System.out.println("PostgreSQL Connected!" + connection);
+			
+			} catch (SQLException e) {
+			
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return;	
 			}
 								
 			try {
@@ -240,18 +265,23 @@ public class Search {
 			Statement sql = connection.createStatement();					
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();
-			String queryI = "INSERT INTO espanya2019 (title,url,created_on,last_login) VALUES ( '"+title+"','"+ videos +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
+			String queryI = "INSERT INTO youtube7 (title,url,created_on,last_login) VALUES ( '"+title+"','"+ videos +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
-			if (connection != null) {		
+			if (connection != null) {
+			
 				System.out.println("Successfully added" + queryI);
 				sql.executeUpdate(queryI);
 				sql.close();
-				System.out.println("Successfully added");				
+				System.out.println("Successfully added");
+				
 			} 
 			}catch (SQLException e) {
 				System.out.println("Got an exception! "); 
 	            System.out.println(e.getMessage());
-			}		
-		}    
+			}
+		
+		}
+      
     } 
+
 }

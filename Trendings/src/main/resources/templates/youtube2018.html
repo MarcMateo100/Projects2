@@ -1,87 +1,159 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<style>
+BODY {
+    font-size: 10pt; 
+    color:#000fff;  
+    font-family: Helvetica; 
+    margin: 0 9 9 9;
+}
+
+table {
+    font-size: 8pt; 
+    color:#525252;  
+    font-family: Helvetica; 
+    margin: 1px;
+    border-collapse: separate;
+}
+
+th {
+    font-size: 10pt; 
+    text-align: left;
+    color:#550055;  
+    font-family: Helvetica; 
+    border-color: #999;
+    border-width: 0 0 1px 0;
+    border-style: dotted;
+}
+
+td {
+    font-size: 10pt; 
+    text-align: left;
+    color:#550055;  
+    font-family: Helvetica; 
+    border-color: #999;
+    border-width: 0 0 1px 0;
+    border-style: dotted;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 50%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left ;
+  width: 40%;
+  padding-left: 10px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+</style>
+
 	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <title>Getting Started: Serving Web Content</title>
+	<link rel="stylesheet"  href="style.css"/>
+    <title>Trendings - 2018</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 </head>
 
 <body>
-   <!--  <p th:text="'Hello, ' + ${name} + '!'" /> -->
-   
-   
- <!--   <p id="demo"></p>   -->
-   <p id="box"></p>
-   <p id="frame"></p>
 
-	
+<p><a href="/">Main Page</a></p>
+
+<h2>Most viewed trailers 2018</h2>   
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <p id="frame"></p>
+    </div>
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <p id="box"></p>
+    </div>
+  </div>
+</div>
+
+   
 <script type="text/javascript">
 	
-	
-function iframef(message2){
-		
-  message2 = message2.replace("watch?v=","embed/");
-  document.getElementById('frame').innerHTML = "<iframe id='frame' width='420' height='315' src="+message2+"></iframe>";
-
-}; 
-
 $(document).ready(function() {
-		
 
     var message = "[[${name}]]";
- <!--    document.getElementById("demo").innerHTML = message; -->
-    
     message = message.replace(']','');
     message = message.replace('[','');
     var nameArr = message.split(',')
     
     var html = "<table border='1|1'>";
+    html+="<tr><td> Push to see </td><td> Name </td></tr>";
     for (var i = 0; i < nameArr.length; i++) {
         html+="<tr>";
-        html+="<td>"+nameArr[i]+"</td>";
+        html+="<td>"+ nameArr[i]+"</td>" + "<td>"+ nameArr[i+1] + "</td>"; 
         html+="</tr>";
-
+        i++
     }
     html+="</table>";
-    
+        
     document.getElementById("box").innerHTML = html;
     
     var rows = document.getElementsByTagName("tr");
     for (var i = 0; i < rows.length; i++)
-    {
-    	
-         rows[i].onclick = function() {
-        	
-        	        	        	
-        	message2 = $(event.target).text().replace('<td>','');
-        	message2 = message2.replace('</td>','');
-        <!-- 	document.getElementById("frame").src =message2; -->
-        	
-        	iframef(message2);
-        	       	
-        	
+    {   	
+    	rows[i].onclick = function() {
+    			        	        	   
+    	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){
+    		    	
+    	message2 = $(event.target).text().replace('<td>','');
+        message2 = message2.replace('</td>','');     	
+        message2 = message2.replace("watch?v=","embed/");
+        document.getElementById('frame').innerHTML = "<iframe id='frame' width='840' height='480' src="+message2+"></iframe>";
+    	}
         };
     }
-    
-    var frame = " <iframe id='frame' width='420' height='315' src=";
+     
+    var frame = " <iframe id='frame' width='840' height='480' src=";
    
     var message2 = rows[1].innerHTML.replace('<td>','');
 	message2 = message2.replace('</td>','');
 	message2 = message2.replace(/\s/g,'');
 	message2 = message2.replace("watch?v=","embed/");
-
+		
+   var end = message2.search("<td>");    
+   message2=message2.substring(0, end);
    frame+='"'+message2+'">';
    frame+="</iframe>";
 
    document.getElementById("frame").innerHTML = frame;
-  
-
 });
-  
-	
-
-   
+     
 </script>
 </body>
 </html>

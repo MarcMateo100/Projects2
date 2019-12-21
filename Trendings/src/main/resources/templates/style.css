@@ -1,0 +1,62 @@
+BODY {
+    font-size: 18pt; 
+    color:#000fff;  
+    font-family: Helvetica; 
+    margin: 0 9 9 9;
+}
+
+table {
+    font-size: 8pt; 
+    color:#525252;  
+    font-family: Helvetica; 
+    margin: 0px;
+    border-collapse: separate;
+}
+
+th {
+    font-size: 10pt; 
+    text-align: left;
+    color:#550055;  
+    font-family: Helvetica; 
+    border-color: #999;
+    border-width: 0 0 1px 0;
+    border-style: dotted;
+}
+
+td {
+    font-size: 10pt; 
+    text-align: left;
+    color:#550055;  
+    font-family: Helvetica; 
+    border-color: #999;
+    border-width: 0 0 1px 0;
+    border-style: dotted;
+}
+
+.left {
+    display:inline-block;
+    font-size: 10pt; 
+    color:#990055;  
+    font-family: Helvetica; 
+    margin: 0 0 5 0;
+}
+
+.right {
+    display:inline-block;
+    font-size: 18pt; 
+    font-weight: bold;
+    float: right;
+    color:#525252;  
+    font-family: Helvetica; 
+    margin: 0px;
+}
+
+.question {
+    display:inline-block;
+    font-size: 18pt; 
+    font-weight: bold;
+    float: right;
+    color:#B452CD;  
+    font-family: Helvetica; 
+    margin: 0px;
+}
