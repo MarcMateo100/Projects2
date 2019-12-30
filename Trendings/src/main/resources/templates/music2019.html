@@ -2,82 +2,10 @@
 <html>
 <head>
 <style>
-BODY {
-    font-size: 10pt; 
-    color:#000fff;  
-    font-family: Helvetica; 
-    margin: 0 9 9 9;
-}
-
-table {
-    font-size: 8pt; 
-    color:#525252;  
-    font-family: Helvetica; 
-    margin: 1px;
-    border-collapse: separate;
-}
-
-th {
-    font-size: 10pt; 
-    text-align: left;
-    color:#550055;  
-    font-family: Helvetica; 
-    border-color: #999;
-    border-width: 0 0 1px 0;
-    border-style: dotted;
-}
-
-td {
-    font-size: 10pt; 
-    text-align: left;
-    color:#550055;  
-    font-family: Helvetica; 
-    border-color: #999;
-    border-width: 0 0 1px 0;
-    border-style: dotted;
-}
-
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 50%;
-}
-
-/* Right column */
-.rightcolumn {
-  float: left ;
-  width: 40%;
-  padding-left: 10px;
-}
-
-/* Add a card effect for articles */
-.card {
-  background-color: white;
-  padding: 10px;
-  margin-top: 20px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
-  .leftcolumn, .rightcolumn {
-    width: 100%;
-    padding: 0;
-  }
-}
-
 </style>
 
 	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<link rel="stylesheet"  href="style.css"/>
+	<link rel="stylesheet"  href="/images/style.css"/>
     <title>Trendings - 2019</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -92,33 +20,34 @@ td {
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <p id="frame"></p>
+      <p align="center" id="frame"></p>
     </div>
   </div>
   <div class="rightcolumn">
     <div class="card">
-      <p id="box"></p>
+      <p align="center" id="box"></p>
     </div>
   </div>
 </div>
 
-   
 <script type="text/javascript">
 	
 $(document).ready(function() {
 
     var message = "[[${name}]]";
-    message = message.replace(']','');
-    message = message.replace('[','');
-    var nameArr = message.split(',')
+    message = message.split("]").join("");
+    message = message.split("[").join("");
+    message = message.split(",").join("");
+    var nameArr = message.split('****')
     
-    var html = "<table border='1|1'>";
+    var html = "<table font size='2' face='Times New Roman' border='1|1'>";
     html+="<tr><td> Push to see </td><td> Name </td></tr>";
-    for (var i = 0; i < nameArr.length; i++) {
+    for (var i = 0; i < nameArr.length-3; i++) {
         html+="<tr>";
-        html+="<td>"+ nameArr[i]+"</td>" + "<td>"+ nameArr[i+1] + "</td>"; 
+        html+="<td>"+ nameArr[i]+"</td>" + "<td>"+ nameArr[i+1] + "</td>"+ "<td>"+ nameArr[i+2] + "</td>"; 
         html+="</tr>";
-        i++
+        i++;
+        i++;
     }
     html+="</table>";
         
@@ -152,7 +81,17 @@ $(document).ready(function() {
    frame+="</iframe>";
 
    document.getElementById("frame").innerHTML = frame;
+   
+   
 });
+
+$(".blue").on("click", function(e){
+    e.preventDefault();
+    
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='840' height='480' src='https://www.youtube.com/embed/QYh6mYIJG2Y'></iframe>";
+});
+
+
      
 </script>
 </body>

@@ -160,88 +160,26 @@ public class SearchYoutube {
     return searchResultList;
   }
   
-  public List<String> selectVideos2018() {
-
-	ResultSet rs= null;
-    //Select BD
-	try {			
+   
+  public List<String> select(String query){
+	  
+	  List<String> list = new ArrayList<String>();
+	  ResultSet rs= null;
+		
+	  //Connect DB
+	  try {			
 			Class.forName("org.postgresql.Driver");
 			
-	} catch (ClassNotFoundException e) {
-			
-			System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
-			e.printStackTrace();
-			//return null;
-			
-			}
-		
-	System.out.println("PostgreSQL JDBC Driver Registered!");
-	Connection connection = null;
-		
-	try {
-			
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-			"PostgresAdmin");
-			
-			System.out.println("PostgreSQL Connected!" + connection);
-			
-	} catch (SQLException e) {
-			
-			System.out.println("Connection Failed! Check output console");
-			e.printStackTrace();
-			//return null;
-			
-	}
-	
-	List<String> list = new ArrayList<String>();
-		
-	try {
-						
-		Statement sql = connection.createStatement();
-		String queryI = "SELECT * FROM YOUTUBE2018"; 
-					
-			if (connection != null) {			
-				System.out.println("Successfully selected" + queryI);
-				rs = sql.executeQuery(queryI);
-				while (rs.next()) {
-				    String em = rs.getString("url");
-				    list.add(em);
-				    String em2 = rs.getString("title");
-				    list.add(em2);
-				   // return em;
-				}
-				sql.close();
-		    	System.out.println("Successfully selected");				
-			} 
-		}catch (SQLException e) {
-				System.out.println("Got an exception! "); 
-	            System.out.println(e.getMessage());
-		}
-		     
-		
-		return list;
-}  
-  
-  public List<String> selectVideos2019() {
-
-		ResultSet rs= null;
-	    //Select BD
-		try {			
-				Class.forName("org.postgresql.Driver");
-				
 		} catch (ClassNotFoundException e) {
 				
 				System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
 				e.printStackTrace();
-				//return null;
-				
-				}
-			
+				//return null;			
+				}		
 		System.out.println("PostgreSQL JDBC Driver Registered!");
 		Connection connection = null;
 			
-		try {
-				
+		try {			
 				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
 				"PostgresAdmin");
 				
@@ -251,26 +189,28 @@ public class SearchYoutube {
 				
 				System.out.println("Connection Failed! Check output console");
 				e.printStackTrace();
-				//return null;
-				
+				//return null;			
 		}
-		
-		List<String> list = new ArrayList<String>();
+	  
+	  //Execute Select
+	  try {
 			
-		try {
-							
 			Statement sql = connection.createStatement();
-			String queryI = "SELECT * FROM YOUTUBE2019"; 
+			String queryI = query; 
 						
 				if (connection != null) {			
 					System.out.println("Successfully selected" + queryI);
 					rs = sql.executeQuery(queryI);
 					while (rs.next()) {
-					    String em = rs.getString("url");
-					    list.add(em);
-					    String em2 = rs.getString("title");
-					    list.add(em2);
-					   // return em;
+						 String em = rs.getString("url");
+						 list.add(em);
+						 list.add("****");
+						 String em2 = rs.getString("title");
+						 list.add(em2);
+						 list.add("****");
+						 String em3 = rs.getString("viewsCount");
+						 list.add(em3);	
+						 list.add("****");
 					}
 					sql.close();
 			    	System.out.println("Successfully selected");				
@@ -280,69 +220,40 @@ public class SearchYoutube {
 		            System.out.println(e.getMessage());
 			}
 			     
-			
-			return list;
-	}  
+	  
+	  return list;
+	  
+  }
+
+  
+  public List<String> selectVideos2018() {
+	
+	return select("SELECT * FROM YOUTUBE2018");
+}  
+  
+  public List<String> index2019() {
+
+	 return select("SELECT * FROM YOUTUBE7");		
+}  
+  
+  public List<String> index20192() {
+
+	 return select("SELECT * FROM YOUTUBE30");						
+}  
+  
+ public List<String> index20193() {
+
+	return select("SELECT * FROM YOUTUBE24");						
+}   
+  
+ public List<String> selectVideos2019() {
+
+	 return select("SELECT * FROM YOUTUBE2019");				
+}  
   
   public List<String> music2019() {
 
-		ResultSet rs= null;
-	    //Select BD
-		try {			
-				Class.forName("org.postgresql.Driver");
-				
-		} catch (ClassNotFoundException e) {
-				
-				System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
-				e.printStackTrace();
-				//return null;
-				
-				}
-			
-		System.out.println("PostgreSQL JDBC Driver Registered!");
-		Connection connection = null;
-			
-		try {
-				
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-				"PostgresAdmin");
-				
-				System.out.println("PostgreSQL Connected!" + connection);
-				
-		} catch (SQLException e) {
-				
-				System.out.println("Connection Failed! Check output console");
-				e.printStackTrace();
-				//return null;
-				
-		}
-		
-		List<String> list = new ArrayList<String>();
-			
-		try {
-							
-			Statement sql = connection.createStatement();
-			String queryI = "SELECT * FROM MUSIC2019"; 
-						
-				if (connection != null) {			
-					System.out.println("Successfully selected" + queryI);
-					rs = sql.executeQuery(queryI);
-					while (rs.next()) {
-					    String em = rs.getString("url");
-					    list.add(em);
-					    String em2 = rs.getString("title");
-					    list.add(em2);
-					   // return em;
-					}
-					sql.close();
-			    	System.out.println("Successfully selected");				
-				} 
-			}catch (SQLException e) {
-					System.out.println("Got an exception! "); 
-		            System.out.println(e.getMessage());
-			}
-			     
-			
-			return list;
-	}  
+	 return select("SELECT * FROM MUSIC2019");		
+}
+  
 }

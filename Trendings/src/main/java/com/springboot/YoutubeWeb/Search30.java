@@ -27,11 +27,14 @@ import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Thumbnail;
+import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoListResponse;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -40,6 +43,7 @@ import java.util.List;
 import java.util.Properties;
 
 import java.sql.*;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 /**
@@ -59,7 +63,7 @@ public class Search30 {
   private static final JsonFactory JSON_FACTORY = new JacksonFactory();
 
   /** Global instance of the max number of videos we want returned (50 = upper limit per page). */
-  private static final long NUMBER_OF_VIDEOS_RETURNED = 5;
+  private static final long NUMBER_OF_VIDEOS_RETURNED = 10;
 
   /** Global instance of Youtube object to make all API requests. */
   private static YouTube youtube;
@@ -107,7 +111,7 @@ public class Search30 {
        */
       String apiKey = properties.getProperty("youtube.apikey");
       search.setKey(apiKey);
-     // search.setQ("trailer");
+      search.setQ(queryTerm);
       /*
        * We are only searching for videos (not playlists or channels). If we were searching for
        * more, we would add them as a string like this: "video,playlist,channel".
@@ -119,7 +123,7 @@ public class Search30 {
       Date d= new Date(System.currentTimeMillis());
       GregorianCalendar cal = new GregorianCalendar();
 	  cal.setTime(d);
-	  cal.add(Calendar.DATE, -360);
+	  cal.add(Calendar.DATE, -30);
       d= cal.getTime();
       
       String pattern = "yyyy-MM-dd'T'HH:mm:ss-00:00";
@@ -127,8 +131,8 @@ public class Search30 {
       
            
       DateTime dt=DateTime.parseRfc3339( simpleDateFormat.format(d));
-      DateTime dt2=DateTime.parseRfc3339("2019-01-01T00:00:00-00:00");
-      search.setPublishedAfter(dt2);
+      //DateTime dt2=DateTime.parseRfc3339("2019-01-01T00:00:00-00:00");
+      search.setPublishedAfter(dt);
       //ESPAÑAsearch.setLocation("40.4165001,-3.7025599");
      // search.setPublishedBefore(dt2);
      // search.setLocation("35.6894989,139.6917114");
@@ -152,15 +156,33 @@ public class Search30 {
     //Create URLs      
       for (int i=0; i<NUMBER_OF_VIDEOS_RETURNED; i++) {
     	  
-    	  SearchResult result= searchResultList.get(i);
-            
-    	  ResourceId id1=result.getId();
-      
-    	  id1.setVideoId(" https://www.youtube.com/watch?v=" + result.getId().getVideoId());
-          
-    	  result.setId(id1);
-       
+    	  //Change Id Format
+    	  SearchResult result= searchResultList.get(i);            
+    	  ResourceId id1=result.getId();    	  
+    	  String videoId = result.getId().getVideoId();      
+    	  id1.setVideoId(" https://www.youtube.com/watch?v=" + result.getId().getVideoId());          
+    	  result.setId(id1);       
     	  searchResultList.get(i).setId(id1);
+    	  
+    	  //Load nuw views    	  
+	    	  YouTube.Videos.List videos = youtube.videos().list("id,statistics");
+	          videos.setKey(apiKey);                  
+	          videos.setFields("items(statistics/viewCount)");	          
+	          videos.setId(videoId);
+	          
+	          VideoListResponse videoResponse = videos.execute();
+	          List<Video> videoResults = videoResponse.getItems();	  
+	          
+	          for (Video video : videoResults) {
+	          
+	        	  
+		          if (video.getStatistics() != null) {
+	                  BigInteger viewsNumber = video.getStatistics().getViewCount();
+	                  String viewsFormatted = NumberFormat.getIntegerInstance().format(viewsNumber) + " views";
+	                  searchResultList.get(i).setEtag(viewsFormatted);
+	              }
+	          
+	          }  
       }
       //End
 
@@ -266,7 +288,8 @@ public class Search30 {
 			Statement sql = connection.createStatement();					
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();
-			String queryI = "INSERT INTO youtube30 (title,url,created_on,last_login) VALUES ( '"+title+"','"+ videos +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
+			String views = singleVideo.getEtag();
+			String queryI = "INSERT INTO youtube30 (title,url, viewsCount, created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
 			if (connection != null) {
 			

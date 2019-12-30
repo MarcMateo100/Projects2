@@ -27,11 +27,14 @@ import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Thumbnail;
+import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoListResponse;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -40,6 +43,7 @@ import java.util.List;
 import java.util.Properties;
 
 import java.sql.*;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 /**
@@ -95,7 +99,7 @@ public class Search24h {
       }).setApplicationName("youtube-cmdline-search-sample").build();
 
       // Get query term from user.
-      String queryTerm = " ";
+      String queryTerm = "music";
 
       YouTube.Search.List search = youtube.search().list("id,snippet");
       /*
@@ -151,14 +155,32 @@ public class Search24h {
       for (int i=0; i<NUMBER_OF_VIDEOS_RETURNED; i++) {
     	  
     	  SearchResult result= searchResultList.get(i);
-            
     	  ResourceId id1=result.getId();
-      
+    	  String videoId = result.getId().getVideoId(); 
     	  id1.setVideoId(" https://www.youtube.com/watch?v=" + result.getId().getVideoId());
-          
-    	  result.setId(id1);
+          result.setId(id1);
        
     	  searchResultList.get(i).setId(id1);
+    	  
+    	//Load nuw views    	  
+    	  YouTube.Videos.List videos = youtube.videos().list("id,statistics");
+          videos.setKey(apiKey);                  
+          videos.setFields("items(statistics/viewCount)");	          
+          videos.setId(videoId);
+          
+          VideoListResponse videoResponse = videos.execute();
+          List<Video> videoResults = videoResponse.getItems();	  
+          
+          for (Video video : videoResults) {
+          
+        	  
+	          if (video.getStatistics() != null) {
+                  BigInteger viewsNumber = video.getStatistics().getViewCount();
+                  String viewsFormatted = NumberFormat.getIntegerInstance().format(viewsNumber) + " views";
+                  searchResultList.get(i).setEtag(viewsFormatted);
+              }
+          
+          }  
       }
       //End
 
@@ -264,7 +286,8 @@ public class Search24h {
 			Statement sql = connection.createStatement();					
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();
-			String queryI = "INSERT INTO youtube24 (title,url,created_on,last_login) VALUES ( '"+title+"','"+ videos +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
+			String views = singleVideo.getEtag();
+			String queryI = "INSERT INTO youtube24 (title,url,viewsCount,created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
 			if (connection != null) {
 			
