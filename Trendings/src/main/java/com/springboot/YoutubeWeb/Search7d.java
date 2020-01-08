@@ -270,7 +270,7 @@ public class Search7d {
 		
 			try {
 			
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
+			connection = DriverManager.getConnection("jdbc:postgresql://database-1.cvprxg28jof0.eu-west-3.rds.amazonaws.com:5432/postgres", "postgres",
 			"PostgresAdmin");
 			
 			System.out.println("PostgreSQL Connected!" + connection);

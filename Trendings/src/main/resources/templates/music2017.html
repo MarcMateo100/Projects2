@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+</style>
+
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet"  href="/images/style.css"/>
+    <title>Trendings - 2017</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+
+<p><a href="/">Main Page</a></p>
+
+<h2>Most viewed Music 2017</h2>   
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <p align="center" id="frame"></p>
+    </div>
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <p align="center" id="box"></p>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	
+$(document).ready(function() {
+
+    var message = "[[${name}]]";
+    message = message.split("]").join("");
+    message = message.split("[").join("");
+    message = message.split(",").join("");
+    var nameArr = message.split('****')
+    
+    var html = "<table font size='2' face='Times New Roman' border='1|1'>";
+    html+="<tr><td> Push to see </td><td> Name </td></tr>";
+    for (var i = 0; i < nameArr.length-3; i++) {
+        html+="<tr>";
+        html+="<td>"+ nameArr[i]+"</td>" + "<td>"+ nameArr[i+1] + "</td>"+ "<td>"+ nameArr[i+2] + "</td>"; 
+        html+="</tr>";
+        i++;
+        i++;
+    }
+    html+="</table>";
+        
+    document.getElementById("box").innerHTML = html;
+    
+    var rows = document.getElementsByTagName("tr");
+    for (var i = 0; i < rows.length; i++)
+    {   	
+    	rows[i].onclick = function() {
+    			        	        	   
+    	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){
+    		    	
+    	message2 = $(event.target).text().replace('<td>','');
+        message2 = message2.replace('</td>','');     	
+        message2 = message2.replace("watch?v=","embed/");
+        document.getElementById('frame').innerHTML = "<iframe id='frame' width='840' height='480' src="+message2+"></iframe>";
+    	}
+        };
+    }
+     
+    var frame = " <iframe id='frame' width='840' height='480' src=";
+   
+    var message2 = rows[1].innerHTML.replace('<td>','');
+	message2 = message2.replace('</td>','');
+	message2 = message2.replace(/\s/g,'');
+	message2 = message2.replace("watch?v=","embed/");
+		
+   var end = message2.search("<td>");    
+   message2=message2.substring(0, end);
+   frame+='"'+message2+'">';
+   frame+="</iframe>";
+
+   document.getElementById("frame").innerHTML = frame;
+   
+   
+});
+
+$(".blue").on("click", function(e){
+    e.preventDefault();
+    
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='840' height='480' src='https://www.youtube.com/embed/QYh6mYIJG2Y'></iframe>";
+});
+
+
+     
+</script>
+</body>
+</html>

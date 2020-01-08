@@ -32,9 +32,18 @@
   <div class="rightcolumn">
     <div class="card">
       <h3>Youtube</h3>
+      <h4>Trailers</h4>
         <p><a href="/2019">2019 - Most Viewed Trailers</a></p>
         <p><a href="/2018">2018 - Most Viewed Trailers</a></p>
+        <p><a href="/2017">2017 - Most Viewed Trailers</a></p>
+        <p><a href="/alltimes"> Most Viewed Trailers</a></p>
+       <h4>Music</h4>
         <p><a href="/music">2019 - Most Viewed Music</a></p>
+        <p><a href="/music2018">2018 - Most Viewed Music</a></p>
+        <p><a href="/music2017">2017 - Most Viewed Music</a></p>
+        <p><a href="/alltimesmusic">Most Viewed Music</a></p>
+       <h4>Sports</h4>
+       <h4>Humour</h4>
        <h3>History</h3>  
         <p><a href="/storyofrock">History of Rock</a></p>
     </div>
@@ -75,11 +84,13 @@ $(document).ready(function() {
     	rows[i].onclick = function() {
     			        	        	   
     	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){
-    		    	
+    		    	    		
     	message2 = $(event.target).text().replace('<td>','');
+    	message2 = message2.split(" ").join("");
+    	message2 = message2.split("https").join("http");	
         message2 = message2.replace('</td>','');     	
         message2 = message2.replace("watch?v=","embed/");
-        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+"></iframe>";
+        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+" frameborder='0' gesture='media' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
     	}
         };
     }
@@ -93,7 +104,7 @@ $(document).ready(function() {
 		
    var end = message2.search("<td>");    
    message2=message2.substring(0, end);
-   frame+='"'+message2+'">';
+   frame+='"'+message2+'"' + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
    frame+="</iframe>";
 
    document.getElementById("frame").innerHTML = frame;
@@ -129,10 +140,13 @@ function function7() {
     			        	        	   
     	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){
     		    	
+    		
     	message2 = $(event.target).text().replace('<td>','');
+    	message2 = message2.split(" ").join("");	
+    	message2 = message2.split("https").join("http");	
         message2 = message2.replace('</td>','');     	
         message2 = message2.replace("watch?v=","embed/");
-        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+"></iframe>";
+        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+" frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
     	}
         };
     }
@@ -140,13 +154,15 @@ function function7() {
     var frame = " <iframe id='frame' width='460' height='340' src=";
    
     var message2 = rows[1].innerHTML.replace('<td>','');
+    message2 = message2.split(" ").join("");
+	message2 = message2.split("https").join("http");
 	message2 = message2.replace('</td>','');
 	message2 = message2.replace(/\s/g,'');
 	message2 = message2.replace("watch?v=","embed/");
 		
    var end = message2.search("<td>");    
    message2=message2.substring(0, end);
-   frame+='"'+message2+'">';
+   frame+='"'+message2+'"' + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
    frame+="</iframe>";
 
    document.getElementById("frame").innerHTML = frame;
@@ -181,11 +197,14 @@ function function30() {
 	    	rows[i].onclick = function() {
 	    			        	        	   
 	    	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){
-	    		    	
+	    		 
+	    			
 	    	message2 = $(event.target).text().replace('<td>','');
+	    	message2 = message2.split(" ").join("");
+	    	message2 = message2.split("https").join("http");
 	        message2 = message2.replace('</td>','');     	
 	        message2 = message2.replace("watch?v=","embed/");
-	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+"></iframe>";
+	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+" frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
 	    	}
 	        };
 	    }
@@ -193,13 +212,15 @@ function function30() {
 	    var frame = " <iframe id='frame' width='460' height='340' src=";
 	   
 	    var message2 = rows[1].innerHTML.replace('<td>','');
+	    message2 = message2.split(" ").join("");
+    	message2 = message2.split("https").join("http");
 		message2 = message2.replace('</td>','');
 		message2 = message2.replace(/\s/g,'');
 		message2 = message2.replace("watch?v=","embed/");
 			
 	   var end = message2.search("<td>");    
 	   message2=message2.substring(0, end);
-	   frame+='"'+message2+'">';
+	   frame+='"'+message2+'"' + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
 	   frame+="</iframe>";
 
 	   document.getElementById("frame").innerHTML = frame;
@@ -233,12 +254,14 @@ function function24() {
 	    {   	
 	    	rows[i].onclick = function() {
 	    			        	        	   
-	    	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){
-	    		    	
+	    	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){ 
+	    			
 	    	message2 = $(event.target).text().replace('<td>','');
+	    	message2 = message2.split(" ").join("");
+	    	message2 = message2.split("https").join("http");
 	        message2 = message2.replace('</td>','');     	
 	        message2 = message2.replace("watch?v=","embed/");
-	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+"></iframe>";
+	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+" frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
 	    	}
 	        };
 	    }
@@ -246,13 +269,15 @@ function function24() {
 	    var frame = " <iframe id='frame' width='460' height='340' src=";
 	   
 	    var message3 = rows[1].innerHTML.replace('<td>','');
+	    message3 = message3.split(" ").join("");
+    	message3 = message3.split("https").join("http");
 		message3 = message3.replace('</td>','');
 		message3 = message3.replace(/\s/g,'');
 		message3 = message3.replace("watch?v=","embed/");
 			
 	   var end = message3.search("<td>");    
 	   message3=message3.substring(0, end);
-	   frame+='"'+message3+'">';
+	   frame+='"'+message3+'"'+ "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
 	   frame+="</iframe>";
 
 	   document.getElementById("frame").innerHTML = frame;

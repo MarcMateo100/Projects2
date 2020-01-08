@@ -95,7 +95,7 @@ public class Search {
       }).setApplicationName("youtube-cmdline-search-sample").build();
 
       // Get query term from user.
-      String queryTerm = "trailer";
+      String queryTerm = "sports";
     		  
     		  /*getInputQuery();*/
 
@@ -115,15 +115,15 @@ public class Search {
       search.setType("video");
       search.setOrder("viewCount");
       DateTime dt=DateTime.parseRfc3339("2019-01-01T00:00:00-00:00");
-     // DateTime dt2=DateTime.parseRfc3339("2019-01-01T00:00:00-00:00");
+      DateTime dt2=DateTime.parseRfc3339("2020-01-01T00:00:00-00:00");
       search.setPublishedAfter(dt);
-      //ESPAÑAsearch.setLocation("40.4165001,-3.7025599");
-     // search.setPublishedBefore(dt2);
+      //search.setLocation("40.4165001,-3.7025599");
+      search.setPublishedBefore(dt2);
      // search.setLocation("35.6894989,139.6917114");
       //search.setLocation("139.6917100,35.68950002");
       //SEVILLAsearch.setLocation("37.3754865,-6.0250983");
       //search.setLocation("43.4628005,-7.062646");
-      //search.setLocationRadius("900km");
+      //search.setLocationRadius("500km");
       //search.setRelevanceLanguage("es");
       //search.setRegionCode("ES");
       
@@ -249,7 +249,7 @@ public class Search {
 		
 			try {
 			
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
+				connection = DriverManager.getConnection("jdbc:postgresql://database-1.cvprxg28jof0.eu-west-3.rds.amazonaws.com:5432/postgres", "postgres",
 				"PostgresAdmin");
 				
 				System.out.println("PostgreSQL Connected!" + connection);
@@ -266,7 +266,7 @@ public class Search {
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();
 			String views = singleVideo.getEtag();
-			String queryI = "INSERT INTO youtube2019 (title,url,viewsCount,created_on,last_login) VALUES ( '"+title+"','"+ videos +"', '"+ views +"',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
+			String queryI = "INSERT INTO sports2019 (title,url,viewsCount,created_on,last_login) VALUES ( '"+title+"','"+ videos +"', '"+ views +"',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
 			if (connection != null) {		
 				System.out.println("Successfully added" + queryI);

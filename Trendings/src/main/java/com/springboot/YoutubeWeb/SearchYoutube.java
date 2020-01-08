@@ -110,15 +110,15 @@ public class SearchYoutube {
        */
       search.setType("video");
       search.setOrder("viewCount");
-      //DateTime dt=DateTime.parseRfc3339("2018-01-01T00:00:00-00:00");
-      //search.setPublishedAfter(dt);
+      DateTime dt=DateTime.parseRfc3339("2018-01-01T00:00:00-00:00");
+      search.setPublishedAfter(dt);
      // search.setLocation("41.3887901,2.1589899");
       //search.setLocation("139.6917100,35.68950002");
       //SEVILLAsearch.setLocation("37.3754865,-6.0250983");
       //search.setLocation("43.4628005,-7.062646");
       //search.setLocationRadius("100km");
       //search.setRelevanceLanguage("es");
-      search.setRegionCode("ES");
+      //search.setRegionCode("ES");
       
       /*
        * This method reduces the info returned to only the fields we need and makes calls more
@@ -180,7 +180,7 @@ public class SearchYoutube {
 		Connection connection = null;
 			
 		try {			
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
+				connection = DriverManager.getConnection("jdbc:postgresql://database-1.cvprxg28jof0.eu-west-3.rds.amazonaws.com:5432/postgres", "postgres",
 				"PostgresAdmin");
 				
 				System.out.println("PostgreSQL Connected!" + connection);
@@ -251,9 +251,34 @@ public class SearchYoutube {
 	 return select("SELECT * FROM YOUTUBE2019");				
 }  
   
-  public List<String> music2019() {
+public List<String> music2019() {
 
 	 return select("SELECT * FROM MUSIC2019");		
+}
+
+public List<String> music2018() {
+
+	 return select("SELECT * FROM MUSIC2018");		
+}
+
+public List<String> music2017() {
+
+	 return select("SELECT * FROM MUSIC2017");		
+}
+
+public List<String> youtube2017() {
+
+	 return select("SELECT * FROM YOUTUBE2017");		
+}
+
+public List<String> alltimes() {
+
+	 return select("SELECT * FROM ALLTRAILER");		
+}
+
+public List<String> alltimesmusic() {
+
+	 return select("SELECT * FROM ALLMUSIC");		
 }
   
 }

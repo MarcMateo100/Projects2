@@ -1,3 +1,79 @@
+
+CREATE SEQUENCE table_sports2019_id_seq;
+CREATE TABLE public.sports2019
+(
+    id integer NOT NULL DEFAULT nextval('table_sports2019_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
+
+CREATE SEQUENCE table_alltrailer_id_seq;
+CREATE TABLE public.alltrailer
+(
+    id integer NOT NULL DEFAULT nextval('table_alltrailer_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
+CREATE SEQUENCE table_allmusic_id_seq;
+CREATE TABLE public.allmusic
+(
+    id integer NOT NULL DEFAULT nextval('table_allmusic_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
+
+CREATE SEQUENCE table_youtube2017_id_seq;
+CREATE TABLE public.youtube2017
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube2017_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
+
+CREATE SEQUENCE table_music2017_id_seq;
+CREATE TABLE public.music2017
+(
+    id integer NOT NULL DEFAULT nextval('table_music2017_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
+CREATE SEQUENCE table_music2018_id_seq;
+CREATE TABLE public.music2018
+(
+    id integer NOT NULL DEFAULT nextval('table_music2018_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
 CREATE SEQUENCE table_youtube2018_id_seq;
 CREATE TABLE public.youtube2018
 (
@@ -39,9 +115,12 @@ CREATE TABLE public.espanya2019
     id integer NOT NULL DEFAULT nextval('table_espanya2019_id_seq'),
     title character varying(150) NOT NULL,
     url character varying(150) NOT NULL,
+	viewsCount character varying(150) NOT NULL,
     created_on timestamp without time zone NOT NULL,
     last_login timestamp without time zone NOT NULL
 )
+
+
 
 CREATE SEQUENCE table_japon2019_id_seq;
 CREATE TABLE public.japon2019
