@@ -77,6 +77,13 @@ public class YoutubeWebController {
 	      	        			        
 	    return "storyofrock";
 	    }
+	  
+	  @GetMapping("/mostViewed")
+	    public String mostviewed(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		  model.addAttribute("name", search.mostViewed());       
+		  model.addAttribute("name2", search.mostViewed2());   
+	    return "mostViewed";
+	    }
 	 
 	  
 	  public void addResourceHandlers(final ResourceHandlerRegistry registry) {

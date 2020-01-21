@@ -36,16 +36,35 @@
         </dependency>
 
 
-  <dependency>
+    <dependency>
       <groupId>com.google.apis</groupId>
       <artifactId>google-api-services-youtube</artifactId>
       <version>v3-rev212-1.25.0</version>
     </dependency>
-     <dependency>
-    <groupId>com.google.apis</groupId>
-    <artifactId>google-api-services-youtubereporting</artifactId>
-    <version>v1-rev1-1.20.0</version>
+    <dependency>
+     <groupId>com.google.apis</groupId>
+     <artifactId>google-api-services-youtubereporting</artifactId>
+     <version>v1-rev1-1.20.0</version>
 	</dependency>	
+	
+	<dependency>
+     <groupId>org.twitter4j</groupId>
+     <artifactId>twitter4j-core</artifactId>
+     <version>[4.0,)</version>
+    </dependency>
+    
+    <dependency>
+		<groupId>org.freaknet.gtrends</groupId>
+		<artifactId>j-google-trends-api</artifactId>
+		<version>1.5.6</version>
+		<scope>system</scope>
+		<systemPath>C:\Users\mmateore\.m2\repository\org\freaknet\gtrends\j-google-trends-api-1.5.6.jar</systemPath>
+	</dependency>
+	   <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.9</version>
+        </dependency>
 	
 	<dependency>
 		<groupId>org.postgresql</groupId>

@@ -280,5 +280,15 @@ public List<String> alltimesmusic() {
 
 	 return select("SELECT * FROM ALLMUSIC");		
 }
+
+public String mostViewed() {
+
+	return WPgetSourceCode.getWP();		
+}
+
+public String mostViewed2() {
+
+	return WPgetSourceCode.getWP2();		
+}
   
 }
