@@ -41,10 +41,10 @@ $(document).ready(function() {
     var nameArr = message.split('****')
     
     var html = "<table font size='2' face='Times New Roman' border='1|1'>";
-    html+="<tr><td> Push to see </td><td> Name </td></tr>";
+    html+="<tr><th> Play </th><th> Name </th><th> Views </th></tr>";
     for (var i = 0; i < nameArr.length-3; i++) {
         html+="<tr>";
-        html+="<td>"+ nameArr[i]+"</td>" + "<td>"+ nameArr[i+1] + "</td>"+ "<td>"+ nameArr[i+2] + "</td>"; 
+        html+="<th><img src='/images/playbutton.jpg' alt="+nameArr[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr[i+1] + "</th>"+ "<th>"+ nameArr[i+2] + "</th>"; 
         html+="</tr>";
         i++;
         i++;
@@ -53,37 +53,47 @@ $(document).ready(function() {
         
     document.getElementById("box").innerHTML = html;
     
-    var rows = document.getElementsByTagName("tr");
+    var rows = document.getElementsByTagName("img");
     for (var i = 0; i < rows.length; i++)
     {   	
     	rows[i].onclick = function() {
     			        	        	   
-    	if($(event.target).text().substring(0, 4) == " htt" || $(event.target).text().substring(0, 4) == "  ht"){
-    		    	
-    	message2 = $(event.target).text().replace('<td>','');
-        message2 = message2.replace('</td>','');     	
-        message2 = message2.replace("watch?v=","embed/");
-        document.getElementById('frame').innerHTML = "<iframe id='frame' width='840' height='480' src="+message2+"></iframe>";
-    	}
-        };
+    		var a=$(event.target).attr('alt');			        	        	   
+        	if(String(a).substring(0, 3) == "htt"){ 	     		    		
+    	    	message2 = String(a).split("https").join("http");	    	
+    	        message2 = message2.replace("watch?v=","embed/");
+    	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='840' height='480' src="+message2+" frameborder='0' gesture='media' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
+        	}
+            };
     }
      
     var frame = " <iframe id='frame' width='840' height='480' src=";
-   
-    var message2 = rows[1].innerHTML.replace('<td>','');
-	message2 = message2.replace('</td>','');
-	message2 = message2.replace(/\s/g,'');
-	message2 = message2.replace("watch?v=","embed/");
-		
-   var end = message2.search("<td>");    
-   message2=message2.substring(0, end);
-   frame+='"'+message2+'">';
-   frame+="</iframe>";
-
-   document.getElementById("frame").innerHTML = frame;
-   
-   
+    var message2="'https://www.youtube.com/embed/kJQP7kiw5Fk' ";
+    frame+= message2 + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
+    frame+="</iframe>";
+    document.getElementById("frame").innerHTML = frame;
 });
+
+function changeImage() {
+	
+	for (var ii = 0; ii < 10; ii++){
+		
+		var a="imgClickAndChange"+ii;
+				
+		if(event.target.id == a){
+			document.getElementById(a).src = "/images/playbutton2.jpg";
+			
+			for (var j = 0; j < 10; j++){
+				if(j!=ii){
+					var b="imgClickAndChange"+j;
+					document.getElementById(b).src = "/images/playbutton.jpg";
+
+				}
+			}
+		}
+	}
+
+}
 
 $(".blue").on("click", function(e){
     e.preventDefault();

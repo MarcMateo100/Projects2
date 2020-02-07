@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn1 {
+  float: left;
+  width: 65%;
+}
+
+/* Right column */
+.rightcolumn1 {
+  float: left;
+  width: 34%;
+  text-align: center;
+  padding-left: 5px;
+}
+
+.button1 {
+font-size: 24px;
+border-radius: 4px;
+}
+
+th, td {
+  padding: 10px;
+}
+
+</style>
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet"  href="/images/style.css"/>
+    <title>Trendings Web</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<p><a href="/">Main Page</a></p>
+<h2>TWITTER</h2>
+<div class="row">
+
+<blockquote class="twitter-tweet"><p lang="es" dir="ltr">Cuando como en un Restaurante fuera de mi pueblo. <a href="https://t.co/uIuEjrHb5W">https://t.co/uIuEjrHb5W</a></p>&mdash; J.Valle14 (@SanderEastwood) <a href="https://twitter.com/SanderEastwood/status/1224662595317260289?ref_src=twsrc%5Etfw">February 4, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<div class="card">
+      <p align="center" id="box"></p>
+    </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+<script type="text/javascript">
+	
+$(document).ready(function() {
+
+	var message = "[[${name}]]";   
+	
+	var nameArr = message.split('****');
+	   
+	   var html = "<table font size='2' face='Times New Roman' border='1|1'>";
+	   for (var i = 0; i < nameArr.length; i++) {
+	       html+="<tr>";
+	       html+="<td>"+ nameArr[i]+"</td>" ; 
+	       html+="</tr>";
+	   }
+	   html+=  "</table>";
+	   
+	   document.getElementById("box").innerHTML = html;
+});
+     
+</script>
+
+</body>
+</html>

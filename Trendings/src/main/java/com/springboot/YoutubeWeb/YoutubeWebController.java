@@ -20,6 +20,14 @@ public class YoutubeWebController {
         return "index";
     }
 	
+	@GetMapping("/youtube")
+    public String youtube(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", search.index2019());
+        model.addAttribute("name2", search.index20192());
+        model.addAttribute("name3", search.index20193());
+        return "youtube";
+    }
+	
 	 @GetMapping("/2019")
 	    public String youtube2019(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 	        model.addAttribute("name", search.selectVideos2019());
@@ -84,6 +92,27 @@ public class YoutubeWebController {
 		  model.addAttribute("name2", search.mostViewed2());   
 	    return "mostViewed";
 	    }
+	  
+	  @GetMapping("/mostViewedNews")
+	    public String mostviewedNews(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		  model.addAttribute("name", search.mostViewed3());       
+		  model.addAttribute("name2", search.mostViewed4());   
+		  model.addAttribute("name3", search.mostViewed5()); 
+	    return "mostViewedNews";
+	    }
+	  
+	  @GetMapping("/googleTrends")
+	    public String googleTrends(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		  model.addAttribute("name", search.getGoogleTrends());         
+	    return "googleTrends";
+	    }
+	  
+	  @GetMapping("/twitter")
+	    public String twitter(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		  model.addAttribute("name", search.getTwitterTrends());       
+	    return "twitter";
+	    }
+	 
 	 
 	  
 	  public void addResourceHandlers(final ResourceHandlerRegistry registry) {

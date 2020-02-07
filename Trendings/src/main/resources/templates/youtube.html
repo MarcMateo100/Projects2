@@ -6,13 +6,13 @@
 /* Left column */
 .leftcolumn1 {
   float: left;
-  width: 75%;
+  width: 65%;
 }
 
 /* Right column */
 .rightcolumn1 {
   float: left;
-  width: 24%;
+  width: 34%;
   text-align: center;
   padding-left: 5px;
 }
@@ -34,43 +34,26 @@ th, td {
 </head>
 
 <body>
-<div class="header">
-  <h2>TRENDINGS</h2>
-</div>
-
+<p><a href="/">Main Page</a></p>
+<h2>YOUTUBE VIDEOS</h2>
 <div class="row">
-  <div class="leftcolumn1">
     <div class="card">
-       <p align="center" id="frame"></p>
+       <div class="leftcolumn1">
+   		 <div class="card">
+	   	   <tr>
+	        <button class="button1" type="button" onclick="function24()">24 hours</button>
+	        <button class="button1" type="button" onclick="function7()">7 days</button>
+	        <button class="button1" type="button" onclick="function30()">30 days</button>
+	       </tr>
+       		 <p align="center" id="box"></p>
+	     </div>
+	  </div>
+       <div class="rightcolumn1">
+    	<div class="card">
+     	  <p align="center" id="frame"></p>
+         </div>
+  		</div>
     </div>
-  </div>
-  <div class="rightcolumn1">
-    <div class="card">
-      <h3>Web Page Comments</h3>
-      	<p><a href="/mostViewed">Sports - Most Commented News</a></p>
-      	<p><a href="/mostViewedNews">News - Most Commented News</a></p>
-      <h3>Google</h3>
-      	<p><a href="googleTrends">Google - Trends</a></p>
-      <h3>Twitter</h3>
-      <p><a href="/twitter">Twitter - Most Retweets</a></p>
-      <h3>Youtube</h3>
-      <h4>Trailers</h4>
-        <p><a href="/2019">2019 - Most Viewed Trailers</a></p>
-        <p><a href="/2018">2018 - Most Viewed Trailers</a></p>
-        <p><a href="/2017">2017 - Most Viewed Trailers</a></p>
-        <p><a href="/alltimes"> Most Viewed Trailers</a></p>
-       <h4>Music</h4>
-       <p><a href="/youtube">Youtube - Most Viewed 24h/7d/30d </a></p>
-        <p><a href="/music">2019 - Most Viewed Music</a></p>
-        <p><a href="/music2018">2018 - Most Viewed Music</a></p>
-        <p><a href="/music2017">2017 - Most Viewed Music</a></p>
-        <p><a href="/alltimesmusic">Most Viewed Music</a></p>
-       <h4>Sports</h4>
-       <h4>Humour</h4>
-       <h3>History</h3>  
-        <p><a href="/storyofrock">History of Rock</a></p>
-    </div>
-  </div>
 </div>
 
 <div class="footer">
@@ -86,13 +69,14 @@ $(document).ready(function() {
     message = message.split("[").join("");
     message = message.split(",").join("");
     var nameArr = message.split('****')
-        
-    var html = "<font size='4' face='Times New Roman' ><table border='1|1'>";
+    var d=0;
+    var html = "<font size='3' face='Times New Roman' ><table border='1|1'>";
     html+="<tr><th> Play </th><th> Name </th><th> Views </th></tr>";
     for (var i = 0; i < nameArr.length-3; i++) {
         html+="<tr>";
-        html+="<th><img src='/images/playbutton.jpg' alt="+nameArr[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr[i+1] + "</th>"+ "<th>"+ nameArr[i+2] + "</th>"; 
+        html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/playbutton.jpg' alt="+nameArr[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr[i+1] + "</th>"+ "<th>"+ nameArr[i+2] + "</th>"; 
         html+="</tr>";
+        d++;
         i++;
         i++;
     }
@@ -112,14 +96,34 @@ $(document).ready(function() {
 	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='520' height='340' src="+message2+" frameborder='0' gesture='media' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
     	}
         };
-    }
-     
+    }   
    var frame = " <iframe id='frame' width='520' height='340' src=";
    var message2="'https://www.youtube.com/embed/pQNf38kMGwI' ";
    frame+= message2 + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
    frame+="</iframe>";
    document.getElementById("frame").innerHTML = frame;
 });
+
+function changeImage() {
+	
+	for (var ii = 0; ii < 10; ii++){
+		
+		var a="imgClickAndChange"+ii;
+				
+		if(event.target.id == a){
+			document.getElementById(a).src = "/images/playbutton2.jpg";
+			
+			for (var j = 0; j < 10; j++){
+				if(j!=ii){
+					var b="imgClickAndChange"+j;
+					document.getElementById(b).src = "/images/playbutton.jpg";
+
+				}
+			}
+		}
+	}
+
+}
 
 
 function function7() {
@@ -128,16 +132,15 @@ function function7() {
 	    message = message.split("]").join("");
 	    message = message.split("[").join("");
 	    message = message.split(",").join("");
-
 	    var nameArr = message.split('****')
-	  
-	
-	var html = "<font size='4' face='Times New Roman' ><table border='1|1'>";
+	var d=0;
+	var html = "<font size='3' face='Times New Roman' ><table border='1|1'>";
     html+="<tr><th> Play </th><th> Name </th><th> Views </th></tr>";
     for (var i = 0; i < nameArr.length-3; i++) {
         html+="<tr>";
-        html+="<th><img src='/images/playbutton.jpg' alt="+nameArr[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr[i+1] + "</th>"+ "<th>"+ nameArr[i+2] + "</th>"; 
+        html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/playbutton.jpg' alt="+nameArr[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr[i+1] + "</th>"+ "<th>"+ nameArr[i+2] + "</th>"; 
         html+="</tr>";
+        d++;
         i++;
         i++;
     }
@@ -157,8 +160,7 @@ function function7() {
 	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+" frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
     	}
         };
-    }
-     
+    }     
     var frame = " <iframe id='frame' width='520' height='340' src=";
     var message2="'https://www.youtube.com/embed/pQNf38kMGwI' ";
     frame+= message2 + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
@@ -175,13 +177,14 @@ function function30() {
 	    message = message.split(",").join("");
 
 	    var nameArr2 = message.split('****')
-	    
-	    var html = "<font size='4' face='Times New Roman' ><table border='1|1'>";
+	    var d=0;
+	    var html = "<font size='3' face='Times New Roman' ><table border='1|1'>";
 	    html+="<tr><th> Play </th><th> Name </th><th> Views </th></tr>";
 	    for (var i = 0; i < nameArr2.length-3; i++) {
 	        html+="<tr>";
-	        html+="<th><img src='/images/playbutton.jpg' alt="+nameArr2[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr2[i+1] + "</th>"+ "<th>"+ nameArr2[i+2] + "</th>"; 
+	        html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/playbutton.jpg' alt="+nameArr2[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr2[i+1] + "</th>"+ "<th>"+ nameArr2[i+2] + "</th>"; 
 	        html+="</tr>";
+	        d++;
 	        i++;
 	        i++;
 	    }
@@ -201,14 +204,12 @@ function function30() {
 	        	document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+" frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
 	    	}
 	        };
-	    }
-	     
+	    }    
 	    var frame = " <iframe id='frame' width='520' height='340' src=";
 	    var message2="'https://www.youtube.com/embed/pQNf38kMGwI' ";
 	    frame+= message2 + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
 	    frame+="</iframe>";
-	    document.getElementById("frame").innerHTML = frame;
-    
+	    document.getElementById("frame").innerHTML = frame; 
 }
 
 function function24() {
@@ -219,13 +220,14 @@ function function24() {
 	    message = message.split(",").join("");
 
 	    var nameArr3 = message.split('****')
-	    
-	    var html = "<font size='4' face='Times New Roman' ><table border='1|1'>";
+	    var d=0;
+	    var html = "<font size='3' face='Times New Roman' ><table border='1|1'>";
 	    html+="<tr><th> Play </th><th> Name </th><th> Views </th></tr>";
 	    for (var i = 0; i < nameArr3.length-3; i++) {
 	        html+="<tr>";
-	        html+="<th><img src='/images/playbutton.jpg' alt="+nameArr3[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr3[i+1] + "</th>"+ "<th>"+ nameArr3[i+2] + "</th>"; 
+	        html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/playbutton.jpg' alt="+nameArr3[i]+" style='width:40px;height:40px;'/></th>" + "<th>"+ nameArr3[i+1] + "</th>"+ "<th>"+ nameArr3[i+2] + "</th>"; 
 	        html+="</tr>";
+	        d++;
 	        i++;
 	        i++;
 	    }
@@ -245,14 +247,12 @@ function function24() {
 	        	document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src="+message2+" frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
 	    	}
 	        };
-	    }
-	     
+	    }   
 	    var frame = " <iframe id='frame' width='520' height='340' src=";
 	    var message3="'https://www.youtube.com/embed/pQNf38kMGwI' ";
 	    frame+= message3 + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
 	    frame+="</iframe>";
 	    document.getElementById("frame").innerHTML = frame;
-   
 }
 
      

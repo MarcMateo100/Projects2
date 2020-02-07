@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+</style>
+
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet"  href="/images/style.css"/>
+    <title>Google - Trendings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p><a href="/">Main Page</a></p>
+
+<h2>Google - Trendings</h2> 
+
+<div class="row">
+
+    <div class="card">
+      <p align="center" id="box"></p>
+    </div>
+  
+</div>
+
+<script type="text/javascript">
+	
+$(document).ready(function() {
+
+   var message = "[[${name}]]";   
+   var nameArr = message.split('****')
+   
+   var html = "<table font size='2' face='Times New Roman' border='1|1'>";
+   for (var i = 0; i < nameArr.length-3; i++) {
+       html+="<tr>";
+       html+="<td>"+ nameArr[i]+"</td>" + "<td><img src='"+ nameArr[i+1] + "' height='42' width='42'></td>"+ "<td>"+ nameArr[i+2] + "</td>" + "<td><a href='"+ nameArr[i+3] + "'> link </td>"; 
+       html+="</tr>";
+       i++;
+       i++;
+       i++;
+   }
+
+   html+=  "</table>";
+   
+   document.getElementById("box").innerHTML = html;
+
+ 
+});
+
+
+     
+</script>
+</body>
+</html>

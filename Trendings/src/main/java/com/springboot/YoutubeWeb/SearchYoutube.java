@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -286,9 +287,34 @@ public String mostViewed() {
 	return WPgetSourceCode.getWP();		
 }
 
+public String getGoogleTrends() {
+
+	return RSSReadTest.getGoogleTrends();		
+}
+
+public String getTwitterTrends() {
+
+	return TwitterC.getTwitterTrends();		
+}
+
 public String mostViewed2() {
 
 	return WPgetSourceCode.getWP2();		
+}
+
+public String mostViewed3() {
+
+	return WPgetSourceCode.getWP3();		
+}
+
+public String mostViewed4() {
+
+	return WPgetSourceCode.getWP4();		
+}
+
+public String mostViewed5() {
+
+	return WPgetSourceCode.getWP5();		
 }
   
 }

@@ -120,7 +120,6 @@
   float: right;
   width: 40%;
 }
-
 </style>
 
 	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -155,7 +154,7 @@
 
   <div class="mySlides fade">
     <div class="numbertext">3 / 3</div>
-     <p align="center" id="frame"></p>
+     <p align="center" id="frame3"></p>
     <div class="text">Caption Three</div>
   </div>
 
@@ -188,9 +187,15 @@ $(document).ready(function() {
    var frame2 = " <iframe id='frame' width='900' height='780' frameborder='0' style='overflow:hidden' src=";
    frame2+='"'+message2+'">';
    frame2+="</iframe>";
-
+   
    document.getElementById("frame2").innerHTML = frame2;
    
+   var message3 = "[[${name3}]]";
+   var frame3 = " <iframe id='frame' width='900' height='780' frameborder='0' style='overflow:hidden' src=";
+   frame3+='"'+message3+'">';
+   frame3+="</iframe>";
+   
+   document.getElementById("frame3").innerHTML = frame3;
    
 });
 
