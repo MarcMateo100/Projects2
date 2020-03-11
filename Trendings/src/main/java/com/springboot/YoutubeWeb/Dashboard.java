@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-public class RSSReadTest {
+public class Dashboard {
 
 	    //public static void main(String[] args) {
 		public static String getGoogleTrends() {
@@ -22,7 +22,7 @@ public class RSSReadTest {
 	    		boolean url =true;
 	    		int i=0;
 	    		HashMap<String, String> GoogleTrends = new HashMap<String, String>();
-	    		while((line = in.readLine()) !=null && i<10){
+	    		while((line = in.readLine()) !=null && i<5){
 	    			if(line.contains("<title>")) {
 	    				int firstPos = line.indexOf("<title>");
 	    				String temp = line.substring(firstPos);
@@ -35,7 +35,7 @@ public class RSSReadTest {
 			    				GoogleTrends.put("Title"+i, temp);
 	    					}
 	    				}
-	    			}		    				
+	    			}	    				
 	    			else if(line.contains("<ht:picture>")) {
 	    				if(pic && !tit) {
 	    					pic=false;
@@ -77,7 +77,7 @@ public class RSSReadTest {
 			    		url =true;
 	    			}
 	    		}
-	    		
+	    	//	System.out.println(sourcecode);
 	    		String strLineApp = sourcecode.replaceAll("&"+"amp;" + "#39", " "); 	
 	    		String strLineApp2 = strLineApp.replaceAll(" "+";", ""); 
 	    		//System.out.println(strLineApp2);
@@ -90,7 +90,5 @@ public class RSSReadTest {
 	    		System.out.println(ioe);
 	    		return null;
 	    	}
-
-	    }
-	
+	    }	
 }

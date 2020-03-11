@@ -1,3 +1,28 @@
+CREATE SEQUENCE table_twitter_id_seq;
+CREATE TABLE public.twitter
+(
+    id integer NOT NULL DEFAULT nextval('table_twitter_id_seq'),
+    title character varying(150) NOT NULL,
+	retweets character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+
+
+CREATE SEQUENCE table_googletrends_id_seq;
+CREATE TABLE public.googletrends
+(
+    id integer NOT NULL DEFAULT nextval('table_googletrends_id_seq'),
+    title character varying(150) NOT NULL,
+	picture character varying(150) NOT NULL,
+	description character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
 
 CREATE SEQUENCE table_sports2019_id_seq;
 CREATE TABLE public.sports2019

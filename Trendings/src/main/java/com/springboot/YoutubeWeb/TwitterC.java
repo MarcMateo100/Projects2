@@ -1,25 +1,10 @@
 package com.springboot.YoutubeWeb;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-
-import twitter4j.Location;
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.ResponseList;
 import twitter4j.Trend;
 import twitter4j.Trends;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.auth.AccessToken;
-import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 /**
 *
@@ -39,11 +24,11 @@ public class TwitterC {  //Constructor de la clase
 	TwitterFactory tf = new TwitterFactory(configBuilder.build());
 	Twitter twitter = tf.getInstance();
 	
-	 //Query query = new Query("trump");
+	// Query query = new Query("FiestaWithIZONE min_retweets:1000");
 
 	 
 	 try{
-	    //QueryResult result = twitter.search(query);
+	  //  QueryResult result = twitter.search(query);
 		// ResponseList<Location> locations;
 		// locations = twitter.getAvailableTrends();
 		// for (Location location : locations) {
@@ -51,16 +36,19 @@ public class TwitterC {  //Constructor de la clase
          //}
 		 
 		 Trends trends = twitter.getPlaceTrends(1);
+		 //twitter.search("min_retweets:10");
+		 //twitter.getPlaceTrends(1);
 		 //getWeeklyTrends()
 		 //getDailyTrends()
+		 //min_retweets
 
-         System.out.println("Showing trends for " + trends.getLocation().getName());
+        System.out.println("Showing trends for " + trends.getLocation().getName());
          String sourcecode=null;
 
-		 for (Trend trend : trends.getTrends()) {
-             sourcecode= sourcecode + String.format("%s (tweet_volume: %d)", trend.getName(), trend.getTweetVolume()) +  "****";
-         }
-		 return sourcecode;
+		for (Trend trend : trends.getTrends()) {
+          sourcecode= sourcecode + String.format("%s (tweet_volume: %d)", trend.getName(), trend.getTweetVolume()) +  "****";
+        }
+		return sourcecode;
 	   // System.out.println(result.getTweets().stream().map(item -> item.getText()).collect(Collectors.toList()));
 	 }catch(TwitterException tw) {
 		 System.out.println(tw);

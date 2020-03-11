@@ -1,5 +1,6 @@
 package com.springboot.YoutubeWeb;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class JDBCExample {
@@ -24,10 +25,18 @@ public class JDBCExample {
 		
 		Connection connection = null;
 	
-		try {
+		try {			
+				String[] parts=null;	
+				GetPropertyValues properties = new GetPropertyValues();
+				try{
+				String url = properties.getPropValues();
+				url = url.replaceAll(" ","");
+				parts = url.split(",");
+			}catch(IOException io) {
+				System.out.println("Get Properties Failed!");
+			}
 		
-		connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-		"PostgresAdmin");
+		connection = DriverManager.getConnection(parts[0], parts[1],parts[2]);
 		
 		} catch (SQLException e) {
 		

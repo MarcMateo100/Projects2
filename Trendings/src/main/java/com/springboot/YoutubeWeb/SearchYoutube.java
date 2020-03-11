@@ -14,6 +14,17 @@
 
 package com.springboot.YoutubeWeb;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -26,19 +37,6 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
-import com.google.api.services.youtube.model.Thumbnail;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-
-import java.sql.*;
 
 /**
  * Prints a list of videos based on a search term.
@@ -181,8 +179,18 @@ public class SearchYoutube {
 		Connection connection = null;
 			
 		try {			
-				connection = DriverManager.getConnection("jdbc:postgresql://database-1.cvprxg28jof0.eu-west-3.rds.amazonaws.com:5432/postgres", "postgres",
-				"PostgresAdmin");
+					
+				String[] parts=null;	
+				GetPropertyValues properties = new GetPropertyValues();
+				try{
+					String url = properties.getPropValues();
+					url = url.replaceAll(" ","");
+					parts = url.split(",");
+				}catch(IOException io) {
+					System.out.println("Get Properties Failed!");
+				}
+		
+				connection = DriverManager.getConnection(parts[0], parts[1],parts[2]);
 				
 				System.out.println("PostgreSQL Connected!" + connection);
 				
@@ -207,6 +215,8 @@ public class SearchYoutube {
 						 list.add(em);
 						 list.add("****");
 						 String em2 = rs.getString("title");
+						 String strLineApp = em2.replaceAll("&"+ "#39", " "); 	
+				    	 em2 = strLineApp.replaceAll(";", ""); 
 						 list.add(em2);
 						 list.add("****");
 						 String em3 = rs.getString("viewsCount");
@@ -226,29 +236,94 @@ public class SearchYoutube {
 	  
   }
 
-  
-  public List<String> selectVideos2018() {
-	
+  public List<String> selectTwitter(String query){
+	  
+	  List<String> list = new ArrayList<String>();
+	  ResultSet rs= null;
+		
+	  //Connect DB
+	  try {			
+			Class.forName("org.postgresql.Driver");
+			
+		} catch (ClassNotFoundException e) {
+				
+				System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
+				e.printStackTrace();
+				//return null;			
+				}		
+		System.out.println("PostgreSQL JDBC Driver Registered!");
+		Connection connection = null;
+			
+		try {			
+					
+				String[] parts=null;	
+				GetPropertyValues properties = new GetPropertyValues();
+				try{
+					String url = properties.getPropValues();
+					url = url.replaceAll(" ","");
+					parts = url.split(",");
+				}catch(IOException io) {
+					System.out.println("Get Properties Failed!");
+				}
+		
+				connection = DriverManager.getConnection(parts[0], parts[1],parts[2]);
+				
+				System.out.println("PostgreSQL Connected!" + connection);
+				
+		} catch (SQLException e) {
+				
+				System.out.println("Connection Failed! Check output console");
+				e.printStackTrace();
+				//return null;			
+		}
+	  
+	  //Execute Select
+	  try {
+			
+			Statement sql = connection.createStatement();
+			String queryI = query; 
+						
+				if (connection != null) {			
+					System.out.println("Successfully selected" + queryI);
+					rs = sql.executeQuery(queryI);
+					while (rs.next()) {
+						 String em = rs.getString("title");
+						 list.add(em);
+						 list.add("****");
+						 String em2 = rs.getString("retweets");
+						 list.add(em2);
+						 list.add("****");
+						 String em3 = rs.getString("url");
+						 list.add(em3);
+						 list.add("****");
+					}
+					sql.close();
+			    	System.out.println("Successfully selected");				
+				} 
+			}catch (SQLException e) {
+					System.out.println("Got an exception! "); 
+		            System.out.println(e.getMessage());
+			}  
+	  return list;
+  }
+
+public List<String> selectVideos2018() {
 	return select("SELECT * FROM YOUTUBE2018");
 }  
   
-  public List<String> index2019() {
-
+public List<String> index2019() {
 	 return select("SELECT * FROM YOUTUBE7");		
 }  
   
-  public List<String> index20192() {
-
+public List<String> index20192() {
 	 return select("SELECT * FROM YOUTUBE30");						
 }  
   
- public List<String> index20193() {
-
+public List<String> index20193() {
 	return select("SELECT * FROM YOUTUBE24");						
 }   
   
- public List<String> selectVideos2019() {
-
+public List<String> selectVideos2019() {
 	 return select("SELECT * FROM YOUTUBE2019");				
 }  
   
@@ -282,6 +357,11 @@ public List<String> alltimesmusic() {
 	 return select("SELECT * FROM ALLMUSIC");		
 }
 
+public List<String> getTwitterTrendDash() {
+
+	 return selectTwitter("SELECT * FROM TWITTER");		
+}
+
 public String mostViewed() {
 
 	return WPgetSourceCode.getWP();		
@@ -290,6 +370,11 @@ public String mostViewed() {
 public String getGoogleTrends() {
 
 	return RSSReadTest.getGoogleTrends();		
+}
+
+public String getGoogleTrendsDashboard() {
+
+	return Dashboard.getGoogleTrends();		
 }
 
 public String getTwitterTrends() {
@@ -315,6 +400,11 @@ public String mostViewed4() {
 public String mostViewed5() {
 
 	return WPgetSourceCode.getWP5();		
+}
+
+public String mostViewedTotal() {
+
+	return WPgetSourceCode.getWPTotal();		
 }
   
 }

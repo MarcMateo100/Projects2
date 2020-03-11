@@ -14,9 +14,11 @@ public class YoutubeWebController {
 	
 	@GetMapping("/")
     public String index2019(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", search.index2019());
-        model.addAttribute("name2", search.index20192());
-        model.addAttribute("name3", search.index20193());
+		model.addAttribute("name", search.getGoogleTrendsDashboard());    
+		model.addAttribute("name2", search.getTwitterTrendDash());     
+		model.addAttribute("name3", search.index2019()); 
+		model.addAttribute("name4", search.mostViewedTotal()); 
+		
         return "index";
     }
 	
@@ -45,7 +47,7 @@ public class YoutubeWebController {
 	 @GetMapping("/2017")
 	    public String youtube2017(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 	      	        		
-	    model.addAttribute("name", search.selectVideos2018());
+	    model.addAttribute("name", search.youtube2017());
 	        
 	    return "youtube2017";
 	    }
