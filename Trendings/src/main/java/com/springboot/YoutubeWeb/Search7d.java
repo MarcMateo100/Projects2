@@ -284,11 +284,15 @@ public class Search7d {
 								
 			try {
 						
-			Statement sql = connection.createStatement();					
+			Statement sql = connection.createStatement();		
+			
+			String queryI = "DELETE from youtube7";
+			sql.executeUpdate(queryI);
+			
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();
 			String views = singleVideo.getEtag();
-			String queryI = "INSERT INTO youtube7 (title,url,viewsCount,created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
+			queryI = "INSERT INTO youtube7 (title,url,viewsCount,created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
 			if (connection != null) {
 			

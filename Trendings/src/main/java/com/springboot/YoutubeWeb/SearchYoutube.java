@@ -60,7 +60,6 @@ public class SearchYoutube {
   /** Global instance of Youtube object to make all API requests. */
   private static YouTube youtube;
 
-
   /**
    * Initializes YouTube object to search for videos on YouTube (Youtube.Search.List). The program
    * then prints the names and thumbnails of each of the videos (only first 50 videos).
@@ -132,14 +131,10 @@ public class SearchYoutube {
     //Create URLs      
       for (int i=0; i<NUMBER_OF_VIDEOS_RETURNED; i++) {
     	  
-    	  SearchResult result= searchResultList.get(i);
-            
-    	  ResourceId id1=result.getId();
-      
-    	  id1.setVideoId(" https://www.youtube.com/watch?v=" + result.getId().getVideoId());
-          
-    	  result.setId(id1);
-       
+    	  SearchResult result= searchResultList.get(i);            
+    	  ResourceId id1=result.getId();      
+    	  id1.setVideoId(" https://www.youtube.com/watch?v=" + result.getId().getVideoId());          
+    	  result.setId(id1);       
     	  searchResultList.get(i).setId(id1);
       }
       //End
@@ -154,17 +149,14 @@ public class SearchYoutube {
       System.err.println("There was an IO error: " + e.getCause() + " : " + e.getMessage());
     } catch (Throwable t) {
       t.printStackTrace();
-    }
-    
+    }  
     return searchResultList;
   }
   
-   
-  public List<String> select(String query){
+public List<String> select(String query){
 	  
 	  List<String> list = new ArrayList<String>();
 	  ResultSet rs= null;
-		
 	  //Connect DB
 	  try {			
 			Class.forName("org.postgresql.Driver");
@@ -178,8 +170,7 @@ public class SearchYoutube {
 		System.out.println("PostgreSQL JDBC Driver Registered!");
 		Connection connection = null;
 			
-		try {			
-					
+		try {						
 				String[] parts=null;	
 				GetPropertyValues properties = new GetPropertyValues();
 				try{
@@ -188,22 +179,17 @@ public class SearchYoutube {
 					parts = url.split(",");
 				}catch(IOException io) {
 					System.out.println("Get Properties Failed!");
-				}
-		
-				connection = DriverManager.getConnection(parts[0], parts[1],parts[2]);
-				
+				}		
+				connection = DriverManager.getConnection(parts[0], parts[1],parts[2]);				
 				System.out.println("PostgreSQL Connected!" + connection);
 				
-		} catch (SQLException e) {
-				
+		} catch (SQLException e) {				
 				System.out.println("Connection Failed! Check output console");
 				e.printStackTrace();
 				//return null;			
 		}
-	  
 	  //Execute Select
-	  try {
-			
+	  try {			
 			Statement sql = connection.createStatement();
 			String queryI = query; 
 						
@@ -254,8 +240,7 @@ public class SearchYoutube {
 		System.out.println("PostgreSQL JDBC Driver Registered!");
 		Connection connection = null;
 			
-		try {			
-					
+		try {					
 				String[] parts=null;	
 				GetPropertyValues properties = new GetPropertyValues();
 				try{
@@ -266,8 +251,7 @@ public class SearchYoutube {
 					System.out.println("Get Properties Failed!");
 				}
 		
-				connection = DriverManager.getConnection(parts[0], parts[1],parts[2]);
-				
+				connection = DriverManager.getConnection(parts[0], parts[1],parts[2]);				
 				System.out.println("PostgreSQL Connected!" + connection);
 				
 		} catch (SQLException e) {
@@ -362,6 +346,11 @@ public List<String> getTwitterTrendDash() {
 	 return selectTwitter("SELECT * FROM TWITTER");		
 }
 
+public List<String> getTwitterTrendDash1h() {
+
+	 return selectTwitter("SELECT * FROM TWITTER1H");		
+}
+
 public String mostViewed() {
 
 	return WPgetSourceCode.getWP();		
@@ -370,6 +359,11 @@ public String mostViewed() {
 public String getGoogleTrends() {
 
 	return RSSReadTest.getGoogleTrends();		
+}
+
+public String getGoogleTrends(int n) {
+
+	return RSSReadTest.getGoogleTrends(n);		
 }
 
 public String getGoogleTrendsDashboard() {

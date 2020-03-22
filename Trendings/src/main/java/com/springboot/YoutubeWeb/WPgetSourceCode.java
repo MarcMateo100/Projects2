@@ -31,22 +31,16 @@ public class WPgetSourceCode {
 						  i++;						  
 				      }
 				}
-				
 				 Arrays.sort(numComments);
-				 
-				
 				 int temp;
 				 int SIZE = numComments.length;
-
 				 for (int j = 0; j < SIZE/2; j++)
 				   {
 				      temp = numComments[j];
 				      numComments[j] = numComments[SIZE-1 - j];
 				      numComments[SIZE-1 - j] = temp;
 				   }
-				 
 				 BufferedReader bs2 = new BufferedReader(new InputStreamReader(url.openStream()));
-				 
 				 while ((txt = bs2.readLine()) != null) {
 					 String tx ="number-comments"+'"'+">" + numComments[0];
 					 int intIndex = txt.indexOf(tx);
@@ -93,8 +87,7 @@ public class WPgetSourceCode {
 						  numComments[i]=Integer.parseInt(txt3);
 						  i++;						  
 				      }
-				}
-				
+				}	
 				 Arrays.sort(numComments);	
 				 int temp;
 				 int SIZE = numComments.length;
@@ -104,8 +97,7 @@ public class WPgetSourceCode {
 				      temp = numComments[j];
 				      numComments[j] = numComments[SIZE-1 - j];
 				      numComments[SIZE-1 - j] = temp;
-				   }
-				 
+				   } 
 				 BufferedReader bs2 = new BufferedReader(new InputStreamReader(url.openStream()));
 				 int u=0;
 				 String txt4=null;
@@ -151,7 +143,6 @@ public class WPgetSourceCode {
 	
 	//public static void main(String[] args) {
 	public static String getWPTotal(){
-		
 		try {
 			URL url = new URL("https://www.eldiario.es/");
 			int[] numComments = new int[200] ;
@@ -171,23 +162,18 @@ public class WPgetSourceCode {
 					  i++;						  
 			      }
 			}
-			
 			 Arrays.sort(numComments);	 		
 			 int temp;
 			 int SIZE = numComments.length;
-
 			 for (int j = 0; j < SIZE/2; j++)
-			   {
-			      temp = numComments[j];
-			      numComments[j] = numComments[SIZE-1 - j];
-			      numComments[SIZE-1 - j] = temp;
-			   }
-			 
+			 {
+			  temp = numComments[j];
+			  numComments[j] = numComments[SIZE-1 - j];
+			  numComments[SIZE-1 - j] = temp;
+			 }	 
 			 BufferedReader bs2 = new BufferedReader(new InputStreamReader(url.openStream()));
 			 String txt3="";
-			 
-			 while ((txt = bs2.readLine()) != null) {
-				 
+			 while ((txt = bs2.readLine()) != null) { 
 				 int intIndex2 = txt.indexOf("html\" title");
 				 if(intIndex2>0){
 					 int beg2=intIndex2+7;
@@ -199,10 +185,10 @@ public class WPgetSourceCode {
 						 txt3 = txt3.replaceAll("&eacute;", "é"); 	
 						 txt3 = txt3.replaceAll("&iacute;", "í"); 	
 						 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-						 txt3 = txt3.replaceAll("&uacute;", "ú"); 			    	
+						 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+						 txt3 = txt3.replaceAll("&ntilde;", "ñ");
 					 }
 				 }
-				 
 				 String tx ="#comments"+'"'+ " class=\"lnk\" title=\"" + numComments[0];
 				 int intIndex = txt.indexOf(tx);
 				 if(intIndex>0){
@@ -212,7 +198,6 @@ public class WPgetSourceCode {
 					 String txt2 = txt.substring(beg,txt.length());
 					 intIndex = txt2.indexOf("#comments");
 					 txt3 = "https://www.eldiario.es/" + txt2.substring(0,intIndex) + "*****" + txt3 + "*****"  + numComments[0] ;						
-					 
 					//Next
 					 try {
 							url = new URL("https://www.elmundo.es/");
@@ -241,55 +226,85 @@ public class WPgetSourceCode {
 							      numComments[j] = numComments[SIZE-1 - j];
 							      numComments[SIZE-1 - j] = temp2;
 							   }
-							 
+							 String txt22="";
 							 bs2 = new BufferedReader(new InputStreamReader(url.openStream())); 											
 							 while ((txt = bs2.readLine()) != null) {
-								 tx ="span title=\"Comentarios"+'"'+">" + numComments[0];
-								 intIndex = txt.indexOf(tx);
-								 if(intIndex>0){
+								 //first fetch name
+								 intIndex2 = txt.indexOf("h2 class="+'"'+"ue-c-cover-content__headline");
+								 if(intIndex2>0){
+									 int beg2=intIndex2+40;
+									 int intIndex3 = txt.indexOf("</h2></a></header>");
+									 txt22 = txt.substring(beg2,intIndex3);
+									 txt22 = txt22.replaceAll("&aacute;", "á"); 	
+									 txt22 = txt22.replaceAll("&eacute;", "é"); 	
+									 txt22 = txt22.replaceAll("&iacute;", "í"); 	
+									 txt22 = txt22.replaceAll("&oacute;", "ó"); 	
+									 txt22 = txt22.replaceAll("&uacute;", "ú"); 	
+									 txt22 = txt22.replaceAll("&ntilde;", "ñ");
+								 }
+								 //second comments
+								  tx ="span title="+'"'+ "Comentarios"+'"'+">" + numComments[0];
+								  intIndex = txt.indexOf(tx);
+								  if(intIndex>0){
 									 intIndex2 = txt.indexOf("href");
 									 beg=intIndex2+6;
-							    	 end=intIndex2+156;
+								   	 end=intIndex2+156;
 									 txt2 = txt.substring(beg,end);
 									 intIndex = txt2.indexOf("html");
-									 txt3 = txt3 + "*****" + txt2.substring(0,intIndex+4);			 
-								 }	
-								 
-								 intIndex2 = txt.indexOf("ue-c-cover-content__standfirst");
-								 if(intIndex2>0){
-									 int beg2=intIndex2+7;
-									 String txt22 = txt.substring(beg2,txt.length());
-									 intIndex2 = txt22.indexOf("</p>");
-									 if(intIndex2>0){
-										 txt22 = txt22.substring(25,intIndex2);	
-										 txt22 = txt22.replaceAll("&aacute;", "á"); 	
-										 txt22 = txt22.replaceAll("&eacute;", "é"); 	
-										 txt22 = txt22.replaceAll("&iacute;", "í"); 	
-										 txt22 = txt22.replaceAll("&oacute;", "ó"); 	
-										 txt22 = txt22.replaceAll("&uacute;", "ú"); 	
-								    	 txt3 = txt3 + "*****" + txt22 + "*****" + numComments[0];
-								    	// System.out.println(txt3);
-								    	 return txt3;
+									 txt3 = txt3 + "*****" + txt2.substring(0,intIndex+4);									
+								     txt3 = txt3 + "*****" + txt22 + "*****" + numComments[0];
+									    // System.out.println(txt3);								
+								    	//Next
+								    	 url = new URL("https://www.elperiodico.com/es/lo-mas-comentado/");
+											bs = new BufferedReader(new InputStreamReader(url.openStream()));
+											while ((txt = bs.readLine()) != null) {
+												//let's search comments number-comments
+												intIndex = txt.indexOf("<span class=\"numpos\">1</span>");
+											      if (intIndex>0){
+											    	  while ((txt = bs.readLine()) != null) {
+											    		  intIndex = txt.indexOf("<a href=\"");
+													    	if (intIndex>0){
+													    	  beg=intIndex+9;
+															  txt2 = txt.substring(beg,txt.length());
+															  intIndex2 = txt2.indexOf("title=");
+															  txt3 = txt3 + "*****" + txt2.substring(0,intIndex2-2);
+															  int intIndex3 = txt2.indexOf('"'+">");	
+															  String tempo= txt2.substring(intIndex3+2,txt2.length()-4);
+															  tempo = tempo.replaceAll("&aacute;", "á"); 	
+															  tempo = tempo.replaceAll("&eacute;", "é"); 	
+															  tempo = tempo.replaceAll("&iacute;", "í"); 	
+															  tempo = tempo.replaceAll("&oacute;", "ó"); 
+															  tempo = tempo.replaceAll("Ã³", "ó");
+															  tempo = tempo.replaceAll("Ã", "í"); 
+															  tempo = tempo.replaceAll("&ntilde;", "ñ");
+															  txt3 = txt3 + "*****" + tempo;
+															  txt3 = txt3 + "*****most commented";
+															  //System.out.println(txt3);
+															  return txt3;
+											    		  }
+											    	  }
+											      }
+											}		
 									 }
-								 }
+								 
 							 }
 						return null;					 
 						}catch(MalformedURLException ioe) {
-						//	System.out.println(ioe);
-							return null;
+							System.out.println(ioe);
+						return null;
 						}catch(IOException ioe) {
-				    		//System.out.println(ioe);
-				    		return null;
+				    		System.out.println(ioe);
+				    	return null;
 				    	}	
 				 }			 
 			 }
 		return null;	 	 
 		}catch(MalformedURLException ioe) {
-		//	System.out.println(ioe);
-		    return null;
+			System.out.println(ioe);
+		return null;
 		}catch(IOException ioe) {
-    		//System.out.println(ioe);
-    		return null;
+    		System.out.println(ioe);
+    	return null;
     	}	
 	}
 	
@@ -346,7 +361,6 @@ public class WPgetSourceCode {
 						 txt3 = txt3.replaceAll("&uacute;", "ú"); 			    	
 					 }
 				 }
-				 
 				 String tx ="#comments"+'"'+ " class=\"lnk\" title=\"" + numComments[0];
 				 int intIndex = txt.indexOf(tx);
 				 if(intIndex>0){

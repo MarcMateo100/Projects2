@@ -1,9 +1,17 @@
 package com.springboot.YoutubeWeb;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 
@@ -12,13 +20,36 @@ public class YoutubeWebController {
 	
 	private SearchYoutube search = new SearchYoutube();
 	
+	 @ResponseBody
+	 @RequestMapping(value = "/getDateAndTime")
+	 public String getDateAndTime(@RequestParam int name) {
+		 String a = search.getGoogleTrends(name);   
+		 return a;
+    }
+	 
+	@ResponseBody
+	@RequestMapping(value = "/twitter1h")
+	public List<String>  twitter1h(@RequestParam int name) {   
+		List<String> Test= search.getTwitterTrendDash1h();
+		return Test;
+    }
+	 
+	@ResponseBody
+	@RequestMapping(value = "/twitter")
+	public List<String>  twitter(@RequestParam int name) {   
+		List<String> Test= search.getTwitterTrendDash();
+		return Test;
+    }
+	
 	@GetMapping("/")
     public String index2019(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-		model.addAttribute("name", search.getGoogleTrendsDashboard());    
+		model.addAttribute("name", search.getGoogleTrends(1));    
 		model.addAttribute("name2", search.getTwitterTrendDash());     
 		model.addAttribute("name3", search.index2019()); 
 		model.addAttribute("name4", search.mostViewedTotal()); 
-		
+		model.addAttribute("name5", search.index2019());
+	    model.addAttribute("name6", search.index20192());
+	    model.addAttribute("name7", search.index20193());
         return "index";
     }
 	

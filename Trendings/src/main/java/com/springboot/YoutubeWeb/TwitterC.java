@@ -25,8 +25,6 @@ public class TwitterC {  //Constructor de la clase
 	Twitter twitter = tf.getInstance();
 	
 	// Query query = new Query("FiestaWithIZONE min_retweets:1000");
-
-	 
 	 try{
 	  //  QueryResult result = twitter.search(query);
 		// ResponseList<Location> locations;

@@ -264,18 +264,13 @@ public class Search30 {
 			e.printStackTrace();
 			return;
 			}
-		
 			System.out.println("PostgreSQL JDBC Driver Registered!");
-			
 			Connection connection = null;
 		
 			try {
-			
-			connection = DriverManager.getConnection("jdbc:postgresql://database-1.cvprxg28jof0.eu-west-3.rds.amazonaws.com:5432/postgres", "postgres",
-			"PostgresAdmin");
-			
-			System.out.println("PostgreSQL Connected!" + connection);
-			
+				connection = DriverManager.getConnection("jdbc:postgresql://database-1.cvprxg28jof0.eu-west-3.rds.amazonaws.com:5432/postgres", "postgres",
+				"PostgresAdmin");
+				System.out.println("PostgreSQL Connected!" + connection);
 			} catch (SQLException e) {
 			
 			System.out.println("Connection Failed! Check output console");
@@ -283,13 +278,14 @@ public class Search30 {
 			return;	
 			}
 								
-			try {
-						
-			Statement sql = connection.createStatement();					
+			try {			
+			Statement sql = connection.createStatement();		
+			String queryI = "DELETE from youtube30";
+			sql.executeUpdate(queryI);
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();
 			String views = singleVideo.getEtag();
-			String queryI = "INSERT INTO youtube30 (title,url, viewsCount, created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
+			queryI = "INSERT INTO youtube30 (title,url, viewsCount, created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
 			if (connection != null) {
 			

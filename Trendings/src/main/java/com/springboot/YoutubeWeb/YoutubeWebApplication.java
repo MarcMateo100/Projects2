@@ -14,20 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class YoutubeWebApplication extends SpringBootServletInitializer{
 	
-	
-	
 	 @Override
 	    protected SpringApplicationBuilder configure(
 	      SpringApplicationBuilder builder) {
 	        return builder.sources(YoutubeWebApplication.class);
 	    }
-	
-
 	 
     public static void main(String[] args) {
         SpringApplication.run(YoutubeWebApplication.class, args);
-
     }
-    
-    
 }

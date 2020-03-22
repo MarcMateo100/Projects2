@@ -22,10 +22,10 @@ import twitter4j.conf.ConfigurationBuilder;
 * @author Marc Mateo
 *
 */
-public class TwitterBatch {  //Constructor de la clase
+public class TwitterBatchT {  //Constructor de la clase
 	
 	public static void main(String[] args) {
-		//public static String getTwitterTrends() {
+	//public static String getTwitterTrends() {
 	
 	ConfigurationBuilder configBuilder = new ConfigurationBuilder();
 	configBuilder.setDebugEnabled(true).setOAuthConsumerKey("fwsR7X3OzKt7QZcthp0asZYq4")
@@ -54,12 +54,11 @@ public class TwitterBatch {  //Constructor de la clase
         System.out.println("Showing trends for " + trends.getLocation().getName());
          
         int j=0;
-
 		for (int i=0; i< trends.getTrends().length; i++ ) {
 			 Trend trend= trends.getTrends()[i];
              sourcecode +=  trend.getName() + "parapa2" + trend.getTweetVolume() +  "parapa2";
              j++;
-	         Query query = new Query( trend.getName() + " min_retweets:300");
+	         Query query = new Query( trend.getName() + " min_retweets:1000");
 	         QueryResult result = twitter.search(query);
 	         String stringResult= result.toString();
 	         int intIndex = stringResult.indexOf("expandedURL");
@@ -73,7 +72,7 @@ public class TwitterBatch {  //Constructor de la clase
 				  sourcecode += txt3 + 	"parapa2";		 
 		      }
 	         else {
-	        	 sourcecode += "No more 300 retweets" + 	"parapa2";	
+	        	 sourcecode += "No more 500 retweets" + 	"parapa2";	
 	         }
 	         
 	         if(j==10){
@@ -122,7 +121,11 @@ public class TwitterBatch {  //Constructor de la clase
 		}
 		String queryI="";
 		try {			
-			Statement sql = connection.createStatement();	
+			Statement sql = connection.createStatement();
+			
+			queryI = "INSERT INTO TWITTER1H SELECT * FROM TWITTER";
+			sql.executeUpdate(queryI);
+			
 			queryI = "DELETE FROM TWITTER";
 			sql.executeUpdate(queryI);
 			
@@ -148,6 +151,6 @@ public class TwitterBatch {  //Constructor de la clase
 					System.out.println("Got an exception! "); 
 		            System.out.println(e.getMessage());
 			} 
-	// return null;
+	 //return null;
 	}
 }

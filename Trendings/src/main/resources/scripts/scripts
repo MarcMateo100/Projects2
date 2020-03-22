@@ -9,7 +9,27 @@ CREATE TABLE public.twitter
     last_login timestamp without time zone NOT NULL
 )
 
+CREATE SEQUENCE table_twitter1h_id_seq;
+CREATE TABLE public.twitter1h
+(
+    id integer NOT NULL DEFAULT nextval('table_twitter1h_id_seq'),
+    title character varying(150) NOT NULL,
+	retweets character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
 
+CREATE SEQUENCE table_twitter4h_id_seq;
+CREATE TABLE public.twitter4h
+(
+    id integer NOT NULL DEFAULT nextval('table_twitter4h_id_seq'),
+    title character varying(150) NOT NULL,
+	retweets character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
 
 CREATE SEQUENCE table_googletrends_id_seq;
 CREATE TABLE public.googletrends
