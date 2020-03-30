@@ -28,6 +28,13 @@ public class YoutubeWebController {
     }
 	 
 	@ResponseBody
+	@RequestMapping(value = "/twitter4h")
+	public List<String>  twitter4h(@RequestParam int name) {   
+		List<String> Test= search.getTwitterTrendDash4h();
+		return Test;
+	}
+	 
+	@ResponseBody
 	@RequestMapping(value = "/twitter1h")
 	public List<String>  twitter1h(@RequestParam int name) {   
 		List<String> Test= search.getTwitterTrendDash1h();

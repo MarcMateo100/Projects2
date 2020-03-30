@@ -37,25 +37,41 @@ public class QuartzSchedulerExample implements ILatch {
 	         
 	        JobDetail jobDetail = jobBuilder.usingJobData("example", "com.javacodegeeks.quartz.QuartzSchedulerExample") 
 	                .usingJobData(data)
-	                .withIdentity("myJob", "group1")
+	                .withIdentity("MyJob", "group1")
 	                .build();
 	         
 	         
-	        Calendar rightNow = Calendar.getInstance();
-	        int hour = rightNow.get(Calendar.HOUR_OF_DAY);
-	        int min = rightNow.get(Calendar.MINUTE);
+	       // Calendar rightNow = Calendar.getInstance();
+	       // int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+	       // int min = rightNow.get(Calendar.MINUTE);
 	         
-	        System.out.println("Current time: " + new Date());
+	       // System.out.println("Current time: " + new Date());
 	         
-	        // Fire at curent time + 1 min every day
+	        // Fire every 2 hours
 	        Trigger trigger = TriggerBuilder.newTrigger()
 	        .withIdentity("myTrigger", "group1")
-	        .startAt(DateBuilder.todayAt(19, 14, 00))
-	        .withSchedule(CronScheduleBuilder.cronSchedule("0 " + (min + 1) + " " + hour + " * * ? *"))     
+	        .startNow()
+	        .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0/2 * * ?"))     
 	        .build();
+	        
+	        
+	        JobDetail jobDetail2 = jobBuilder.usingJobData("example", "com.javacodegeeks.quartz.QuartzSchedulerExample") 
+	                .usingJobData(data)
+	                .withIdentity("MyJobYoutube24", "group1")
+	                .build();
+	        
+	        // Fire every 24 hours
+	        Trigger trigger2 = TriggerBuilder.newTrigger()
+	        .withIdentity("myTrigger", "group1")
+	        .startNow()
+	        .withSchedule(CronScheduleBuilder.cronSchedule("0 0 23 * * ?"))     
+	        .build();
+	        
+	         
 	         
 	        // Tell quartz to schedule the job using our trigger
 	        scheduler.scheduleJob(jobDetail, trigger);
+	        scheduler.scheduleJob(jobDetail2, trigger2);
 	        latch.await();
 	        System.out.println("All triggers executed. Shutdown scheduler");
 	        scheduler.shutdown();

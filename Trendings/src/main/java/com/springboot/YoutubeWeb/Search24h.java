@@ -293,19 +293,16 @@ public class Search24h {
 			String views = singleVideo.getEtag();
 			queryI = "INSERT INTO youtube24 (title,url,viewsCount,created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
-			if (connection != null) {
-			
+			if (connection != null) {		
 				System.out.println("Successfully added" + queryI);
 				sql.executeUpdate(queryI);
 				sql.close();
-				System.out.println("Successfully added");
-				
+				System.out.println("Successfully added");	
 			} 
 			}catch (SQLException e) {
 				System.out.println("Got an exception! "); 
 	            System.out.println(e.getMessage());
 			}
-		
 		}
       
     } 

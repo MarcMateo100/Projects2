@@ -59,6 +59,13 @@
   margin-top: 20px;
 }
 
+.card3 {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-top: 20px;
+  right: 150px;
+}
+
 /* Slideshow container */
 .slideshow-container2 {
   max-width: 700px;
@@ -342,6 +349,9 @@ hr {
   border-top: 1px solid grey;
 }
 
+.mini { 
+float:right;}
+
 </style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -405,7 +415,10 @@ hr {
 
 <div class="row">
   <div class="leftcolumn1">
-    <div class="card2">
+    <hr> 
+    <span  onclick="myFunction2()"><img id="youtube" src="/images/youtube.png" style="width:90px;height:30px;"/></img></span><span class="mini"  onclick="myFunction2()"><img id="min" src="/images/min.png" style="width:20px;height:20px;"/></img></span>
+    <hr> 
+    <div id="myDIV" class="card2">
      <tr>
 	   <button class="button1" type="button1" onclick="function24(this)"><span>24 hours</span></button>
 	   <button class="button1" type="button1" onclick="function7(this)"><span>7 days</span></button>
@@ -413,8 +426,19 @@ hr {
 	 </tr>
      <p id="box3">
     </div>	
+    <span  onclick="myFunction4()"><img id="youtube" src="/images/news.png" style="width:90px;height:30px;"/></img></span><span class="mini"  onclick="myFunction4()"><img id="min" src="/images/min.png" style="width:20px;height:20px;"/></img></span>
+     <hr>
+    <div id="myDIV3" class="card2">
+     <p id="box23">
+    </div>	
+     <span  onclick="myFunction5()"><img id="twitter" src="/images/twitter.png" style="width:90px;height:30px;"/></img></span><span class="mini"  onclick="myFunction5()"><img id="min" src="/images/min.png" style="width:20px;height:20px;"/></img></span>
+    <hr> 
+    <div id="myDIV4" class="card3">
+     <tr><td><button class='button1' type='button' onclick='twitter(this)'><span>TREND LAST</span></button></td><td> <button class='button1' type='button' onclick='twitter1h(this)'><span>TREND 1H</span></button></td><td> <button class='button1' type='button' onclick='twitter4h(this)'><span>TREND 4H</span></button></td><td><p id="box2"></p></td></tr>
+    </div>	
+    <span  onclick="myFunction3()"><img id="google" src="/images/google.png" style="width:90px;height:30px;"/></img></span><span class="mini"  onclick="myFunction3()"><img id="min" src="/images/min.png" style="width:20px;height:20px;"/></img></span>
     <hr>
-    <div class="card2"> 
+    <div id="myDIV2" class="card2"> 
     <tr>
     <span  onclick="google(1)"><img id="eua"  src="/images/eua.png" style="width:40px;height:40px;"/></span>
     <span  onclick="google(2)"><img id="argentina"  src="/images/argentina.png" style="width:40px;height:40px;"/></span>
@@ -502,17 +526,7 @@ hr {
 			  <span class="dot" onclick="currentSlide(10)"></span>
 			</div> 
 	    </div>	
-      </tr>
-    <hr>
-    <div class="card2">
-     <p id="box23">
-    </div>	
-    <hr> 
-    <div class="card2">
-    <button class="button1" type="button" onclick="twitter(this)"><span>TREND LAST</span></button>
-    <button class="button1" type="button" onclick="twitter1h(this)"><span>TREND 1H</span></button>
-     <p id="box2">
-    </div>	
+      </tr> 
   </div>	
 </div>
 
@@ -535,7 +549,7 @@ $(document).ready(function() {
 	html+="<tr><td rowspan='11'><p class='test' id='frame'></td><th  bgcolor='#333'><font color='white'> Select </font></th><th bgcolor='#333'><font color='white'>  Name </font></th><th bgcolor='#333'><font color='white'>  Views </font></th></tr>";
 	for (var i = 0; i < nameArr.length-3; i++) {
 	    html+="<tr>";
-	    html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/playbutton.jpg' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th>" + "<th align='left'>"+ nameArr[i+1] + "</th>"+ "<th align='left'>"+ nameArr[i+2] + "</th>"; 
+	    html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th>" + "<th align='left'>"+ nameArr[i+1] + "</th>"+ "<th align='left'>"+ nameArr[i+2] + "</th>"; 
 	    html+="</tr>";
 	    d++;
 	    i++;
@@ -569,18 +583,15 @@ $(document).ready(function() {
 	message2 = message2.split(",").join("");
 	var nameArr = message2.split('****');
 	var d=0;
-	var html = "<table font size='2' face='Times New Roman'>";
-	html+="<tr><th  bgcolor='#333'><font color='white'> Trending </font></th><th  bgcolor='#333'><font color='white'> Retweets </font></th><th  bgcolor='#333'><font color='white'> Tweet </font></th></tr>";
+	var html = "<table font size='2' width='1000' face='Times New Roman'>";
+	html+="<tr><td rowspan='11'><p id='twit'></td><th bgcolor='#333'><font size='2' color='white'> Select </font></th><th  bgcolor='#333'><font size='2' color='white'> Trending </font></th><th width='200' bgcolor='#333'><font size='2' color='white'> Retweets </font></th></tr>";
 	for (var i = 0; i < nameArr.length-1; i++) {
 	     html+="<tr>";
-	     html+="<th><data class='data' value='"+nameArr[i+2]+"'>"+ nameArr[i]+" </data></th><th>"+ nameArr[i+1]+" retweets </th>"; 
-	     if (i==0){
-		   	html+="<td rowspan='10'><p id='twit'></td>";
-	    }
-	html+="</tr>";
-	d++;
-	i++;
-	i++;
+	    html+="<th onclick='changeImage2()'><img id='imgTwitter"+ d +"' class='data' value='"+nameArr[i+2]+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th><th size='1'><data>"+ nameArr[i]+" </data></th><th size='1'>"+ nameArr[i+1]+" retweets </th>";    
+		html+="</tr>";
+		d++;
+		i++;
+		i++;
 	}
 	html+=  "</table>";
 	document.getElementById("box2").innerHTML = html;
@@ -613,56 +624,125 @@ $(document).ready(function() {
 	var message1 = "[[${name4}]]";
 	var nameArr = message1.split('*****')
 	var url="";
+	var d=0;
 	var html = "<table font size='1' face='Times New Roman'>";
-	html+="<tr><th  bgcolor='#333'><font size='2' color='white'> Title </font></th><th  bgcolor='#333'><font size='2' color='white'> Comments </font></th></tr>";
+	html+="<tr><td rowspan='11'><p id='news'></td><th bgcolor='#333'><font size='2' color='white'> Select </font></th><th  bgcolor='#333'><font size='2' color='white'> Title </font></th><th  bgcolor='#333'><font size='2' color='white'> Comments </font></th></tr>";
 	for (var i = 0; i < nameArr.length-1; i++) {
-	    html+="<tr>";
+	    html+="<tr>";    
 	    url=nameArr[i];
-	    html+="<th><data class='test' value='"+nameArr[i]+"'><font size='2'>"+ nameArr[i+1]+"</font></data></th><th><font size='2'>"+ nameArr[i+2]+" comments </font></th>"; 
-	    if(i==0){
-	    	html+="<td rowspan='10'><p id='news'></td>";
-	    }
-		html+="</tr>";
+	    html+="<th onclick='changeImage3()'><img  id='imgNews"+ d +"' class='test3' value='"+nameArr[i]+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th><th align='left'><data class='test3' value='"+nameArr[i]+"'><font size='2'>"+ nameArr[i+1]+"</font></data></th><th><font size='2'>"+ nameArr[i+2]+" comments </font></th>"; 
+	    html+="</tr>";
+	    d++;
 		i++;
 		i++;
 	}
 	html+=  "</table>";
 	document.getElementById("box23").innerHTML = html;
 	
-	var rows = document.getElementsByClassName("test");
-	for (var i = 0; i < rows.length; i++)
+	var rows2 = document.getElementsByClassName("test3");
+	for (var i = 0; i < rows2.length; i++)
 	{   	
-		rows[i].onclick = function() {				        	        	   
-		 var a=$(event.target).attr('value');	
-		 a = a.split(" ").join("");
-		 var frame = " <iframe id='frame1' width='760' height='480' frameborder='0' style='overflow:hidden' src=";
+		rows2[i].onclick = function() {	
+		var a=$(event.target).attr('value');	
+		a = a.split(" ").join("");
+		var frame = " <iframe id='frame1' width='760' height='480' frameborder='0' style='overflow:hidden' src=";
 		frame+='"'+ a +'">';
 		frame+="</iframe>";
 		document.getElementById("news").innerHTML = frame;
 	    };
 	}  	
-	
+		
     var frame = " <iframe id='frame1' width='760' height='480' frameborder='0' style='overflow:hidden' src=";
 	frame+='"'+url+'">';
 	frame+="</iframe>";
 	document.getElementById("news").innerHTML = frame;
 });
 
+function myFunction2() {
+	  var x = document.getElementById("myDIV");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+}
+	
+function myFunction3() {
+	  var x = document.getElementById("myDIV2");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+}
+
+function myFunction4() {
+	  var x = document.getElementById("myDIV3");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+}
+	
+function myFunction5() {
+	  var x = document.getElementById("myDIV4");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+}
+
 function changeImage() {
 	
 	for (var ii = 0; ii < 10; ii++){		
 		var a="imgClickAndChange"+ii;				
 		if(event.target.id == a){
-			document.getElementById(a).src = "/images/playbutton2.jpg";	
+			document.getElementById(a).src = "/images/virusy.png";	
 			for (var j = 0; j < 10; j++){
 				if(j!=ii){
 					var b="imgClickAndChange"+j;
-					document.getElementById(b).src = "/images/playbutton.jpg";
+					document.getElementById(b).src = "/images/virusb.png";
 				}
 			}
 		}
 	}
 }   
+
+function changeImage2() {
+	
+	for (var ii = 0; ii < 10; ii++){		
+		var a="imgTwitter"+ii;				
+		if(event.target.id == a){
+			document.getElementById(a).src = "/images/virusy.png";	
+			for (var j = 0; j < 10; j++){
+				if(j!=ii){
+					var b="imgTwitter"+j;
+					document.getElementById(b).src = "/images/virusb.png";
+				}
+			}
+		}
+	}
+}   
+
+function changeImage3() {
+	
+	
+	for (var ii = 0; ii < 10; ii++){		
+		var a="imgNews"+ii;		
+		if(event.target.id == a){
+			document.getElementById(a).src = "/images/virusy.png";	
+			for (var j = 0; j < 10; j++){
+				if(j!=ii){
+					var b="imgNews"+j;
+					document.getElementById(b).src = "/images/virusb.png";
+				}
+			}
+		}
+	}
+}   
+
 
 function myFunction() {
 	  var x = document.getElementById("myTopnav");
@@ -688,6 +768,16 @@ function currentSlide(n) {
 
 function google(n) {
 	
+
+	if(n==1){
+		document.getElementById("eua").src = "/images/euay.png";	
+	}else if(n==2){
+		document.getElementById("argentina").src = "/images/argentinay.png";	
+	}else{
+		document.getElementById("eua").src = "/images/eua.png";	
+		document.getElementById("argentina").src = "/images/argentina.png";
+	}
+		
 	 var tempId = n;
 	 $.ajax({
 	     type : "POST",
@@ -715,6 +805,34 @@ function google(n) {
 	         console.log("DONE");
 	     }
 	 });	
+}
+
+function twitter4h(n) {	
+	
+	var rows = document.getElementsByClassName("button1");
+	for (var i = 0; i < rows.length; i++)
+	{   	
+		rows[i].style.backgroundColor='#333';
+		rows[i].style.color = '#FFF'
+	}  
+	n.style.backgroundColor='#F9F100';
+	n.style.color = '#000'
+	
+	 var n=1;
+	 $.ajax({
+	     type : "POST",
+	     url : "/twitter4h",
+	     data : {name:n},
+	     timeout : 100000,
+	     success : function(n) {  
+	    	var message2 = n.toString();
+	    	message2 = message2.split("]").join("");
+	    	message2 = message2.split("[").join("");
+	    	message2 = message2.split(",").join("");
+	        var nameArr = message2.split('****');
+	        tweetInit(nameArr);
+	     }
+	 });
 }
 
 function twitter1h(n) {	
@@ -776,14 +894,14 @@ function twitter(n) {
 function tweetInit(nameArr){
 	
 	var d=0;
- 	var html = "<table font size='3' face='Times New Roman' border='1|1'>";
- 	html+="<tr><th> Trending </th><th> Retweets </th><th> Tweet </th></tr>";
+ 	var html = "<table font size='2' face='Times New Roman' >";
+ 	html+="<tr><th bgcolor='#333'><font size='2' color='white'> Tweet </font></th><th bgcolor='#333'><font size='2' color='white'> Trending </font></th><th bgcolor='#333'><font size='2' color='white'> Retweets </font></th></tr>";
  	for (var i = 0; i < nameArr.length-1; i++) {
     html+="<tr>";
- 	html+="<th><data class='data' value='"+nameArr[i+2]+"'>"+ nameArr[i]+" </data></th><th>"+ nameArr[i+1]+" retweets </th>"; 
- 	if (i==0){
+    if (i==0){
  	  	html+="<td rowspan='10'><p id='twit'></td>";
  	}
+ 	html+="<th><data class='data' value='"+nameArr[i+2]+"'>"+ nameArr[i]+" </data></th><th>"+ nameArr[i+1]+" retweets </th>"; 
  	html+="</tr>";
  	d++;
  	i++;
@@ -798,7 +916,7 @@ function tweetInit(nameArr){
 		rows[i].onclick = function() {				        	        	   
 		 var a=$(event.target).attr('value');	
 		 a = a.split(" ").join("");
-	     document.getElementById("twit").innerHTML = "<blockquote id='test' class='twitter-tweet'><p lang='es' dir='ltr'>No Tweet with more than 1000 retweets <a href='https://t.co/uIuEjrHb5W'></a></p><a href='"+ a +"'></a></blockquote>";
+	     document.getElementById("twit").innerHTML = "<blockquote id='test' class='twitter-tweet'><p style='width: 500px;' lang='es' dir='ltr'>No Tweet with more than 100 retweets <a href='https://t.co/uIuEjrHb5W'></a></p><a href='"+ a +"'></a></blockquote>";
 	     twttr.widgets.load(document.getElementById("twit"));
 	    };
 	}  	
@@ -909,10 +1027,10 @@ function table(n) {
 	 var nameArr3 = n;
 	 var d=0;
 	 var html = "<font size='2' face='Times New Roman' ><table>";
-	 html+="<tr><td rowspan='11'><p class='test' id='frame'></td><th  bgcolor='#000000'><font color='white'> Select </font></th><th bgcolor='#000000'><font color='white'>  Name </font></th><th bgcolor='#000000'><font color='white'>  Views </font></th></tr>";
+	 html+="<tr><td rowspan='11'><p class='test' id='frame'></td><th  bgcolor='#333'><font color='white'> Select </font></th><th bgcolor='#333'><font color='white'>  Name </font></th><th bgcolor='#333'><font color='white'>  Views </font></th></tr>";
 	 for (var i = 0; i < nameArr3.length-3; i++) {
 	        html+="<tr>";
-	        html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/playbutton.jpg' alt="+nameArr3[i]+" style='width:25px;height:25px;'/></th>" + "<th align='left'>"+ nameArr3[i+1] + "</th>"+ "<th align='left'>"+ nameArr3[i+2] + "</th>"; 
+	        html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/virusb.png' alt="+nameArr3[i]+" style='width:25px;height:25px;'/></th>" + "<th align='left'>"+ nameArr3[i+1] + "</th>"+ "<th align='left'>"+ nameArr3[i+2] + "</th>"; 
 	        html+="</tr>";
 	        d++;
 	        i++;

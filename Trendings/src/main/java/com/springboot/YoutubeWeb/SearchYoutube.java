@@ -351,6 +351,11 @@ public List<String> getTwitterTrendDash1h() {
 	 return selectTwitter("SELECT * FROM TWITTER1H");		
 }
 
+public List<String> getTwitterTrendDash4h() {
+
+	 return selectTwitter("SELECT * FROM TWITTER4H");		
+}
+
 public String mostViewed() {
 
 	return WPgetSourceCode.getWP();		

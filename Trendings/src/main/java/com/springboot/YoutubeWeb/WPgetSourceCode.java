@@ -182,11 +182,14 @@ public class WPgetSourceCode {
 					 if(intIndex2>0){
 						 txt3 = txt22.substring(6,intIndex2);	
 						 txt3 = txt3.replaceAll("&aacute;", "á"); 	
+						 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
 						 txt3 = txt3.replaceAll("&eacute;", "é"); 	
 						 txt3 = txt3.replaceAll("&iacute;", "í"); 	
 						 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
 						 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
 						 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+						 txt3 = txt3.replaceAll("í±", "ñ");
+						 txt3 = txt3.replaceAll("&quot;", "''");
 					 }
 				 }
 				 String tx ="#comments"+'"'+ " class=\"lnk\" title=\"" + numComments[0];
@@ -235,12 +238,15 @@ public class WPgetSourceCode {
 									 int beg2=intIndex2+40;
 									 int intIndex3 = txt.indexOf("</h2></a></header>");
 									 txt22 = txt.substring(beg2,intIndex3);
-									 txt22 = txt22.replaceAll("&aacute;", "á"); 	
+									 txt22 = txt22.replaceAll("&aacute;", "á"); 
+									 txt22 = txt22.replaceAll("&Aacute;", "Á"); 	
 									 txt22 = txt22.replaceAll("&eacute;", "é"); 	
 									 txt22 = txt22.replaceAll("&iacute;", "í"); 	
 									 txt22 = txt22.replaceAll("&oacute;", "ó"); 	
 									 txt22 = txt22.replaceAll("&uacute;", "ú"); 	
 									 txt22 = txt22.replaceAll("&ntilde;", "ñ");
+									 txt22 = txt22.replaceAll("í±", "ñ");
+									 txt22 = txt22.replaceAll("&quot;", "''");
 								 }
 								 //second comments
 								  tx ="span title="+'"'+ "Comentarios"+'"'+">" + numComments[0];
@@ -271,12 +277,15 @@ public class WPgetSourceCode {
 															  int intIndex3 = txt2.indexOf('"'+">");	
 															  String tempo= txt2.substring(intIndex3+2,txt2.length()-4);
 															  tempo = tempo.replaceAll("&aacute;", "á"); 	
+															  tempo = tempo.replaceAll("&Aacute;", "Á"); 
 															  tempo = tempo.replaceAll("&eacute;", "é"); 	
 															  tempo = tempo.replaceAll("&iacute;", "í"); 	
 															  tempo = tempo.replaceAll("&oacute;", "ó"); 
+															  tempo = tempo.replaceAll("&quot;", "''");
 															  tempo = tempo.replaceAll("Ã³", "ó");
 															  tempo = tempo.replaceAll("Ã", "í"); 
 															  tempo = tempo.replaceAll("&ntilde;", "ñ");
+															  tempo = tempo.replaceAll("í±", "ñ");
 															  txt3 = txt3 + "*****" + tempo;
 															  txt3 = txt3 + "*****most commented";
 															  //System.out.println(txt3);
