@@ -158,13 +158,11 @@ public class Search {
           
           for (Video video : videoResults) {
           
-        	  
 	          if (video.getStatistics() != null) {
                   BigInteger viewsNumber = video.getStatistics().getViewCount();
-                  String viewsFormatted = NumberFormat.getIntegerInstance().format(viewsNumber) + " views";
+                  String viewsFormatted = NumberFormat.getIntegerInstance().format(viewsNumber);
                   searchResultList.get(i).setEtag(viewsFormatted);
               }
-          
           }  
       }
       //End

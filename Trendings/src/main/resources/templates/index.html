@@ -14,7 +14,7 @@
 
 .button1 {
   display: inline-block;
-  background-color: #333;
+  background-color: #515A5A;
   border-radius: 25px;
   border: none;
   color: #FFFFFF;
@@ -185,6 +185,11 @@
   to {opacity: 1}
 }
 
+.blockquote {
+ margin-left:20px;
+ margin-right:20px;
+}
+
 .frame {
         -ms-zoom: 0.5;
         -moz-transform: scale(0.5);
@@ -350,7 +355,36 @@ hr {
 }
 
 .mini { 
-float:right;}
+float:right;
+display: inline-block;
+vertical-align: text-bottom;
+}
+
+#loadingmsg {
+      color: black;
+      background: #fff; 
+      padding: 10px;
+      position: fixed;
+      top: 50%;
+      left: 40%;
+      z-index: 100;
+      margin-right: -25%;
+      margin-bottom: -25%;
+}
+#loadingover {
+      background: black;
+      z-index: 99;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+      filter: alpha(opacity=80);
+      -moz-opacity: 0.8;
+      -khtml-opacity: 0.8;
+      opacity: 0.8;
+}
 
 </style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -407,13 +441,22 @@ float:right;}
       <a href="mostViewedNews">News - Most Commented News</a>
     </div>
   </div> 
+  <div class="dropdown">
+    <button class="dropbtn">AdsForHelp 
+      <i class="fa fa-caret-down"></i>
+    </button>
+  </div> 
   <div align=right>
     <img id="virus"  src="/images/virus.png" style="width:40px;height:40px;"/>
   </div> 
 
 </div>
 
+<div id='loadingmsg' style='display: none;'>Loading, please wait...</div>
+<div id='loadingover' style='display: none;'></div>
+
 <div class="row">
+  <div class="loader"></div>
   <div class="leftcolumn1">
     <hr> 
     <span  onclick="myFunction2()"><img id="youtube" src="/images/youtube.png" style="width:90px;height:30px;"/></img></span><span class="mini"  onclick="myFunction2()"><img id="min" src="/images/min.png" style="width:20px;height:20px;"/></img></span>
@@ -429,6 +472,17 @@ float:right;}
     <span  onclick="myFunction4()"><img id="youtube" src="/images/news.png" style="width:90px;height:30px;"/></img></span><span class="mini"  onclick="myFunction4()"><img id="min" src="/images/min.png" style="width:20px;height:20px;"/></img></span>
      <hr>
     <div id="myDIV3" class="card2">
+    <tr>
+   	   <span onclick="showLoading()">
+	    <button class="button1" type="button1" onclick="spanishNews(this)"><span>Spanish</span></button>
+	   </span>
+	   <span onclick="showLoading()">
+	    <button class="button1" type="button1" onclick="englishNews(this)"><span>English</span></button>
+	   </span>
+	   <span onclick="showLoading()">
+	    <button class="button1" type="button1" onclick="frenchNews(this)"><span>French</span></button>
+	   </span>
+	 </tr>
      <p id="box23">
     </div>	
      <span  onclick="myFunction5()"><img id="twitter" src="/images/twitter.png" style="width:90px;height:30px;"/></img></span><span class="mini"  onclick="myFunction5()"><img id="min" src="/images/min.png" style="width:20px;height:20px;"/></img></span>
@@ -447,6 +501,7 @@ float:right;}
     <span  onclick="google(5)"><img id="australia"  src="/images/aus.png" style="width:40px;height:40px;"/></span>
     <span  onclick="google(7)"><img id="mexico"  src="/images/mex.png" style="width:40px;height:40px;"/></span>
     <span  onclick="google(6)"><img id="colombia"  src="/images/co.png" style="width:40px;height:40px;"/></span>
+    <span  onclick="google(8)"><img id="france"  src="/images/france.png" style="width:40px;height:40px;"/></span>
 	    <div class="slideshow-container">
 		     <div class="Column">
 			  <div class="mySlides fade">
@@ -543,38 +598,13 @@ $(document).ready(function() {
     message = message.split("]").join("");
     message = message.split("[").join("");
     message = message.split(",").join("");
-    var nameArr = message.split('****')
-	var d=0;
-	var html = "<font size='2' face='Times New Roman' ><table>";
-	html+="<tr><td rowspan='11'><p class='test' id='frame'></td><th  bgcolor='#333'><font color='white'> Select </font></th><th bgcolor='#333'><font color='white'>  Name </font></th><th bgcolor='#333'><font color='white'>  Views </font></th></tr>";
-	for (var i = 0; i < nameArr.length-3; i++) {
-	    html+="<tr>";
-	    html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th>" + "<th align='left'>"+ nameArr[i+1] + "</th>"+ "<th align='left'>"+ nameArr[i+2] + "</th>"; 
-	    html+="</tr>";
-	    d++;
-	    i++;
-	    i++;
-	}
-	html+="</table></font>";
-	document.getElementById("box3").innerHTML = html;
-	
-	var rows = document.getElementsByTagName("img");
-	for (var i = 0; i < rows.length; i++)
-	{   	
-		rows[i].onclick = function() {			        	        	   
-		var a=$(event.target).attr('alt');			        	        	   
-		if(String(a).substring(0, 3) == "htt"){ 	
-	    	message2 = String(a).split("https").join("http");	   	
-	        message2 = message2.replace("watch?v=","embed/");
-	        document.getElementById('frame').innerHTML = "<iframe id='frame' width='720' height='400' src="+message2+" frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen></iframe>";
-		}
-	    };
-	}     
-	var frame = " <iframe id='frame' width='720' height='400' src=";
-	var message2="'https://www.youtube.com/embed/pQNf38kMGwI' ";
-	frame+= message2 + "frameborder='0' gesture='media' allowscriptaccess='always' allow='autoplay; encrypted-media' allowfullscreen>";
-	frame+="</iframe>";
-	document.getElementById("frame").innerHTML = frame;
+    var nameArr = message.split('****');
+    table(nameArr);
+   	
+	//News
+	var message2 = "[[${name8}]]";
+	var nameArr = message2.split('*****');
+	newsInit(nameArr);
 	
 	//Twitter
 	var message2 = "[[${name2}]]";   
@@ -583,8 +613,8 @@ $(document).ready(function() {
 	message2 = message2.split(",").join("");
 	var nameArr = message2.split('****');
 	var d=0;
-	var html = "<table font size='2' width='1000' face='Times New Roman'>";
-	html+="<tr><td rowspan='11'><p id='twit'></td><th bgcolor='#333'><font size='2' color='white'> Select </font></th><th  bgcolor='#333'><font size='2' color='white'> Trending </font></th><th width='200' bgcolor='#333'><font size='2' color='white'> Retweets </font></th></tr>";
+	var html = "<font size='2' width='1000' face='Times New Roman'><table>";
+	html+="<tr><td rowspan='11'><p id='twit'></td><th bgcolor='#515A5A'><font size='2' color='white'> Select </font></th><th  bgcolor='#515A5A'><font size='2' color='white'> Trending </font></th><th width='200' bgcolor='#515A5A'><font size='2' color='white'> Retweets </font></th></tr>";
 	for (var i = 0; i < nameArr.length-1; i++) {
 	     html+="<tr>";
 	    html+="<th onclick='changeImage2()'><img id='imgTwitter"+ d +"' class='data' value='"+nameArr[i+2]+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th><th size='1'><data>"+ nameArr[i]+" </data></th><th size='1'>"+ nameArr[i+1]+" retweets </th>";    
@@ -593,7 +623,7 @@ $(document).ready(function() {
 		i++;
 		i++;
 	}
-	html+=  "</table>";
+	html+=  "</table></font>";
 	document.getElementById("box2").innerHTML = html;
 	
 	var rows = document.getElementsByClassName("data");
@@ -602,61 +632,36 @@ $(document).ready(function() {
 		rows[i].onclick = function() {				        	        	   
 		 var a=$(event.target).attr('value');	
 		 a = a.split(" ").join("");
-	     document.getElementById("twit").innerHTML = "<blockquote id='test' class='twitter-tweet'><p lang='es' dir='ltr'>No Tweet with more than 1000 retweets <a href='https://t.co/uIuEjrHb5W'></a></p><a href='"+ a +"'></a></blockquote>";
+	     document.getElementById("twit").innerHTML = "<blockquote id='test' class='twitter-tweet'><p style='width: 400px;' lang='es' dir='ltr'>No Tweet with more than 100 retweets <a href='https://t.co/uIuEjrHb5W'></a></p><a href='"+ a +"'></a></blockquote>";
 	     twttr.widgets.load(document.getElementById("twit"));
 	    };
 	}  	
-	document.getElementById("twit").innerHTML ="<blockquote id='test' class='twitter-tweet'><p lang='es' dir='ltr'>Real Madrid. <a href='https://t.co/uIuEjrHb5W'>https://t.co/uIuEjrHb5W</a></p>&mdash; Cuenta oficial del Real Madrid C.F. (@realmadriden)<a href='https://twitter.com/realmadrid/status/1232394839540432897'>February 4, 2020</a></blockquote>";
+	document.getElementById("twit").innerHTML ="<blockquote id='test' class='twitter-tweet'><p lang='es' style='width: 400px;' dir='ltr'>Real Madrid. <a href='https://t.co/uIuEjrHb5W'>https://t.co/uIuEjrHb5W</a></p>&mdash; Cuenta oficial del Real Madrid C.F. (@realmadriden)<a href='https://twitter.com/realmadrid/status/1232394839540432897'>February 4, 2020</a></blockquote>";
 	
 	 //Google
 	 var message = "[[${name}]]";   
-	 var nameArr = message.split('****')
+	 var nameArr = message.split('****');
 	 var v= 0;
 	 for (var i = 0; i < nameArr.length-3; i++) {
-	    document.getElementById("pic" + v).innerHTML = "<table font size='1' face='Times New Roman' class='fixed'><col width='200px' /><tr><td><div class='container'><img src='"+ nameArr[i+1] + "'  height='186' width='186' ></tr><tr><col width='200px' /><td height='50' bgcolor='#000000'><a href='"+ nameArr[i+3] +"'  style='font-size: 14px;color:white'>"+ nameArr[i+2] +" </a></td></tr></table>";
+	    document.getElementById("pic" + v).innerHTML = "<table font size='1' face='Times New Roman' class='fixed'><col width='200px' /><tr><td><div class='container'><img src='"+ nameArr[i+1] + "'  height='186' width='186' ></tr><tr><col width='200px' /><td height='50' bgcolor='#515A5A'><a href='"+ nameArr[i+3] +"'  style='font-size: 14px;color:white'>"+ nameArr[i+2] +" </a></td></tr></table>";
 	    i++;
 	    i++;
 	    i++;
 	    v++;
 	  }
 	 
-	//News
-	var message1 = "[[${name4}]]";
-	var nameArr = message1.split('*****')
-	var url="";
-	var d=0;
-	var html = "<table font size='1' face='Times New Roman'>";
-	html+="<tr><td rowspan='11'><p id='news'></td><th bgcolor='#333'><font size='2' color='white'> Select </font></th><th  bgcolor='#333'><font size='2' color='white'> Title </font></th><th  bgcolor='#333'><font size='2' color='white'> Comments </font></th></tr>";
-	for (var i = 0; i < nameArr.length-1; i++) {
-	    html+="<tr>";    
-	    url=nameArr[i];
-	    html+="<th onclick='changeImage3()'><img  id='imgNews"+ d +"' class='test3' value='"+nameArr[i]+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th><th align='left'><data class='test3' value='"+nameArr[i]+"'><font size='2'>"+ nameArr[i+1]+"</font></data></th><th><font size='2'>"+ nameArr[i+2]+" comments </font></th>"; 
-	    html+="</tr>";
-	    d++;
-		i++;
-		i++;
-	}
-	html+=  "</table>";
-	document.getElementById("box23").innerHTML = html;
-	
-	var rows2 = document.getElementsByClassName("test3");
-	for (var i = 0; i < rows2.length; i++)
-	{   	
-		rows2[i].onclick = function() {	
-		var a=$(event.target).attr('value');	
-		a = a.split(" ").join("");
-		var frame = " <iframe id='frame1' width='760' height='480' frameborder='0' style='overflow:hidden' src=";
-		frame+='"'+ a +'">';
-		frame+="</iframe>";
-		document.getElementById("news").innerHTML = frame;
-	    };
-	}  	
-		
-    var frame = " <iframe id='frame1' width='760' height='480' frameborder='0' style='overflow:hidden' src=";
-	frame+='"'+url+'">';
-	frame+="</iframe>";
-	document.getElementById("news").innerHTML = frame;
 });
+
+function showLoading() {
+    document.getElementById('loadingmsg').style.display = 'block';
+    document.getElementById('loadingover').style.display = 'block';
+}
+
+function hideLoading() {
+
+    document.getElementById('loadingmsg').style.display = 'none';
+    document.getElementById('loadingover').style.display = 'none';
+}
 
 function myFunction2() {
 	  var x = document.getElementById("myDIV");
@@ -728,7 +733,6 @@ function changeImage2() {
 
 function changeImage3() {
 	
-	
 	for (var ii = 0; ii < 10; ii++){		
 		var a="imgNews"+ii;		
 		if(event.target.id == a){
@@ -742,7 +746,6 @@ function changeImage3() {
 		}
 	}
 }   
-
 
 function myFunction() {
 	  var x = document.getElementById("myTopnav");
@@ -768,14 +771,72 @@ function currentSlide(n) {
 
 function google(n) {
 	
-
 	if(n==1){
 		document.getElementById("eua").src = "/images/euay.png";	
+		document.getElementById("argentina").src = "/images/argentina.png";
+		document.getElementById("germany").src = "/images/ger.png";	
+		document.getElementById("italy").src = "/images/it.png";
+		document.getElementById("australia").src = "/images/aus.png";
+		document.getElementById("mexico").src = "/images/mex.png";	
+		document.getElementById("colombia").src = "/images/co.png";
 	}else if(n==2){
 		document.getElementById("argentina").src = "/images/argentinay.png";	
+		document.getElementById("eua").src = "/images/eua.png";	
+		document.getElementById("germany").src = "/images/ger.png";	
+		document.getElementById("italy").src = "/images/it.png";
+		document.getElementById("australia").src = "/images/aus.png";
+		document.getElementById("mexico").src = "/images/mex.png";	
+		document.getElementById("colombia").src = "/images/co.png";
+	}
+	else if(n==3){
+		document.getElementById("argentina").src = "/images/argentina.png";	
+		document.getElementById("eua").src = "/images/eua.png";	
+		document.getElementById("germany").src = "/images/gery.png";	
+		document.getElementById("italy").src = "/images/it.png";
+		document.getElementById("australia").src = "/images/aus.png";
+		document.getElementById("mexico").src = "/images/mex.png";	
+		document.getElementById("colombia").src = "/images/co.png";
+	}
+	else if(n==4){
+		document.getElementById("argentina").src = "/images/argentina.png";	
+		document.getElementById("eua").src = "/images/eua.png";	
+		document.getElementById("germany").src = "/images/ger.png";	
+		document.getElementById("italy").src = "/images/ity.png";
+		document.getElementById("australia").src = "/images/aus.png";
+		document.getElementById("mexico").src = "/images/mex.png";	
+		document.getElementById("colombia").src = "/images/co.png";
+	}else if(n==5){
+		document.getElementById("argentina").src = "/images/argentina.png";	
+		document.getElementById("eua").src = "/images/eua.png";	
+		document.getElementById("germany").src = "/images/ger.png";	
+		document.getElementById("italy").src = "/images/it.png";
+		document.getElementById("australia").src = "/images/ausy.png";
+		document.getElementById("mexico").src = "/images/mex.png";	
+		document.getElementById("colombia").src = "/images/co.png";
+	}else if(n==6){
+		document.getElementById("argentina").src = "/images/argentina.png";	
+		document.getElementById("eua").src = "/images/eua.png";	
+		document.getElementById("germany").src = "/images/ger.png";	
+		document.getElementById("italy").src = "/images/it.png";
+		document.getElementById("australia").src = "/images/aus.png";
+		document.getElementById("mexico").src = "/images/mex.png";	
+		document.getElementById("colombia").src = "/images/coy.png";
+	}else if(n==7){
+		document.getElementById("argentina").src = "/images/argentina.png";	
+		document.getElementById("eua").src = "/images/eua.png";	
+		document.getElementById("germany").src = "/images/ger.png";	
+		document.getElementById("italy").src = "/images/it.png";
+		document.getElementById("australia").src = "/images/aus.png";
+		document.getElementById("mexico").src = "/images/mexy.png";	
+		document.getElementById("colombia").src = "/images/co.png";
 	}else{
 		document.getElementById("eua").src = "/images/eua.png";	
 		document.getElementById("argentina").src = "/images/argentina.png";
+		document.getElementById("germany").src = "/images/ger.png";	
+		document.getElementById("italy").src = "/images/it.png";
+		document.getElementById("australia").src = "/images/aus.png";
+		document.getElementById("mexico").src = "/images/mex.png";	
+		document.getElementById("colombia").src = "/images/co.png";
 	}
 		
 	 var tempId = n;
@@ -790,7 +851,7 @@ function google(n) {
 	    	 var nameArr = message.split('****')
 	    	 var v= 0;
 	    	 for (var i = 0; i < nameArr.length-3; i++) {
-	    	    document.getElementById("pic" + v).innerHTML = "<table font size='1' face='Times New Roman' border='1|1'><tr><td><div class='container'><img src='"+ nameArr[i+1] + "'  height='186' width='186' ></tr><tr><td height='50' width='200' bgcolor='#000000'><a href='"+ nameArr[i+3] +"'  style='font-size: 14px;color:white'>"+ nameArr[i+2] +" </a></td></tr></table>";
+	    	    document.getElementById("pic" + v).innerHTML = "<table font size='1' face='Times New Roman' border='1|1'><tr><td><div class='container'><img src='"+ nameArr[i+1] + "'  height='186' width='186' ></tr><tr><td height='50' width='200' bgcolor='#515A5A'><a href='"+ nameArr[i+3] +"'  style='font-size: 14px;color:white'>"+ nameArr[i+2] +" </a></td></tr></table>";
 	    	    i++;
 	    	    i++;
 	    	    i++;
@@ -812,7 +873,7 @@ function twitter4h(n) {
 	var rows = document.getElementsByClassName("button1");
 	for (var i = 0; i < rows.length; i++)
 	{   	
-		rows[i].style.backgroundColor='#333';
+		rows[i].style.backgroundColor='#515A5A';
 		rows[i].style.color = '#FFF'
 	}  
 	n.style.backgroundColor='#F9F100';
@@ -840,7 +901,7 @@ function twitter1h(n) {
 	var rows = document.getElementsByClassName("button1");
 	for (var i = 0; i < rows.length; i++)
 	{   	
-		rows[i].style.backgroundColor='#333';
+		rows[i].style.backgroundColor='#515A5A';
 		rows[i].style.color = '#FFF'
 	}  
 	n.style.backgroundColor='#F9F100';
@@ -868,7 +929,7 @@ function twitter(n) {
 	var rows = document.getElementsByClassName("button1");
 	for (var i = 0; i < rows.length; i++)
 	{   	
-		rows[i].style.backgroundColor='#333';
+		rows[i].style.backgroundColor='#515A5A';
 		rows[i].style.color = '#FFF'
 	}  
 	n.style.backgroundColor='#F9F100';
@@ -894,20 +955,17 @@ function twitter(n) {
 function tweetInit(nameArr){
 	
 	var d=0;
- 	var html = "<table font size='2' face='Times New Roman' >";
- 	html+="<tr><th bgcolor='#333'><font size='2' color='white'> Tweet </font></th><th bgcolor='#333'><font size='2' color='white'> Trending </font></th><th bgcolor='#333'><font size='2' color='white'> Retweets </font></th></tr>";
+ 	var html = "<font size='2' width='1000' face='Times New Roman' ><table>";
+ 	html+="<tr height='18'><td rowspan='11'><p id='twit'></td><th bgcolor='#515A5A'><font size='2' color='white'> Select </font></th><th bgcolor='#515A5A'><font size='2' color='white'> Trending </font></th><th bgcolor='#515A5A'><font size='2' color='white'> Retweets </font></th></tr>";
  	for (var i = 0; i < nameArr.length-1; i++) {
     html+="<tr>";
-    if (i==0){
- 	  	html+="<td rowspan='10'><p id='twit'></td>";
- 	}
- 	html+="<th><data class='data' value='"+nameArr[i+2]+"'>"+ nameArr[i]+" </data></th><th>"+ nameArr[i+1]+" retweets </th>"; 
+ 	html+="<th onclick='changeImage2()'><img id='imgTwitter"+ d +"' class='data' value='"+nameArr[i+2]+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th><th><data>"+ nameArr[i]+" </data></th><th>"+ nameArr[i+1]+" retweets </th>"; 
  	html+="</tr>";
  	d++;
  	i++;
  	i++;
  	}
- 	html+=  "</table>";
+ 	html+=  "</table></font>";
  	document.getElementById("box2").innerHTML = html;
 	
 	var rows = document.getElementsByClassName("data");
@@ -916,13 +974,54 @@ function tweetInit(nameArr){
 		rows[i].onclick = function() {				        	        	   
 		 var a=$(event.target).attr('value');	
 		 a = a.split(" ").join("");
-	     document.getElementById("twit").innerHTML = "<blockquote id='test' class='twitter-tweet'><p style='width: 500px;' lang='es' dir='ltr'>No Tweet with more than 100 retweets <a href='https://t.co/uIuEjrHb5W'></a></p><a href='"+ a +"'></a></blockquote>";
+	     document.getElementById("twit").innerHTML = "<blockquote id='test' class='twitter-tweet'><p style='width: 400px;' lang='es' dir='ltr'>No Tweet with more than 100 retweets <a href='https://t.co/uIuEjrHb5W'></a></p><a href='"+ a +"'></a></blockquote>";
 	     twttr.widgets.load(document.getElementById("twit"));
 	    };
 	}  	
-	document.getElementById("twit").innerHTML ="<blockquote id='test' class='twitter-tweet'><p lang='es' dir='ltr'>Real Madrid. <a href='https://t.co/uIuEjrHb5W'>https://t.co/uIuEjrHb5W</a></p>&mdash; Cuenta oficial del Real Madrid C.F. (@realmadriden)<a href='https://twitter.com/realmadrid/status/1232394839540432897'>February 4, 2020</a></blockquote>";   	
+	document.getElementById("twit").innerHTML ="<blockquote id='test' class='twitter-tweet'><p lang='es' style='width: 400px;' dir='ltr'>Real Madrid. <a href='https://t.co/uIuEjrHb5W'>https://t.co/uIuEjrHb5W</a></p>&mdash; Cuenta oficial del Real Madrid C.F. (@realmadriden)<a href='https://twitter.com/realmadrid/status/1232394839540432897'>February 4, 2020</a></blockquote>";   	
 }
 
+function newsInit(nameArr){
+	
+	var url="";
+	var d=0;
+	var html = "<font size='1' face='Times New Roman'><table>";
+	html+="<tr height='18'><td rowspan='11'><p id='news'></td><th bgcolor='#515A5A'><font size='2' color='white'> Select </font></th><th  bgcolor='#515A5A'><font size='2' color='white'> Title </font></th><th  bgcolor='#515A5A'><font size='2' color='white'> Newspaper </font></th></tr>";
+	for (var i = 0; i < nameArr.length-1; i++) {
+	    html+="<tr>";  
+	    if(i==0){
+	    	url=nameArr[i];
+	    }
+	    html+="<th onclick='changeImage3()'><img  id='imgNews"+ d +"' class='test3' value='"+nameArr[i]+"' src='/images/virusb.png' alt="+nameArr[i]+" style='width:25px;height:25px;'/></th><th align='left'><data class='test3' value='"+nameArr[i]+"'><font size='2'>"+ nameArr[i+1]+"</font></data></th><th>"+ nameArr[i+2]+"</th>"; 
+	    html+="</tr>";
+	    d++;
+		i++;
+		i++;
+	}
+	html+=  "</table></font>";
+	html = html.split("&lt;").join("<");
+	html = html.split("&quot;").join("\"");
+	html = html.split("&gt;").join(">");
+	document.getElementById("box23").innerHTML = html;
+	
+	var rows2 = document.getElementsByClassName("test3");
+	for (var i = 0; i < rows2.length; i++)
+	{   	
+		rows2[i].onclick = function() {	
+		var a=$(event.target).attr('value');	
+		a = a.split(" ").join("");
+		var frame = " <iframe id='frame1' width='760' height='480' frameborder='0' style='overflow:hidden' src=";
+		frame+='"'+ a +'">';
+		frame+="</iframe>";
+		document.getElementById("news").innerHTML = frame;
+	    };
+	}  	
+		
+    var frame = " <iframe id='frame1' width='760' height='480' frameborder='0' style='overflow:hidden' src=";
+	frame+='"'+url+'">';
+	frame+="</iframe>";
+	document.getElementById("news").innerHTML = frame;
+}
 
 function showSlides(n) {
   var i;
@@ -962,12 +1061,96 @@ function showSlides(n) {
   }
 }
 
+function spanishNews(n) {	
+	
+	var rows = document.getElementsByClassName("button1");
+	for (var i = 0; i < rows.length; i++)
+	{   	
+		rows[i].style.backgroundColor='#515A5A';
+		rows[i].style.color = '#FFF'
+	}  
+	
+	n.style.backgroundColor='#F9F100';
+	n.style.color = '#000'
+	
+	 var n=1;
+	 $.ajax({
+	     type : "POST",
+	     url : "/newsSpanish",
+	     data : {name:n},
+	     timeout : 100000,
+	     success : function(n) {  
+	    	var message2 = n.toString();
+	        var nameArr = message2.split('*****');
+	        newsInit(nameArr);	
+	        hideLoading();
+	     }
+	 });
+}
+
+
+function frenchNews(n) {	
+	
+	var rows = document.getElementsByClassName("button1");
+	for (var i = 0; i < rows.length; i++)
+	{   	
+		rows[i].style.backgroundColor='#515A5A';
+		rows[i].style.color = '#FFF'
+	}  
+	n.style.backgroundColor='#F1C40F';
+	n.style.color = '#000'
+	
+	 var n=1;
+	 $.ajax({
+	     type : "POST",
+	     url : "/newsFrench",
+	     data : {name:n},
+	     timeout : 100000,
+	     success : function(n) {  
+	    	 
+	    	var message2 = n.toString();
+	        var nameArr = message2.split('*****');
+	        newsInit(nameArr);	
+	        hideLoading();
+	     }
+	 });	 
+}
+
+function englishNews(n) {	
+	
+	var rows = document.getElementsByClassName("button1");
+	for (var i = 0; i < rows.length; i++)
+	{   	
+		rows[i].style.backgroundColor='#515A5A';
+		rows[i].style.color = '#FFF'
+	}  
+	n.style.backgroundColor='#F9F100';
+	n.style.color = '#000'
+	
+	 var n=1;
+	 $.ajax({
+	     type : "POST",
+	     url : "/newsEnglish",
+	     data : {name:n},
+	     timeout : 100000,
+	     success : function(n) {  
+	    	 
+	    	var message2 = n.toString();
+	        var nameArr = message2.split('*****');
+	        newsInit(nameArr);	 
+	        hideLoading();
+	     }
+	 });
+	 
+	 
+}
+
 function function7(n) {	
 	
 	var rows = document.getElementsByClassName("button1");
 	for (var i = 0; i < rows.length; i++)
 	{   	
-		rows[i].style.backgroundColor='#333';
+		rows[i].style.backgroundColor='#515A5A';
 		rows[i].style.color = '#FFF'
 	}  
 	
@@ -987,7 +1170,7 @@ function function24(n) {
 	var rows = document.getElementsByClassName("button1");
 	for (var i = 0; i < rows.length; i++)
 	{   	
-		rows[i].style.backgroundColor='#333';
+		rows[i].style.backgroundColor='#515A5A';
 		rows[i].style.color = '#FFF'
 	}  
 	
@@ -1007,32 +1190,34 @@ function function30(n) {
 	var rows = document.getElementsByClassName("button1");
 	for (var i = 0; i < rows.length; i++)
 	{   	
-		rows[i].style.backgroundColor='#333';
+		rows[i].style.backgroundColor='#515A5A';
 		rows[i].style.color = '#FFF'
 	}  
 	
 	n.style.backgroundColor='#F9F100';
 	n.style.color = '#000'
 	
-	
-	 var message = "[[${name6}]]";
-	 message = message.split("]").join("");
-	 message = message.split("[").join("");
-	 message = message.split(",").join("");
-	 var nameArr3 = message.split('****')
-	 table(nameArr3);
+	var message = "[[${name6}]]";
+	message = message.split("]").join("");
+	message = message.split("[").join("");
+	message = message.split(",").join("");
+	var nameArr3 = message.split('****')
+	table(nameArr3);
 }
 
 function table(n) {
 	 var nameArr3 = n;
+	 var date=nameArr3[3];
+	 date=date.substring(0, 20);
 	 var d=0;
 	 var html = "<font size='2' face='Times New Roman' ><table>";
-	 html+="<tr><td rowspan='11'><p class='test' id='frame'></td><th  bgcolor='#333'><font color='white'> Select </font></th><th bgcolor='#333'><font color='white'>  Name </font></th><th bgcolor='#333'><font color='white'>  Views </font></th></tr>";
+	 html+="<tr height='18'>"+"Last update:"+date+"<td rowspan='11'><p class='test' id='frame'></td><th  bgcolor='#515A5A'><font color='white'> Select </font></th><th bgcolor='#515A5A'><font color='white'>  Name </font></th><th bgcolor='#515A5A'><font color='white'>  Views </font></th></tr>";
 	 for (var i = 0; i < nameArr3.length-3; i++) {
 	        html+="<tr>";
 	        html+="<th onclick='changeImage()'><img id='imgClickAndChange"+d+"' src='/images/virusb.png' alt="+nameArr3[i]+" style='width:25px;height:25px;'/></th>" + "<th align='left'>"+ nameArr3[i+1] + "</th>"+ "<th align='left'>"+ nameArr3[i+2] + "</th>"; 
 	        html+="</tr>";
 	        d++;
+	        i++;
 	        i++;
 	        i++;
 	    }

@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
+
 import org.apache.log4j.Logger;
 
 
@@ -60,6 +61,7 @@ public class RSSReadTest {
 				    		temp = temp.replace("<ht:news_item_title>", "");
 				    		temp = temp.replace("</ht:news_item_title>", "");	
 				    		temp = temp.replaceAll("Ã³;", "ó"); 	
+				    		temp = temp.replaceAll("Ãº", "ú"); 
 				    		sourcecode = sourcecode + temp + "****";
 			    			GoogleTrends.put("TitleL"+i, temp);
 	    				}
@@ -127,6 +129,12 @@ public class RSSReadTest {
 	    		else if (n==7) {
 	    			rssUrl = new URL("https://trends.google.com/trends/trendingsearches/daily/rss?geo=MX");
 	    		}
+	    		else if (n==8) {
+	    			rssUrl = new URL("https://trends.google.com/trends/trendingsearches/daily/rss?geo=FR");
+	    		}    		
+	    		else if (n==9) {
+	    			rssUrl = new URL("https://trends.google.com/trends/trendingsearches/daily/rss?geo=JP");
+	    		} 
 
 	    		BufferedReader in= new BufferedReader(new InputStreamReader(rssUrl.openStream()));
 	    		String sourcecode="";
@@ -143,9 +151,29 @@ public class RSSReadTest {
 	    				String temp = line.substring(firstPos);
 	    				temp = temp.replace("<title>", "");
 	    				temp = temp.replace("</title>", "");
-	    				temp = temp.replaceAll("Ã³;", "ó"); 	
+	    				
+	    				//if(n==9) {
+	    					//Translator translate = Translator.getInstance();
+	    					//String text = translate.translate(temp, Language.ENGLISH, Language.ROMANIAN);
+		    				//System.out.println(text); // "Bună ziua!" 
+	    				//}
+	    				
+	    				
+	    				temp = temp.replaceAll("Ã³", "ó"); 	
 			    		temp = temp.replaceAll("Ã�;", "á"); 	
 			    		temp = temp.replaceAll("Ã­;", "í"); 
+			    		temp = temp.replaceAll("Ãº", "ú"); 
+			    		temp = temp.replaceAll("Ã¡", "á"); 
+			    		temp = temp.replaceAll("Ã©", "é"); 
+			    		temp = temp.replaceAll("Ã±", "ñ"); 	
+			    		temp = temp.replaceAll("Ã“", "Ó"); 
+			    		temp = temp.replaceAll("&amp;quot;", "''"); 	
+			    		temp = temp.replaceAll("â€œ", "''"); 
+			    		temp = temp.replaceAll("â€�", "''"); 
+			    		temp = temp.replaceAll("Ã¼", "ü"); 
+			    		temp = temp.replaceAll("Ã¶", "ö"); 
+			    		temp = temp.replaceAll("Ã¤", "ä"); 
+			    		temp = temp.replaceAll("Ã", "à"); 
 	    				if (!temp.equals("Daily Search Trends")){
 	    					if(tit) {
 		    					tit=false;
@@ -172,9 +200,20 @@ public class RSSReadTest {
 				    		String temp = line.substring(firstPos);
 				    		temp = temp.replace("<ht:news_item_title>", "");
 				    		temp = temp.replace("</ht:news_item_title>", "");
-				    		temp = temp.replaceAll("Ã³;", "ó"); 	
+				    		temp = temp.replaceAll("Ã³", "ó"); 	
 				    		temp = temp.replaceAll("Ã�;", "á"); 	
 				    		temp = temp.replaceAll("Ã­;", "í"); 	
+				    		temp = temp.replaceAll("Ãº", "ú"); 
+				    		temp = temp.replaceAll("Ã¡", "á"); 
+				    		temp = temp.replaceAll("Ã±", "ñ"); 
+				    		temp = temp.replaceAll("Ã©", "é"); 
+				    		temp = temp.replaceAll("&amp;quot;", "''"); 
+				    		temp = temp.replaceAll("â€œ", "''"); 
+				    		temp = temp.replaceAll("â€�", "''"); 
+				    		temp = temp.replaceAll("Ã¼", "ü"); 
+				    		temp = temp.replaceAll("Ã¶", "ö"); 
+				    		temp = temp.replaceAll("Ã¤", "ä"); 
+				    		temp = temp.replaceAll("Ã", "à"); 
 				    		sourcecode = sourcecode + temp + "****";
 			    			GoogleTrends.put("TitleL"+i, temp);
 	    				}

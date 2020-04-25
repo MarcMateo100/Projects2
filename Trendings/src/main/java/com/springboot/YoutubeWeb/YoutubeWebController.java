@@ -48,15 +48,37 @@ public class YoutubeWebController {
 		return Test;
     }
 	
+	@ResponseBody
+	@RequestMapping(value = "/newsSpanish")
+	public String  newsSpanish(@RequestParam int name) {   
+		String Test= search.mostViewedTitles();
+		return Test;
+    }
+	
+	@ResponseBody
+	@RequestMapping(value = "/newsEnglish")
+	public String  newsEnglish(@RequestParam int name) {   
+		String Test= search.mostViewedTitlesEnglish();
+		return Test;
+    }
+	
+	@ResponseBody
+	@RequestMapping(value = "/newsFrench")
+	public String  newsFrench(@RequestParam int name) {   
+		String Test= search.mostViewedTitlesFrench();
+		return Test;
+    }
+	
 	@GetMapping("/")
     public String index2019(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 		model.addAttribute("name", search.getGoogleTrends(1));    
 		model.addAttribute("name2", search.getTwitterTrendDash());     
 		model.addAttribute("name3", search.index2019()); 
-		model.addAttribute("name4", search.mostViewedTotal()); 
+		//model.addAttribute("name4", search.mostViewedTotal()); 
 		model.addAttribute("name5", search.index2019());
 	    model.addAttribute("name6", search.index20192());
 	    model.addAttribute("name7", search.index20193());
+	    model.addAttribute("name8", search.mostViewedTitles());
         return "index";
     }
 	

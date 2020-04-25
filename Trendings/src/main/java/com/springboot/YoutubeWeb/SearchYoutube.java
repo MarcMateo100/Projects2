@@ -208,6 +208,9 @@ public List<String> select(String query){
 						 String em3 = rs.getString("viewsCount");
 						 list.add(em3);	
 						 list.add("****");
+						 String em4 = rs.getString("created_on");
+						 list.add(em4);	
+						 list.add("****");
 					}
 					sql.close();
 			    	System.out.println("Successfully selected");				
@@ -404,6 +407,21 @@ public String mostViewed5() {
 public String mostViewedTotal() {
 
 	return WPgetSourceCode.getWPTotal();		
+}
+
+public String mostViewedTitles() {
+
+	return WPgetSourceCode.getWPTitles();		
+}
+
+public String mostViewedTitlesEnglish() {
+
+	return WPgetSourceCode.getWPTitlesEnglish();		
+}
+
+public String mostViewedTitlesFrench() {
+
+	return WPgetSourceCode.getWPTitlesFrench();		
 }
   
 }

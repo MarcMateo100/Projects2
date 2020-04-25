@@ -235,6 +235,8 @@ public class Search24h {
     if (!iteratorSearchResults.hasNext()) {
       System.out.println(" There aren't any results for your query.");
     }
+    
+    int i=0;
 
     while (iteratorSearchResults.hasNext()) {
 
@@ -283,10 +285,15 @@ public class Search24h {
 								
 			try {
 						
-			Statement sql = connection.createStatement();	
+			Statement sql = connection.createStatement();
 			
-			String queryI = "DELETE from youtube24";
-			sql.executeUpdate(queryI);
+			String queryI=null;
+			
+			if(i==0) {			
+				queryI = "DELETE from youtube24";
+				sql.executeUpdate(queryI);
+				i++;
+			}
 			
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();

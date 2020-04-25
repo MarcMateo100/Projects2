@@ -141,6 +141,831 @@ public class WPgetSourceCode {
 	    	}
 	 }
 	
+	// public static void main(String[] args) {
+	 public static String getWPTitles()  {
+		 		 
+		 String txt2="";
+	
+			try {				
+				URL url = new URL("https://elpais.com/");
+				BufferedReader bs = new BufferedReader(new InputStreamReader(url.openStream()));
+	            boolean flag=true;
+	            String txt;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("NewsArticle\",\"headline");
+				      if (intIndex>0){
+								 String tx ="url";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("url");
+									 int beg=intIndex+25;
+							    	 int end=intIndex3-3; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€œ", "\"");
+									 txt3 = txt3.replaceAll("í³", "ó"); 
+									 txt3 = txt3.replaceAll("íº", "ú"); 
+									 txt3 = txt3.replaceAll("â€�", "\"");									 
+									 txt3 = txt3.replaceAll("Â", "");
+									 txt2= "https://elpais.com/" + "*****" + txt3 + "*****" + "<a href=\"https://elpais.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://elpais.com\"><img id=\"elpais\" src=\"images/elpais.png\" style=\"width:90px;height:20px;\"></img></a>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }			 	  
+				      }
+				}
+				
+				url = new URL("https://www.elmundo.es/");
+				flag=true;
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h2 class=");
+				      if (intIndex>0){
+								 String tx ="headline\">";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("/h2>");
+									 int beg=intIndex2+10;
+							    	 int end=intIndex3-1; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt2= txt2 + "*****" + "https://www.elmundo.es/" + "*****" + txt3 + "*****" + "<a href=\"https://elmundo.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://elmundo.com\"><img id=\"elmundo\" src=\"images/elmundo.png\" style=\"width:90px;height:18px;\"></img></a>";
+									 System.out.println(txt2);
+									 flag=false;
+								 }		
+				      }
+				}
+				
+				url = new URL("https://www.abc.es/");
+				flag=true;
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h3 class=");
+				      if (intIndex>0){
+								// String tx ="\"  >";
+				    	         txt= txt.substring(intIndex, txt.length());
+								 int intIndex2 = txt.indexOf("html\" title=\"");
+								 //int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){									 
+									 int intIndex3 = txt.indexOf("  >");
+									 int beg=intIndex2+13;
+							    	 int end=intIndex3-1; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("í³", "ó"); 	
+									 txt3 = txt3.replaceAll("íº", "ú");
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("Â", "");
+									 txt2= txt2 + "*****" + "https://www.abc.es/" + "*****" + txt3 + "*****" + "<a href=\"https://abc.es/\" data-toggle=\"tooltip\\\" data-placement=\"top\" title=\"https://abc.es\"><img id=\"abc\" src=\"images/abc.png\" style=\"width:90px;height:20px;\"></img></a>";
+									 System.out.println(txt2);
+									 flag=false;
+								 }		
+				      }
+				}
+				
+				url = new URL("https://www.milenio.com/");
+				flag=true;
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h2");
+				      if (intIndex>0){
+								 //String tx ="\">";
+								 int intIndex2 = txt.indexOf("title>");
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("</h2>");
+									 int beg=intIndex2+6;
+							    	 int end=intIndex3; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt2= txt2 + "*****" + "https://www.milenio.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.milenio.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.jornada.com.mx/ultimas\"><img id=\"milenio\" src=\"images/milenio.png\" style=\"width:90px;height:20px;\"></img></a>";
+									 System.out.println(txt2);
+									 flag=false;
+								 }		
+				      }
+				}
+				url = new URL("https://www.elcomercio.com/");
+				flag=true;
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("class=\"title page-link\"");
+				      if (intIndex>0){
+								 //String tx ="html\">"
+								 int intIndex2 = txt.indexOf("html\">", txt.indexOf("html\">") + 1);
+								 //int intIndex2 = txt.indexOf("html\">");
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("</a><div");
+									 int beg=intIndex2+6;
+							    	 int end=intIndex3; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€˜", "'");	
+									 txt3 = txt3.replaceAll("Â", "");
+									 txt3 = txt3.replaceAll("â€™", "'"); 										
+									 txt2= txt2 + "*****" + "https://www.elcomercio.com/" + "*****" + txt3 + "*****" + "<img id=\"elcomercio\" src=\"images/elcomercio.png\" style=\"width:90px;height:20px;\"></img>";
+									 System.out.println(txt2);
+									 flag=false;
+								 }		
+				      }
+				}
+				
+				/*url = new URL("https://elcomercio.pe/");
+				flag=true;
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("</h3><h2 ");
+				      txt= txt.substring(intIndex,txt.length());
+				      if (intIndex>0){
+								 //String tx ="\">";
+								 int intIndex2 = txt.indexOf("/\">");
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("</a></h2>");
+									 int beg=intIndex2+7;
+							    	 int end=intIndex3; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt2= txt2 + "*****" + "https://elcomercio.pe/" + "*****" + txt3 + "*****" + "title";
+									 System.out.println(txt2);
+									 flag=false;
+								 }		
+				      }
+				}*/
+				
+				url = new URL("https://www.lavanguardia.com/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+					//let's search comments number-comments
+				      int intIndex = txt.indexOf("<h1 class");
+				      if (intIndex>0){
+							 while ((txt = bs.readLine()) != null && flag) {
+								 String tx ="\">";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("</a>");
+									 int beg=intIndex2+1;
+							    	 int end=intIndex3;
+									 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 	
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 
+									 txt3 = txt3.replaceAll("íº", "ú"); 
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€œ", "''");
+									 txt3 = txt3.replaceAll("â€�", "''");
+									 txt3 = txt3.replaceAll("í³", "ó");
+									 txt2= txt2 + "*****" + "https://www.lavanguardia.com/" + "*****" + txt3 + "*****" + "<img id=\"lavanguardia\" src=\"images/lavan.png\" style=\"width:90px;height:18px;\"></img>";
+									 //System.out.println(txt2);
+									 flag=false;
+								 }			 
+							 }		  
+				      }      
+				}
+				
+				url = new URL("https://www.eldiario.es/");
+				flag=true;
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("bkn headline typ-1");
+				      if (intIndex>0){
+				    	  while ((txt = bs.readLine()) != null && flag) {
+								 String tx ="title=";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("\">");
+									 int beg=intIndex2+7;
+							    	 int end=intIndex3; 
+							    	 String txt3= txt.substring(beg,end);
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("&aacute;", "á");
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&iacute;", "í"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt2= txt2 + "*****" + "https://www.eldiario.es/" + "*****" + txt3 + "*****" + "<img id=\"eldiario\" src=\"images/eldiario.png\" style=\"width:90px;height:20px;\"></img>";
+									 System.out.println(txt2);
+									 //return txt2;
+									 flag=false;
+								 }		
+				    	  }
+				      } 
+				}
+				url = new URL("https://www.elperiodico.com/es/");
+				flag=true;
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h2 class=");
+				      if (intIndex>0){
+				    	  while ((txt = bs.readLine()) != null && flag) {
+								 String tx ="title=";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("\">");
+									 int beg=intIndex2+7;
+							    	 int end=intIndex3; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("í³", "ó"); 	
+									 txt3 = txt3.replaceAll("íº", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");						
+									 txt2= txt2 + "*****" + "https://www.elperiodico.com/es/" + "*****" + txt3 + "*****" + "<img id=\"periodico\" src=\"images/periodico.png\" style=\"width:90px;height:20px;\"></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									return txt2;
+								 }		
+				    	  }
+				      }
+				}				
+			return null;	
+				 
+			}catch(MalformedURLException ioe) {
+				System.out.println(ioe);
+				return null;
+			}catch(IOException ioe) {
+	    		System.out.println(ioe);
+	    		return null;
+	    	}	
+}
+	 
+ //public static void main(String[] args) {
+ public static String getWPTitlesEnglish()  {
+		 
+		 String txt2="";
+	
+			try {
+				
+				URL url = new URL("https://www.theguardian.com/international");
+				BufferedReader bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				String txt;
+				boolean flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("js-headline-text\">");
+				      if (intIndex>0){
+								 String tx ="</span></span>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+18;
+							    	 int end=intIndex2; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt2= "https://www.theguardian.com/international" + "*****" + txt3 + "*****" + "<img id=\"guardian\" src=\"/images/guardian.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("https://www.wsj.com/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("hp_lead_pos1\">");
+				      if (intIndex>0){
+								 String tx ="</a>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+14;
+							    	 int end=intIndex2; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€™", "\'");
+									 txt2= txt2 + "*****" + "https://www.wsj.com/" + "*****" + txt3 + "*****" + "<img id=\"youtube\" src=\"/images/wsj.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("https://www.nytimes.com/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("esl82me0\"><span>");
+				      if (intIndex>0){
+								 String tx ="</span></h2>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+16;
+							    	 int end=intIndex2; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt2= txt2 + "*****" + "https://www.nytimes.com/" + "*****" + txt3 + "*****" + "<img id=\"youtube\" src=\"/images/nyt.png\" style=\"width:90px;height:20px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("http://global.chinadaily.com.cn/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("CT_lunbo_txt2\">");
+				      if (intIndex>0){
+				    	  while ((txt = bs.readLine()) != null && flag) {
+								 String tx ="html\"";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int intIndex3 = txt.indexOf("html\">");
+									 tx ="</a></p>";
+									 intIndex2 = txt.indexOf(tx);
+									 if(intIndex2>0){
+										 int beg=intIndex3+6;
+								    	 int end=intIndex2; 
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt2= txt2 + "*****" + "http://global.chinadaily.com.cn/" + "*****" + txt3 + "*****" + "<img id=\"youtube\" src=\"/images/chinad.png\" style=\"width:90px;height:20px;\"/></img>";
+										 System.out.println(txt2);
+										 flag=false;
+										 //return txt2;
+									 }
+								}		
+						 }
+				      }
+				}
+				url = new URL("https://timesofindia.indiatimes.com");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf(".jpg\" alt=\"");
+				      if (intIndex>0){
+				    	  String tx ="\"></a>";
+						 int intIndex2 = txt.indexOf(tx);
+						 if(intIndex2>0){
+							 int beg=intIndex+11;
+						   	 int end=intIndex2; 
+						   	 String txt3= txt.substring(beg,end);
+						   	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+							 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+							 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+							 txt3 = txt3.replaceAll("Ã±", "ñ");
+							 txt3 = txt3.replaceAll("Ã", "í"); 
+							 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+							 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+							 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+							 txt3 = txt3.replaceAll("&quot;", "''");
+							 txt2= txt2 + "*****" + "https://timesofindia.indiatimes.com" + "*****" + txt3 + "*****" + "<img id=\"india\" src=\"/images/thimesI.png\" style=\"width:90px;height:20px;\"/></img>";
+							 System.out.println(txt2);
+							 flag=false;
+							 //return txt2;
+						 }	
+				      }
+				}
+				url = new URL("https://www.smh.com.au/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h3 class=");	     
+				      if (intIndex>0){
+				    	  		 txt= txt.substring(intIndex,txt.length());
+								 String tx ="</a></h3>";
+								 int intIndex2 = txt.indexOf(tx);
+								 int intIndex3 = txt.indexOf("html\">");
+								 if(intIndex2>0){
+									 int beg=intIndex3+6;
+							    	 int end=intIndex2; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt2= txt2 + "*****" + "https://www.smh.com.au/" + "*****" + txt3 + "*****" + "<img id=\"youtube\" src=\"/images/tsmh.png\" style=\"width:90px;height:20px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("http://www.asahi.com/ajw/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("EnTopHeadline\">");
+				      if (intIndex>0){
+								 int intIndex2 = txt.indexOf("</span>");
+								 if(intIndex2>0){
+									 int beg=intIndex+15;
+							    	 int end=intIndex2; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt2= txt2 + "*****" + "http://www.asahi.com/ajw//" + "*****" + txt3 + "*****" + "<img id=\"youtube\" src=\"/images/asahi.png\" style=\"width:90px;height:20px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+								 }		
+				      }
+				}	
+				url = new URL("https://www.dawn.com/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h2 data-layout=");
+				      if (intIndex>0){
+				    	  intIndex = txt.indexOf("'>", txt.indexOf("'>") + 1);
+							 int beg=intIndex+2;
+						   	 int end=txt.length(); 
+						   	 String txt3= txt.substring(beg,end);
+						   	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+							 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+							 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+							 txt3 = txt3.replaceAll("Ã±", "ñ");
+							 txt3 = txt3.replaceAll("Ã", "í"); 
+							 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+							 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+							 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+							 txt3 = txt3.replaceAll("&quot;", "''");
+							 txt3 = txt3.replaceAll("â€˜", "'");
+							 txt3 = txt3.replaceAll("â€™", "'");
+							 txt2= txt2 + "*****" + "https://www.dawn.com/" + "*****" + txt3 + "*****" + "<img id=\"dawn\" src=\"/images/dawn.png\" style=\"width:80px;height:25px;\"/></img>";
+							 System.out.println(txt2);
+							 flag=false;
+							 return txt2;
+				      }
+				}
+				//Zaman (Turkey)
+			return null;	
+				 
+			}catch(MalformedURLException ioe) {
+				System.out.println(ioe);
+				return null;
+			}catch(IOException ioe) {
+	    		System.out.println(ioe);
+	    		return null;
+	    	}	
+}
+ 
+ //public static void main(String[] args) {
+public static String getWPTitlesFrench()  {
+		 
+		 String txt2="";
+	
+			try {
+				
+				URL url = new URL("https://www.lemonde.fr");
+				BufferedReader bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				String txt;
+				boolean flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("\"article__title-label\">");
+				      if (intIndex>0){
+								 String tx ="</span> </h1>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+23;
+							    	 int end=intIndex2; 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("í¨", "è");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt3 = txt3.replaceAll("í´", "ô");
+									 txt2= "https://www.lemonde.fr/" + "*****" + txt3 + "*****" + "<img id=\"lemonde\" src=\"/images/lemonde.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("https://www.lefigaro.fr/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h1 class");
+				      if (intIndex>0){
+								 String tx ="</h1></a>";
+								 int intIndex2 = txt.indexOf(tx);
+								 txt= txt.substring(intIndex, intIndex2);
+								 tx ="\">";
+								 int intIndex3 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex3+2;
+							    	 int end=txt.length(); 
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("í¨", "è");
+									 txt3 = txt3.replaceAll("Â", "");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt3 = txt3.replaceAll("í´", "ô");
+									 txt2= txt2 + "*****" + "https://www.lefigaro.fr/" + "*****" + txt3 + "*****" + "<img id=\"lefigaro\" src=\"/images/lefigaro.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+								 }		
+				      }
+				}
+				url = new URL("http://www.leparisien.fr/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h2 class=\"story-headline\">");
+				      if (intIndex>0){
+								 String tx ="</h2><span";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+27;
+							    	 int end=intIndex2;
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("í¨", "è");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("í§", "ç");									 
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt3 = txt3.replaceAll("Â", "");
+									 txt3 = txt3.replaceAll("í´", "ô");
+									 txt2= txt2 + "*****" + "http://www.leparisien.fr/" + "*****" + txt3 + "*****" + "<img id=\"parisien\" src=\"/images/parisien.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("http://www.francesoir.fr/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h2>");
+				      if (intIndex>0){
+								 String tx ="</h2></a>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+4;
+							    	 int end=intIndex2;
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("í¨", "è");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt3 = txt3.replaceAll("í´", "ô");
+									 txt3 = txt3.replaceAll("í‰", "E");
+									 txt3 = txt3.replaceAll("â€", "...");
+									 txt2= txt2 + "*****" + "http://www.francesoir.fr/" + "*****" + txt3 + "*****" + "<img id=\"francese\" src=\"/images/francese.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("https://www.liberation.fr/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h2>");
+				      if (intIndex>0){
+								 String tx ="</h2>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+4;
+							    	 int end=intIndex2;
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("í¨", "è");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt3 = txt3.replaceAll("í©", "ê");
+									 txt3 = txt3.replaceAll("í´", "ô");
+									 txt3 = txt3.replaceAll("Â´", "");
+									 txt2= txt2 + "*****" + "https://www.liberation.fr/" + "*****" + txt3 + "*****" + "<img id=\"liberation\" src=\"/images/liberation.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 //return txt2;
+								 }		
+				      }
+				}
+				url = new URL("http://aujourdhui.ma/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h4>");
+				      if (intIndex>0){
+								 String tx ="</a></h4>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 tx ="bookmark\">";
+									 int intIndex3 = txt.indexOf(tx);
+									 int beg=intIndex3+10;
+							    	 int end=intIndex2;
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("í¨", "è");
+									 txt3 = txt3.replaceAll("í´", "ô");
+									 txt2= txt2 + "*****" + "http://aujourdhui.ma/" + "*****" + txt3 + "*****" + "<img id=\"auj\" src=\"/images/auj.png\" style=\"width:90px;height:20px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;								
+								 }		
+				      }
+				}
+				url = new URL("http://www.liberte-algerie.com/");
+				bs = new BufferedReader(new InputStreamReader(url.openStream()));
+				flag=true;
+				while ((txt = bs.readLine()) != null && flag) {
+				      int intIndex = txt.indexOf("<h1>");
+				      if (intIndex>0){
+								 String tx ="</h1>";
+								 int intIndex2 = txt.indexOf(tx);
+								 if(intIndex2>0){
+									 int beg=intIndex+4;
+							    	 int end=intIndex2;
+							    	 String txt3= txt.substring(beg,end);
+							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+									 txt3 = txt3.replaceAll("Ã±", "ñ");
+									 txt3 = txt3.replaceAll("Ã", "í"); 
+									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+									 txt3 = txt3.replaceAll("&quot;", "''");
+									 txt3 = txt3.replaceAll("â€˜", "'");
+									 txt3 = txt3.replaceAll("â€™", "'");
+									 txt3 = txt3.replaceAll("í©", "é");
+									 txt3 = txt3.replaceAll("í¨", "è");
+									 txt3 = txt3.replaceAll("í´", "ô");
+									 txt3 = txt3.replaceAll("â€œ", "''");	
+									 txt3 = txt3.replaceAll("íª", "ê");
+									 txt2= txt2 + "*****" + "http://www.liberte-algerie.com/" + "*****" + txt3 + "*****" + "<img id=\"liberte\" src=\"/images/liberte.png\" style=\"width:90px;height:17px;\"/></img>";
+									 System.out.println(txt2);
+									 flag=false;
+									 return txt2;
+								 }		
+				      }
+				}
+
+			return null;	
+				 
+			}catch(MalformedURLException ioe) {
+				System.out.println(ioe);
+				return null;
+			}catch(IOException ioe) {
+	    		System.out.println(ioe);
+	    		return null;
+	    	}	
+}
+	 
+	 
+	
 	//public static void main(String[] args) {
 	public static String getWPTotal(){
 		try {
