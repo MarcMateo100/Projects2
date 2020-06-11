@@ -24,8 +24,8 @@ import twitter4j.conf.ConfigurationBuilder;
 */
 public class TwitterBatch {  //Constructor de la clase
 	
-	public static void main(String[] args) {
-		//public static String getTwitterTrends() {
+	//public static void main(String[] args) {
+		public static String getTwitterTrends() {
 	
 	ConfigurationBuilder configBuilder = new ConfigurationBuilder();
 	configBuilder.setDebugEnabled(true).setOAuthConsumerKey("fwsR7X3OzKt7QZcthp0asZYq4")
@@ -52,6 +52,7 @@ public class TwitterBatch {  //Constructor de la clase
 		 //min_retweets
 
         System.out.println("Showing trends for " + trends.getLocation().getName());
+        
          
         int j=0;
 
@@ -148,6 +149,6 @@ public class TwitterBatch {  //Constructor de la clase
 					System.out.println("Got an exception! "); 
 		            System.out.println(e.getMessage());
 			} 
-	// return null;
+	 return null;
 	}
 }

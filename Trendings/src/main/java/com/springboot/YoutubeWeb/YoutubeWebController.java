@@ -26,7 +26,21 @@ public class YoutubeWebController {
 		 String a = search.getGoogleTrends(name);   
 		 return a;
     }
-	 
+	 	 
+	@ResponseBody
+	@RequestMapping(value = "/twitter1w")
+	public List<String>  twitter1w(@RequestParam int name) {   
+		List<String> Test= search.getTwitterTrendDash1w();
+		return Test;
+	}    
+	    
+	@ResponseBody
+	@RequestMapping(value = "/twitter1d")
+	public List<String>  twitter1d(@RequestParam int name) {   
+		List<String> Test= search.getTwitterTrendDash1d();
+		return Test;
+	}    
+	    
 	@ResponseBody
 	@RequestMapping(value = "/twitter4h")
 	public List<String>  twitter4h(@RequestParam int name) {   
@@ -73,12 +87,15 @@ public class YoutubeWebController {
     public String index2019(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 		model.addAttribute("name", search.getGoogleTrends(1));    
 		model.addAttribute("name2", search.getTwitterTrendDash());     
-		model.addAttribute("name3", search.index2019()); 
+		model.addAttribute("name3", search.index20193()); 
 		//model.addAttribute("name4", search.mostViewedTotal()); 
 		model.addAttribute("name5", search.index2019());
 	    model.addAttribute("name6", search.index20192());
 	    model.addAttribute("name7", search.index20193());
 	    model.addAttribute("name8", search.mostViewedTitles());
+	    model.addAttribute("name9", search.getGoogleTrendsList());
+	    model.addAttribute("name10", search.youtube3m());
+	    model.addAttribute("name11", search.youtube6m());
         return "index";
     }
 	

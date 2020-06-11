@@ -298,6 +298,7 @@ public class Search24h {
 			String videos= rId.getVideoId();
 			String title= singleVideo.getSnippet().getTitle();
 			String views = singleVideo.getEtag();
+			views = views.replaceAll("views", "");
 			queryI = "INSERT INTO youtube24 (title,url,viewsCount,created_on,last_login) VALUES ( '"+title+"','"+ videos +"','"+ views +"', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP )";
 		
 			if (connection != null) {		

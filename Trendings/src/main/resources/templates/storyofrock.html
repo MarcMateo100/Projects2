@@ -3,17 +3,152 @@
 <head>
 <style>
 
+	/* Footer */
+	.footer {
+	  padding: 20px;
+	  text-align: center;
+	  background: #ddd;
+	  margin-top: 20px;
+	}
+	
+	canvas
+	{
+    pointer-events: none;       /* make the canvas transparent to the mouse - needed since canvas is position infront of image */
+    position: absolute;
+	}
+	
+	.container {
+	  position: relative;
+	  text-align: center;
+	  color: #ffffff;
+	}
+	
+	.topnav {
+	  overflow: hidden;
+	  background-color: #333;
+	  height: 40px;
+	}
+	
+	.topnav a {
+	  float: left;
+	  display: block;
+	  color: #000000;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	  font-size: 14px;
+	  font-weight: bold;
+	}
+	
+	.active {
+	  background-color: #F9F100;
+	  color: black;
+	}
+	
+	.topnav .icon {
+	  display: none;
+	}
+	
+	.dropdown {
+	  float: left;
+	  overflow: hidden;
+	}
+	
+	.dropdown .dropbtn {
+	  font-size: 14px;    
+	  border: none;
+	  outline: none;
+	  color: white;
+	  padding: 14px 16px;
+	  background-color: inherit;
+	  font-family: inherit;
+	  margin: 0;
+	  font-weight: bold;
+	}
+	
+	.dropdown-content {
+	  display: none;
+	  position: absolute;
+	  background-color: #f9f9f9;
+	  min-width: 160px;
+	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	  z-index: 1;
+	  font-weight: bold;
+	}
+	
+	.dropdown-content a {
+	  float: none;
+	  color: black;
+	  padding: 12px 16px;
+	  text-decoration: none;
+	  display: block;
+	  text-align: left;
+	}
+	
+	.topnav a:hover, .dropdown:hover .dropbtn {
+	  background-color: #555;
+	  color: black;
+	}
+	
+	.dropdown-content a:hover {
+	  background-color: #ddd;
+	  color: black;
+	}
+	
+	.dropdown:hover .dropdown-content {
+	  display: block;
+	}
+	
+.card {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-top: 20px;
+  align: center;
+}
+	
+	#im {
+    position: relative;
+    top: 0;
+    width: 1000px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/images/original.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 
-.leftcolumn2 {
-  float: left;
-  width: 67%;
+
+@media screen and (max-width: 1000px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
 }
-/* Right column */
-.rightcolumn2 {
-  float: left;
-  width: 32%;
-  padding-left: 10px;
+
+#block_container
+{
 }
+
+#bloc1, #bloc2
+{
+    display:inline;
+}
+
 </style>
 
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -21,936 +156,1047 @@
     <title>Story of Rock</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+<body onload='myInit()'>
 
-<p><a href="/">Main Page</a></p>
+<div class="topnav" id="myTopnav">
+  <a href="/" class="active">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Youtube
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/2019">2019 - Most Viewed Trailers</a>
+   	  <a href="/2018">2018 - Most Viewed Trailers</a>
+   	  <a href="/2017">2017 - Most Viewed Trailers</a>
+   	  <a href="/alltimes">Most Viewed Trailers</a>
+   	  <a href="/music">2019 - Most Viewed Music</a>
+   	  <a href="/music2018">2018 - Most Viewed Music</a>
+   	  <a href="/music2017">2017 - Most Viewed Music</a>
+   	  <a href="/alltimesmusic">Most Viewed Music</a>
+      <a href="/storyofrock">History of Rock</a>
+    </div>
+  </div> 
+  <div class="dropdown">
+    <button class="dropbtn">Google 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="googleTrends">Google - Trends</a>
+    </div>
+  </div> 
+  <div class="dropdown">
+    <button class="dropbtn">Twitter 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/twitter">Twitter - Most Retweets</a>
+    </div>
+  </div> 
+  <div align=right>
+    <img id="virus"  src="/images/virus.png" style="width:40px;height:40px;"/>
+  </div> 
+
+</div>
 
 <h2>History of Rock</h2> 
-
-<p>Click the name to see the most popular song of the Group. </p>
-
-<div class="row">
-  <div class="leftcolumn2">
-    <div class="card">
-      <img src="/images/original.png"  usemap="#logos" />
+<div id="block_container">
+<div id="bloc1">
+Click the band's name in the below picture to select the most popular song of the band.
+</div> 
+<div id="bloc2">
+      <p align="center" id="frame"></p>
+</div>
+</div>
+<canvas id='myCanvas'></canvas> 
+<p  align="center">
+      <img id="im" src="/images/original.png"  usemap="#logos"  />
 		<map name="logos">
-		    <area class="Kingston" shape="rect" coords="130,70,220,85" href="https://www.youtube.com/watch?v=VhXuO4Gz3Wo" title="Kingston trio"  />
-		    <area class="Joan" shape="rect" coords="130,85,200,100" href="https://www.youtube.com/watch?v=1ST9TZBb9v8" title="Joan Baez"/>
-		    <area class="Peter" shape="rect" coords="130,100,250,115" href="https://www.youtube.com/watch?v=Ld6fAO4idaI" title="Peter, Paul and Mary"/>
-		    <area class="Bob" shape="rect" coords="245,50,300,85" href="https://www.youtube.com/watch?v=PYF8Y47qZQY" title="Bob Dylan" />	   
-		    <area class="Carl" shape="rect" coords="145,135,225,150" href="https://www.youtube.com/watch?v=DRNyvO4QouY" title="Carl Perkins" />
-		    <area class="Gene" shape="rect" coords="145,150,225,165" href="https://www.youtube.com/watch?v=Dp-0-xgGzLM" title="Gene Vincent" />
-		    <area class="Elvis" shape="rect" coords="234,160,320,175" href="https://www.youtube.com/watch?v=gj0Rz-uP4Mk" title="Elvis" />
-		    <area class="Everly" shape="rect" coords="234,175,320,190" href="https://www.youtube.com/watch?v=lTYe9eDqxe8" title="Everly Brothers" />
-		    <area class="Buddy" shape="rect" coords="234,190,320,205" href="https://www.youtube.com/watch?v=bfu_gfPBPWc" title="Buddy Holly" />
-		    <area class="Roy" shape="rect" coords="234,205,320,220" href="https://www.youtube.com/watch?v=lvR1YgT7QYs" title="Roy Orbison" />
-		    <area class="Eddie" shape="rect" coords="234,220,320,235" href="https://www.youtube.com/watch?v=Qadw2rFiaJc" title="Eddie Cochran" />
-		    <area class="Fats" shape="rect" coords="105,284,200,298" href="https://www.youtube.com/watch?v=bQQCPrwKzdo" title="Fats Domino" />
-		    <area class="Little" shape="rect" coords="105,298,200,312" href="https://www.youtube.com/watch?v=eFFgbc5Vcbw" title="Little Richard" />
-		    <area class="Chuck" shape="rect" coords="105,312,200,326" href="https://www.youtube.com/watch?v=T38v3-SSGcM" title="Chuck Berry" />
-		    <area class="Ray" shape="rect" coords="105,326,200,340" href="https://www.youtube.com/watch?v=Q8Tiz6INF7I" title="Ray Charles" />
-  			<area class="Bo" shape="rect" coords="105,340,200,354" href="https://www.youtube.com/watch?v=yeZHB3ozglQ" title="Bo Diddley" />
-  			<area class="Ike" shape="rect" coords="95,354,200,368" href="https://www.youtube.com/watch?v=hzQnPz6TpGc" title="Ike & Tina Turner" />
-   			<area class="Platters" shape="rect" coords="205,368,285,382" href="https://www.youtube.com/watch?v=3FygIKsnkCw" title="The Platters" />
-   			<area class="Coasters" shape="rect" coords="205,382,285,396" href="https://www.youtube.com/watch?v=Kahp_kmOFzQ" title="The Coasters" />
-   			<area class="Drifters" shape="rect" coords="205,396,285,410" href="https://www.youtube.com/watch?v=EPEqRMVnZNU" title="The Drifters" />
-   			<area class="Temptations" shape="rect" coords="205,410,300,424" href="https://www.youtube.com/watch?v=pJV2pWFyfn4" title="The Temptations" />
-   			<area class="Parliament" shape="rect" coords="285,449,425,464" href="https://www.youtube.com/watch?v=JOKn33-q4Ao" title="Parliament/Funkadelic" />
-   			<area class="ConFunkShun" shape="rect" coords="295,463,375,478" href="https://www.youtube.com/watch?v=8mPho_BlN6M" title="ConFunkShun" />
-			<area class="Prince" shape="rect" coords="295,477,375,492" href="https://www.youtube.com/watch?v=TvnYmWpD_T8" title="Prince" />
-			<area class="Isley Brothers" shape="rect" coords="295,492,385,506" href="https://www.youtube.com/watch?v=WMdBs7uTLHw" title="Isley Brothers" />
-			<area class="Rick" shape="rect" coords="295,504,385,520" href="https://www.youtube.com/watch?v=QYHxGBH6o4M" title="Rick James" />
-			<area class="Gladys" shape="rect" coords="310,275,390,303" href="https://www.youtube.com/watch?v=A0F9lh8TiSM" title="Gladys Knight & The Pips" />
-			<area class="Otis" shape="rect" coords="305,305,390,317" href="https://www.youtube.com/watch?v=rTVjnBo96Ug" title="Otis Redding" />
-			<area class="Sam" shape="rect" coords="305,317,380,331" href="https://www.youtube.com/watch?v=wEBlaMOmKV4" title="Sam Cooke" />
-			<area class="Marvin" shape="rect" coords="305,331,380,345" href="https://www.youtube.com/watch?v=x6QZn9xiuOE" title="Marvin Gaye" />
-			<area class="Stevie" shape="rect" coords="305,345,390,359" href="https://www.youtube.com/watch?v=0CFuCYNx-1g" title="Stevie Wonder" />
-			<area class="Diana" shape="rect" coords="305,359,390,373" href="https://www.youtube.com/watch?v=Nm-ISatLDG0" title="Diana Ross" />
-			<area class="James" shape="rect" coords="315,373,405,387" href="https://www.youtube.com/watch?v=U5TqIdff_DQ" title="James Brown" />
-			<area class="Aretha" shape="rect" coords="320,387,415,401" href="https://www.youtube.com/watch?v=KtBbyglq37E" title="Aretha Franklin" />
-			<area class="Isaac" shape="rect" coords="380,317,460,331" href="https://www.youtube.com/watch?v=Q429AOpL_ds" title="Isaac Hayes" />
-			<area class="Al" shape="rect" coords="380,331,460,347" href="https://www.youtube.com/watch?v=COiIC3A0ROM" title="Al Green" />
-			<area class="Sly" shape="rect" coords="385,347,470,375" href="https://www.youtube.com/watch?v=YUUhDoCx8zc" title="Sly and the Family Stone" />
-			<area class="Beatles" shape="rect" coords="390,135,470,149" href="https://www.youtube.com/watch?v=2Q_ZzBGPdqE" title="Beatles" />
-			<area class="Kinks" shape="rect" coords="390,149,470,163" href="https://www.youtube.com/watch?v=fTTsY-oz6Go" title="Kinks" />
-			<area class="Rolling" shape="rect" coords="370,163,450,177" href="https://www.youtube.com/watch?v=nrIPxlFzDi0" title="Rolling Stones" />
-			<area class="Animals" shape="rect" coords="370,177,450,191" href="https://www.youtube.com/watch?v=4-43lLKaqBQ" title="The Animals" />
-			<area class="Yardbirds" shape="rect" coords="370,191,450,205" href="https://www.youtube.com/watch?v=HU5zqidlxMQ" title="The Yardbirds" />
-			<area class="Cream" shape="rect" coords="370,205,450,219" href="https://www.youtube.com/watch?v=zt51rITH3EA" title="The Cream" />
-			<area class="Go" shape="rect" coords="470,158,550,174" href="https://www.youtube.com/watch?v=r3kQlzOi27M" title="The Go-Go's" />
-			<area class="Fleetwood" shape="rect" coords="470,174,570,188" href="https://www.youtube.com/watch?v=JDG2m5hN1vo" title="Fleetwood Mac" />
-			<area class="Iggy" shape="rect" coords="470,224,550,238" href="https://www.youtube.com/watch?v=hLhN__oEHaw" title="Iggy Pop" />
-			<area class="Janis" shape="rect" coords="385,231,440,270" href="https://www.youtube.com/watch?v=guKoNCQFAFk" title="Janis Joplin" />
-			<area class="Van" shape="rect" coords="465,5,545,20" href="https://www.youtube.com/watch?v=UfmkgQRmmeE" title="Van Morrison" />
-			<area class="Dave" shape="rect" coords="465,20,540,35" href="https://www.youtube.com/watch?v=p8_FOQ7-P30" title="Dave Mason" />
-			<area class="Creedence" shape="rect" coords="465,35,620,50" href="https://www.youtube.com/watch?v=Gu2pVPWGYMQ" title="Creedence Clearwater" />
-			<area class="Jackson" shape="rect" coords="465,50,560,64" href="https://www.youtube.com/watch?v=d3bUg8wsgVE" title="Jackson Browne" />
-			<area class="Simon" shape="rect" coords="445,64,560,78" href="https://www.youtube.com/watch?v=L-JQ1q-13Ek" title="Simon & Garfunkel" />
-			<area class="Neil" shape="rect" coords="445,78,540,92" href="https://www.youtube.com/watch?v=Eh44QPT1mPE" title="Neil Young" />
-			<area class="Crosby" shape="rect" coords="445,92,560,106" href="https://www.youtube.com/watch?v=EkaKwXddT_I" title="Crosby, Stills, Nash" />
-			<area class="Byrds" shape="rect" coords="445,106,540,120" href="https://www.youtube.com/watch?v=W4ga_M5Zdn4" title="Byrds" />
-			<area class="Doors" shape="rect" coords="485,279,560,293" href="https://www.youtube.com/watch?v=iv8GW1GaoIc" title="The Doors" />
-			<area class="Jefferson" shape="rect" coords="485,293,560,307" href="https://www.youtube.com/watch?v=WANNqr-vcx0" title="Jefferson Airplane" />
-			<area class="Greatful" shape="rect" coords="485,307,560,321" href="https://www.youtube.com/watch?v=671AgW9xSiA" title="Greatful Dead" />
-			<area class="Psychedelic" shape="rect" coords="485,321,560,335" href="https://www.youtube.com/watch?v=LGD9i718kBU" title="The Psychedelic Furs" />
-			<area class="Allman" shape="rect" coords="475,375,600,389" href="https://www.youtube.com/watch?v=TCRS4DRmf_w" title="The Allman Brothers Band" />
-			<area class="Lyndyr" shape="rect" coords="475,389,580,403" href="https://www.youtube.com/watch?v=D0W1v0kOELA" title="Lyndyr Skynyrd" />
-			<area class="ZZ" shape="rect" coords="475,403,550,417" href="https://www.youtube.com/watch?v=Vppbdf-qtGU" title="ZZ Top" />
-			<area class="Ozark" shape="rect" coords="475,417,600,431" href="https://www.youtube.com/watch?v=Qr0hcoksupQ" title="The Ozark Mountain Daredevils" />
-			<area class="Black" shape="rect" coords="475,431,580,445" href="https://www.youtube.com/watch?v=niinwPKcnr4" title="Black Oak Arkansas" />
-			<area class="Molly" shape="rect" coords="475,445,570,459" href="https://www.youtube.com/watch?v=jTZHHQplIX8" title="Molly Hatchet" />
-			<area class="Feat" shape="rect" coords="495,459,570,473" href="https://www.youtube.com/watch?v=3z-GwdaKrn8" title="Little Feat" />
-			<area class="Bee" shape="rect" coords="450,498,540,512" href="https://www.youtube.com/watch?v=fNFzfwLM72c" title="Little Feat" />
-			<area class="Village" shape="rect" coords="450,512,540,526" href="https://www.youtube.com/watch?v=CS9OO0S5w2k" title="Village People" />
-			<area class="Donna" shape="rect" coords="435,526,540,540" href="https://www.youtube.com/watch?v=Nm-ISatLDG0" title="Donna Summer" />
-			<area class="KC" shape="rect" coords="435,540,540,561" href="https://www.youtube.com/watch?v=_Ee3C2m3OXE" title="KC & the Sunshine Band" />
-			<area class="Bonnie" shape="rect" coords="580,74,660,88" href="https://www.youtube.com/watch?v=nW9Cu6GYqxo" title="Bonnie Raitt" />
-			<area class="Beach" shape="rect" coords="560,88,640,102" href="https://www.youtube.com/watch?v=2s4slliAtQU" title="Beach Boys" />
-			<area class="Kiss" shape="rect" coords="560,102,640,116" href="https://www.youtube.com/watch?v=ZhIsAZO5gl0" title="Kiss" />
-			<area class="Elton" shape="rect" coords="560,116,640,130" href="https://www.youtube.com/watch?v=ZHwVBirqD2s" title="Elton John" />
-			<area class="Diamond" shape="rect" coords="560,130,650,144" href="https://www.youtube.com/watch?v=1vhFnTjia_I" title="Neil Diamond" />
-			<area class="Jimi" shape="rect" coords="540,210,620,224" href="https://www.youtube.com/watch?v=K38uTI0EHCI" title="Jimi Hendrix" />
-			<area class="Dr" shape="rect" coords="570,516,630,530" href="https://www.youtube.com/watch?v=NuKP3CeFDJA" title="Dr. Dre" />
-			<area class="Geto" shape="rect" coords="540,530,630,544" href="https://www.youtube.com/watch?v=KutXyPEEbQs" title="The Geto Boys" />
-			<area class="Public" shape="rect" coords="540,544,630,558" href="https://www.youtube.com/watch?v=8PaoLy7PHwk" title="Public Enemy" />
-			<area class="NWA" shape="rect" coords="630,558,700,572" href="https://www.youtube.com/watch?v=TMZi25Pq3T8" title="N.W.A" />
-			<area class="LL" shape="rect" coords="630,487,710,501" href="https://www.youtube.com/watch?v=vimZj8HW0Kg" title="LL Cool J" />
-			<area class="Run" shape="rect" coords="630,501,710,515" href="https://www.youtube.com/watch?v=l-O5IHVhWj0" title="Run-DMC" />
-			<area class="Beastie" shape="rect" coords="702,515,790,529" href="https://www.youtube.com/watch?v=eBShN8qT4lk" title="Beastie Boys" />
-			<area class="Ice" shape="rect" coords="700,529,790,543" href="https://www.youtube.com/watch?v=_nODi6OECzs" title="Ice T" />
-			<area class="Cube" shape="rect" coords="699,543,790,557" href="https://www.youtube.com/watch?v=h4UqMyldS7Q" title="Ice Cube" />
-			<area class="Snoop" shape="rect" coords="698,557,790,571" href="https://www.youtube.com/watch?v=Wa5B22KAkEk" title="Snoop Dogg" />
-			<area class="Ted" shape="rect" coords="665,112,745,126" href="https://www.youtube.com/watch?v=0c3d7QgZr7g" title="Ted Nugent" />
-			<area class="Grand" shape="rect" coords="665,126,745,140" href="https://www.youtube.com/watch?v=O7B5jXYRy3Q" title="Grand Funk" />
-			<area class="ACDC" shape="rect" coords="655,140,735,154" href="https://www.youtube.com/watch?v=v2AC41dglnM" title="AC/DC" />
-			<area class="Who" shape="rect" coords="655,194,735,208" href="https://www.youtube.com/watch?v=x2KRpRMSu4g" title="The Who" />
-			<area class="Led" shape="rect" coords="655,208,735,222" href="https://www.youtube.com/watch?v=y8OtzJtp-EM" title="Led Zeppelin" />
-			<area class="Aerosmith" shape="rect" coords="655,222,735,236" href="https://www.youtube.com/watch?v=JkK8g6FMEXE" title="Aerosmith" />
-			<area class="Deep" shape="rect" coords="655,236,735,250" href="https://www.youtube.com/watch?v=LCnebZnysmI" title="Deep Purple" />
-			<area class="Van" shape="rect" coords="655,250,735,264" href="https://www.youtube.com/watch?v=SwYN7mTi6HM" title="Van Halen" />
-			<area class="Jethro" shape="rect" coords="630,287,690,301" href="https://www.youtube.com/watch?v=eSUdlUmtg3Q" title="Jethro Tull" />
-			<area class="Rush" shape="rect" coords="630,301,690,315" href="https://www.youtube.com/watch?v=auLBLk4ibAk" title="Rush" />
-			<area class="ELO" shape="rect" coords="630,315,690,329" href="https://www.youtube.com/watch?v=Up4WjdabA2c" title="ELO" />
-			<area class="Yes" shape="rect" coords="700,304,780,319" href="https://www.youtube.com/watch?v=SVOuYquXuuc" title="Yes" />
-			<area class="Pink" shape="rect" coords="700,319,780,334" href="https://www.youtube.com/watch?v=YR5ApYxkU-U" title="Pink Floyd" />
-			<area class="Genesis" shape="rect" coords="700,334,780,348" href="https://www.youtube.com/watch?v=sNJVFloPIVA" title="Genesis" />
-			<area class="Residents" shape="rect" coords="700,348,780,362" href="https://www.youtube.com/watch?v=hr-I6-gxecg" title="Residents" />
-			<area class="Crimson" shape="rect" coords="700,362,780,376" href="https://www.youtube.com/watch?v=FhKJgqxNDD8" title="King Crimsom" />
-			<area class="Bowie" shape="rect" coords="680,415,760,429" href="https://www.youtube.com/watch?v=tRcPA7Fzebw" title="David Bowie" />
-			<area class="Alice" shape="rect" coords="680,429,760,443" href="https://www.youtube.com/watch?v=Qq4j1LtCdww" title="Alice Cooper" />
-			<area class="T-Rex" shape="rect" coords="680,443,760,457" href="https://www.youtube.com/watch?v=wZkTh_T75QY" title="T.Rex" />
-			<area class="Roxy" shape="rect" coords="680,457,760,471" href="https://www.youtube.com/watch?v=kOnde5c7OG8" title="Roxy Music" />
-			<area class="Zappa" shape="rect" coords="830,414,900,428" href="https://www.youtube.com/watch?v=qwIrXOtZyvQ" title="Frank Zappa" />
-			<area class="Can" shape="rect" coords="830,428,900,442" href="https://www.youtube.com/watch?v=m5SyBIoMwsM" title="Can" />
-			<area class="Capt" shape="rect" coords="800,442,900,456" href="https://www.youtube.com/watch?v=LpHgG4jILa0" title="Capt. Beefheart" />
-			<area class="Salt" shape="rect" coords="850,484,920,498" href="https://www.youtube.com/watch?v=vCadcBR95oU" title="Salt-n-Pepa" />
-			<area class="Doug" shape="rect" coords="850,498,920,512" href="https://www.youtube.com/watch?v=bDkqz5C62SM" title="Doug e Fresh" />
-			<area class="Sugar" shape="rect" coords="790,512,880,526" href="https://www.youtube.com/watch?v=rKTUAESacQM" title="Sugarhill Gang" />
-			<area class="Eric" shape="rect" coords="890,512,950,524" href="https://www.youtube.com/watch?v=2TN-kDEKxF0" title="Eric B" />
-			<area class="Boogie" shape="rect" coords="790,526,920,540" href="https://www.youtube.com/watch?v=h1vKOchATXs" title="Boogie Down Productions" />
-			<area class="Talking" shape="rect" coords="695,34,760,49" href="https://www.youtube.com/watch?v=O52jAYa4Pm8" title="Talking Heads" />
-			<area class="Pretenders" shape="rect" coords="695,49,760,64" href="https://www.youtube.com/watch?v=radFwHzD-PM" title="Pretenders" />
-			<area class="Eurythmics" shape="rect" coords="695,64,760,79" href="https://www.youtube.com/watch?v=qeMFqkcPYcg" title="Eurythmics" />
-			<area class="Devo" shape="rect" coords="900,5,980,20" href="https://www.youtube.com/watch?v=j_QLzthSkfM" title="Devo" />
-			<area class="B52s" shape="rect" coords="900,20,980,35" href="https://www.youtube.com/watch?v=9SOryJvTAGs" title="B-52's" />
-			<area class="Police" shape="rect" coords="900,35,980,50" href="https://www.youtube.com/watch?v=OMOGaugKpzs" title="The Police" />
-			<area class="Blondie" shape="rect" coords="840,50,920,65" href="https://www.youtube.com/watch?v=WGU_4-5RaxU" title="Blondie" />
-			<area class="Costello" shape="rect" coords="840,65,920,80" href="https://www.youtube.com/watch?v=O040xuq2FR0" title="Elvis Costello" />
-			<area class="Nirvana" shape="rect" coords="800,146,870,161" href="https://www.youtube.com/watch?v=hTWKbfoikeg" title="Nirvana" />
-			<area class="Pearl" shape="rect" coords="800,161,870,176" href="https://www.youtube.com/watch?v=CxKWTzr-k6s" title="Pearl Jam" />
-			<area class="Mudhoney" shape="rect" coords="800,176,870,190" href="https://www.youtube.com/watch?v=_nGsT_qFMBs" title="Mudhoney" />
-			<area class="Soundgarden" shape="rect" coords="800,190,880,204" href="https://www.youtube.com/watch?v=3mbBbFH9fAg" title="Soundgarden" />
-			<area class="AliceChains" shape="rect" coords="800,204,890,218" href="https://www.youtube.com/watch?v=Nco_kh8xJDs" title="Alice in Chains" />
-			<area class="Motorhead" shape="rect" coords="930,112,1010,126" href="https://www.youtube.com/watch?v=pWB5JZRGl0U" title="Motörhead" />
-			<area class="Sabbath" shape="rect" coords="930,126,1020,140" href="https://www.youtube.com/watch?v=0qanF-91aJo" title="Black Sabbath" />
-			<area class="Dio" shape="rect" coords="1010,154,1050,168" href="https://www.youtube.com/watch?v=EhGEGIBGLu8" title="Dio" />
-			<area class="Priest" shape="rect" coords="935,182,1020,196" href="https://www.youtube.com/watch?v=nM__lPTWThU" title="Judas Priest" />
-			<area class="Maiden" shape="rect" coords="935,196,1020,210" href="https://www.youtube.com/watch?v=2G5rfPISIwo" title="Iron Maiden" />
-			<area class="Metallica" shape="rect" coords="935,210,1020,224" href="https://www.youtube.com/watch?v=2G5rfPISIwo" title="Metallica" />
-			<area class="Pistols" shape="rect" coords="880,246,960,260" href="https://www.youtube.com/watch?v=yqrAPOZxgzU" title="Sex Pistols" />
-			<area class="Ramones" shape="rect" coords="880,260,960,274" href="https://www.youtube.com/watch?v=iymtpePP8I8" title="Ramones" />
-			<area class="Clash" shape="rect" coords="880,274,960,288" href="https://www.youtube.com/watch?v=BN1WwnEDWAM" title="The Clash" />
-			<area class="Patti" shape="rect" coords="800,274,880,288" href="https://www.youtube.com/watch?v=c_BcivBprM0" title="Patti Smith" />
-			<area class="Buzzcocks" shape="rect" coords="800,288,880,302" href="https://www.youtube.com/watch?v=51OB2YoC4sg" title="Buzzcocks" />
-			<area class="Richard" shape="rect" coords="800,302,880,316" href="https://www.youtube.com/watch?v=JsK8fHPjav0" title="Richard Hell" />
-			<area class="Siouxsie" shape="rect" coords="800,316,880,344" href="https://www.youtube.com/watch?v=amR6-neQBPE" title="Siouxsie And the Banshees" />
-			<area class="Dead" shape="rect" coords="950,426,1050,440" href="https://www.youtube.com/watch?v=-KTsXHXMkJA" title="Dead Kennedys" />
-			<area class="Replacements" shape="rect" coords="950,440,1050,454" href="https://www.youtube.com/watch?v=fl9KQ1Mub6Q" title="The Replacements" />
-			<area class="Minutemen" shape="rect" coords="950,454,1050,468" href="https://www.youtube.com/watch?v=jlxmKsTvcLg" title="Minutemen" />
-			<area class="Sonic" shape="rect" coords="950,468,1050,482" href="https://www.youtube.com/watch?v=rP3ovD8ZSS4" title="Sonic Youth" />
-			<area class="Butthole" shape="rect" coords="950,482,1050,496" href="https://www.youtube.com/watch?v=CNAkbbKycCM" title="Butthole Surfers" />
-			<area class="Husker" shape="rect" coords="950,496,1050,510" href="https://www.youtube.com/watch?v=eoKeH7JYE48" title="Husker Du" />
-			<area class="Meat" shape="rect" coords="950,510,1050,524" href="https://www.youtube.com/watch?v=9-HFbNhTTKQ" title="Meat Puppets" />
-			<area class="Fugazi" shape="rect" coords="950,524,1050,538" href="https://www.youtube.com/watch?v=cMOAXm94VWo" title="Fugazi" />
-			
-			
-			
-			<area class="Rock" shape="rect" coords="145,530,255,544" href="https://www.youtube.com/watch?v=3PsUJFEBC74" title="Rock" />
+		    <area class="Kingston" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="115,66,210,80" href="https://www.youtube.com/watch?v=VhXuO4Gz3Wo" title="Kingston trio"  />
+		    <area class="Joan" onmouseover='myHover(this);' onmouseout='myLeave();'  shape="rect" coords="115,80,190,94" href="https://www.youtube.com/watch?v=1ST9TZBb9v8" title="Joan Baez"/>
+		    <area class="Peter" onmouseover='myHover(this);' onmouseout='myLeave();'  shape="rect" coords="115,94,250,108" href="https://www.youtube.com/watch?v=Ld6fAO4idaI" title="Peter, Paul and Mary"/>
+		    <area class="Bob" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="245,38,295,85" href="https://www.youtube.com/watch?v=PYF8Y47qZQY" title="Bob Dylan" />	   
+		    <area class="Carl" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="135,130,205,144" href="https://www.youtube.com/watch?v=DRNyvO4QouY" title="Carl Perkins" />
+		    <area class="Gene" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="135,144,210,158" href="https://www.youtube.com/watch?v=Dp-0-xgGzLM" title="Gene Vincent" />
+		    <area class="Elvis" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="220,152,310,166" href="https://www.youtube.com/watch?v=gj0Rz-uP4Mk" title="Elvis" />
+		    <area class="Everly" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="220,166,310,180" href="https://www.youtube.com/watch?v=lTYe9eDqxe8" title="Everly Brothers" />
+		    <area class="Buddy" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="220,180,310,194" href="https://www.youtube.com/watch?v=bfu_gfPBPWc" title="Buddy Holly" />
+		    <area class="Roy" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="220,194,310,208" href="https://www.youtube.com/watch?v=lvR1YgT7QYs" title="Roy Orbison" />
+		    <area class="Eddie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="220,208,310,222" href="https://www.youtube.com/watch?v=Qadw2rFiaJc" title="Eddie Cochran" />
+		    <area class="Fats" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="105,267,200,281" href="https://www.youtube.com/watch?v=bQQCPrwKzdo" title="Fats Domino" />
+		    <area class="Little" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="105,281,200,295" href="https://www.youtube.com/watch?v=eFFgbc5Vcbw" title="Little Richard" />
+		    <area class="Chuck" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="105,295,200,309" href="https://www.youtube.com/watch?v=T38v3-SSGcM" title="Chuck Berry" />
+		    <area class="Ray" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="105,309,200,323" href="https://www.youtube.com/watch?v=Q8Tiz6INF7I" title="Ray Charles" />
+  			<area class="Bo" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="105,323,200,337" href="https://www.youtube.com/watch?v=yeZHB3ozglQ" title="Bo Diddley" />
+  			<area class="Ike" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="85,337,180,351" href="https://www.youtube.com/watch?v=hzQnPz6TpGc" title="Ike & Tina Turner" />
+   			<area class="Platters" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="197,340,275,354" href="https://www.youtube.com/watch?v=3FygIKsnkCw" title="The Platters" />
+   			<area class="Coasters" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="197,354,275,368" href="https://www.youtube.com/watch?v=Kahp_kmOFzQ" title="The Coasters" />
+   			<area class="Drifters" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="197,368,275,382" href="https://www.youtube.com/watch?v=EPEqRMVnZNU" title="The Drifters" />
+   			<area class="Temptations" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="197,382,285,396" href="https://www.youtube.com/watch?v=pJV2pWFyfn4" title="The Temptations" />
+   			<area class="Parliament" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="265,420,405,434" href="https://www.youtube.com/watch?v=JOKn33-q4Ao" title="Parliament/Funkadelic" />
+   			<area class="ConFunkShun" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="290,434,375,448" href="https://www.youtube.com/watch?v=8mPho_BlN6M" title="ConFunkShun" />
+			<area class="Prince" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="295,448,375,462" href="https://www.youtube.com/watch?v=TvnYmWpD_T8" title="Prince" />
+			<area class="Isley Brothers" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="290,462,375,476" href="https://www.youtube.com/watch?v=WMdBs7uTLHw" title="Isley Brothers" />
+			<area class="Rick" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="295,476,365,490" href="https://www.youtube.com/watch?v=QYHxGBH6o4M" title="Rick James" />
+			<area class="Gladys" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="295,261,375,289" href="https://www.youtube.com/watch?v=A0F9lh8TiSM" title="Gladys Knight & The Pips" />
+			<area class="Otis" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="285,289,375,303" href="https://www.youtube.com/watch?v=rTVjnBo96Ug" title="Otis Redding" />
+			<area class="Sam" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="285,303,365,317" href="https://www.youtube.com/watch?v=wEBlaMOmKV4" title="Sam Cooke" />
+			<area class="Marvin" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="285,317,365,330" href="https://www.youtube.com/watch?v=x6QZn9xiuOE" title="Marvin Gaye" />
+			<area class="Stevie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="285,330,375,343" href="https://www.youtube.com/watch?v=0CFuCYNx-1g" title="Stevie Wonder" />
+			<area class="Diana" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="285,343,375,357" href="https://www.youtube.com/watch?v=Nm-ISatLDG0" title="Diana Ross" />
+			<area class="James" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="295,357,390,370" href="https://www.youtube.com/watch?v=U5TqIdff_DQ" title="James Brown" />
+			<area class="Aretha" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="300,370,400,384" href="https://www.youtube.com/watch?v=KtBbyglq37E" title="Aretha Franklin" />
+			<area class="Isaac" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="350,303,450,317" href="https://www.youtube.com/watch?v=Q429AOpL_ds" title="Isaac Hayes" />
+			<area class="Al" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="350,317,450,331" href="https://www.youtube.com/watch?v=COiIC3A0ROM" title="Al Green" />
+			<area class="Sly" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="355,331,450,355" href="https://www.youtube.com/watch?v=YUUhDoCx8zc" title="Sly and the Family Stone" />
+			<area class="Beatles" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="390,128,440,142" href="https://www.youtube.com/watch?v=2Q_ZzBGPdqE" title="Beatles" />
+			<area class="Kinks" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="390,142,440,156" href="https://www.youtube.com/watch?v=fTTsY-oz6Go" title="Kinks" />
+			<area class="Rolling" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="360,156,440,170" href="https://www.youtube.com/watch?v=nrIPxlFzDi0" title="Rolling Stones" />
+			<area class="Animals" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="360,170,430,184" href="https://www.youtube.com/watch?v=4-43lLKaqBQ" title="The Animals" />
+			<area class="Yardbirds" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="360,184,430,198" href="https://www.youtube.com/watch?v=HU5zqidlxMQ" title="The Yardbirds" />
+			<area class="Cream" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="360,198,430,212" href="https://www.youtube.com/watch?v=zt51rITH3EA" title="The Cream" />
+			<area class="Go" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="455,153,535,169" href="https://www.youtube.com/watch?v=r3kQlzOi27M" title="The Go-Go's" />
+			<area class="Fleetwood" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="450,169,555,183" href="https://www.youtube.com/watch?v=JDG2m5hN1vo" title="Fleetwood Mac" />
+			<area class="Iggy" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="465,210,545,224" href="https://www.youtube.com/watch?v=hLhN__oEHaw" title="Iggy Pop" />
+			<area class="Janis" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="375,211,410,250" href="https://www.youtube.com/watch?v=guKoNCQFAFk" title="Janis Joplin" />
+			<area class="Van" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="435,5,525,19" href="https://www.youtube.com/watch?v=UfmkgQRmmeE" title="Van Morrison" />
+			<area class="Dave" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="435,19,520,33" href="https://www.youtube.com/watch?v=p8_FOQ7-P30" title="Dave Mason" />
+			<area class="Creedence" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="435,33,590,47" href="https://www.youtube.com/watch?v=Gu2pVPWGYMQ" title="Creedence Clearwater" />
+			<area class="Jackson" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="435,47,530,61" href="https://www.youtube.com/watch?v=d3bUg8wsgVE" title="Jackson Browne" />
+			<area class="Simon" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="415,61,540,75	" href="https://www.youtube.com/watch?v=L-JQ1q-13Ek" title="Simon & Garfunkel" />
+			<area class="Neil" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="415,75,500,87" href="https://www.youtube.com/watch?v=Eh44QPT1mPE" title="Neil Young" />
+			<area class="Crosby" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="415,87,520,101" href="https://www.youtube.com/watch?v=EkaKwXddT_I" title="Crosby, Stills, Nash" />
+			<area class="Byrds" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="415,101,490,115" href="https://www.youtube.com/watch?v=W4ga_M5Zdn4" title="Byrds" />
+			<area class="Doors" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="465,263,540,277" href="https://www.youtube.com/watch?v=iv8GW1GaoIc" title="The Doors" />
+			<area class="Jefferson" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="465,277,570,291" href="https://www.youtube.com/watch?v=WANNqr-vcx0" title="Jefferson Airplane" />
+			<area class="Greatful" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="465,291,540,305" href="https://www.youtube.com/watch?v=671AgW9xSiA" title="Greatful Dead" />
+			<area class="Psychedelic" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="465,305,550,319" href="https://www.youtube.com/watch?v=LGD9i718kBU" title="The Psychedelic Furs" />
+			<area class="Allman" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="460,353,585,367" href="https://www.youtube.com/watch?v=TCRS4DRmf_w" title="The Allman Brothers Band" />
+			<area class="Lyndyr" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="460,367,585,381" href="https://www.youtube.com/watch?v=D0W1v0kOELA" title="Lyndyr Skynyrd" />
+			<area class="ZZ" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="460,381,535,394" href="https://www.youtube.com/watch?v=Vppbdf-qtGU" title="ZZ Top" />
+			<area class="Ozark" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="460,394,610,407" href="https://www.youtube.com/watch?v=Qr0hcoksupQ" title="The Ozark Mountain Daredevils" />
+			<area class="Black" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="460,407,560,421" href="https://www.youtube.com/watch?v=niinwPKcnr4" title="Black Oak Arkansas" />
+			<area class="Molly" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="460,421,550,434" href="https://www.youtube.com/watch?v=jTZHHQplIX8" title="Molly Hatchet" />
+			<area class="Feat" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="495,434,570,448" href="https://www.youtube.com/watch?v=3z-GwdaKrn8" title="Little Feat" />
+			<area class="Bee" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="410,470,500,484" href="https://www.youtube.com/watch?v=fNFzfwLM72c" title="Bee Gees" />
+			<area class="Village" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="410,484,500,498" href="https://www.youtube.com/watch?v=CS9OO0S5w2k" title="Village People" />
+			<area class="Donna" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="395,498,500,512" href="https://www.youtube.com/watch?v=Nm-ISatLDG0" title="Donna Summer" />
+			<area class="KC" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="385,512,500,536" href="https://www.youtube.com/watch?v=_Ee3C2m3OXE" title="KC & the Sunshine Band" />
+			<area class="Bonnie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="550,69,620,83" href="https://www.youtube.com/watch?v=nW9Cu6GYqxo" title="Bonnie Raitt" />
+			<area class="Beach" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="530,83,610,97" href="https://www.youtube.com/watch?v=2s4slliAtQU" title="Beach Boys" />
+			<area class="Kiss" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="530,97,610,111" href="https://www.youtube.com/watch?v=ZhIsAZO5gl0" title="Kiss" />
+			<area class="Elton" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="530,111,610,125" href="https://www.youtube.com/watch?v=ZHwVBirqD2s" title="Elton John" />
+			<area class="Diamond" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="530,125,620,139" href="https://www.youtube.com/watch?v=1vhFnTjia_I" title="Neil Diamond" />
+			<area class="Jimi" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="510,196,580,210" href="https://www.youtube.com/watch?v=K38uTI0EHCI" title="Jimi Hendrix" />
+			<area class="Dr" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="555,486,615,500" href="https://www.youtube.com/watch?v=NuKP3CeFDJA" title="Dr. Dre" />
+			<area class="Geto" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="515,500,615,514" href="https://www.youtube.com/watch?v=KutXyPEEbQs" title="The Geto Boys" />
+			<area class="Public" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="515,514,615,528" href="https://www.youtube.com/watch?v=8PaoLy7PHwk" title="Public Enemy" />
+			<area class="NWA" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="600,525,640,539" href="https://www.youtube.com/watch?v=TMZi25Pq3T8" title="N.W.A" />
+			<area class="LL" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="600,459,670,473" href="https://www.youtube.com/watch?v=vimZj8HW0Kg" title="LL Cool J" />
+			<area class="Run" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="600,473,680,487" href="https://www.youtube.com/watch?v=l-O5IHVhWj0" title="Run-DMC" />
+			<area class="Beastie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="662,486,760,500" href="https://www.youtube.com/watch?v=eBShN8qT4lk" title="Beastie Boys" />
+			<area class="Ice" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="660,500,760,514" href="https://www.youtube.com/watch?v=_nODi6OECzs" title="Ice T" />
+			<area class="Cube" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="659,514,760,528" href="https://www.youtube.com/watch?v=h4UqMyldS7Q" title="Ice Cube" />
+			<area class="Snoop" onmouseover='myHover(this);' onmouseout='myLeave();'shape="rect" coords="658,528,760,542" href="https://www.youtube.com/watch?v=Wa5B22KAkEk" title="Snoop Dogg" />
+			<area class="Ted" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="635,105,715,119" href="https://www.youtube.com/watch?v=0c3d7QgZr7g" title="Ted Nugent" />
+			<area class="Grand" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="630,119,715,133" href="https://www.youtube.com/watch?v=O7B5jXYRy3Q" title="Grand Funk" />
+			<area class="ACDC" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="620,133,715,147" href="https://www.youtube.com/watch?v=v2AC41dglnM" title="AC/DC" />
+			<area class="Who" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="620,184,705,198" href="https://www.youtube.com/watch?v=x2KRpRMSu4g" title="The Who" />
+			<area class="Led" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="620,198,705,212" href="https://www.youtube.com/watch?v=y8OtzJtp-EM" title="Led Zeppelin" />
+			<area class="Aerosmith" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="620,212,705,226" href="https://www.youtube.com/watch?v=JkK8g6FMEXE" title="Aerosmith" />
+			<area class="Deep" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="620,226,705,240" href="https://www.youtube.com/watch?v=LCnebZnysmI" title="Deep Purple" />
+			<area class="Van" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="620,240,705,254" href="https://www.youtube.com/watch?v=SwYN7mTi6HM" title="Van Halen" />
+			<area class="Jethro" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="590,272,650,286" href="https://www.youtube.com/watch?v=eSUdlUmtg3Q" title="Jethro Tull" />
+			<area class="Rush" onmouseover='myHover(this);' onmouseout='myLeave();'  shape="rect" coords="600,286,660,300" href="https://www.youtube.com/watch?v=auLBLk4ibAk" title="Rush" />
+			<area class="ELO" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="600,300,660,314" href="https://www.youtube.com/watch?v=Up4WjdabA2c" title="ELO" />
+			<area class="Yes" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="660,284,720,298" href="https://www.youtube.com/watch?v=SVOuYquXuuc" title="Yes" />
+			<area class="Pink" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="660,298,750,312" href="https://www.youtube.com/watch?v=YR5ApYxkU-U" title="Pink Floyd" />
+			<area class="Genesis" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="660,312,750,326" href="https://www.youtube.com/watch?v=sNJVFloPIVA" title="Genesis" />
+			<area class="Residents" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="660,326,750,340" href="https://www.youtube.com/watch?v=hr-I6-gxecg" title="Residents" />
+			<area class="DrJohn" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="590,326,640,340" href="https://www.youtube.com/watch?v=guUN-5Xpdt0" title="Dr. John" />			
+			<area class="Crimson" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="660,340,750,354" href="https://www.youtube.com/watch?v=FhKJgqxNDD8" title="King Crimsom" />
+			<area class="Bowie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="645,395,730,409" href="https://www.youtube.com/watch?v=tRcPA7Fzebw" title="David Bowie" />
+			<area class="Alice" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="645,409,730,423" href="https://www.youtube.com/watch?v=Qq4j1LtCdww" title="Alice Cooper" />
+			<area class="T-Rex" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="645,423,730,437" href="https://www.youtube.com/watch?v=wZkTh_T75QY" title="T.Rex" />
+			<area class="Roxy" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="645,437,730,451" href="https://www.youtube.com/watch?v=kOnde5c7OG8" title="Roxy Music" />
+			<area class="Zappa" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="780,388,860,402" href="https://www.youtube.com/watch?v=qwIrXOtZyvQ" title="Frank Zappa" />
+			<area class="Can" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="780,402,860,416" href="https://www.youtube.com/watch?v=m5SyBIoMwsM" title="Can" />
+			<area class="Capt" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,416,900,430" href="https://www.youtube.com/watch?v=LpHgG4jILa0" title="Capt. Beefheart" />
+			<area class="Salt" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="808,456,880,470" href="https://www.youtube.com/watch?v=vCadcBR95oU" title="Salt-n-Pepa" />
+			<area class="Doug" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="808,470,880,484" href="https://www.youtube.com/watch?v=bDkqz5C62SM" title="Doug e Fresh" />
+			<area class="Sugar" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="750,486,840,500" href="https://www.youtube.com/watch?v=rKTUAESacQM" title="Sugarhill Gang" />
+			<area class="Eric" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="840,486,900,500" href="https://www.youtube.com/watch?v=2TN-kDEKxF0" title="Eric B" />
+			<area class="Boogie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="750,500,890,514" href="https://www.youtube.com/watch?v=h1vKOchATXs" title="Boogie Down Productions" />
+			<area class="Talking" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="665,31,750,45" href="https://www.youtube.com/watch?v=O52jAYa4Pm8" title="Talking Heads" />
+			<area class="Pretenders" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="665,45,730,59" href="https://www.youtube.com/watch?v=radFwHzD-PM" title="Pretenders" />
+			<area class="Eurythmics" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="665,59,730,73" href="https://www.youtube.com/watch?v=qeMFqkcPYcg" title="Eurythmics" />
+			<area class="Devo" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="850,5,910,19" href="https://www.youtube.com/watch?v=j_QLzthSkfM" title="Devo" />
+			<area class="B52s" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="850,19,910,33" href="https://www.youtube.com/watch?v=9SOryJvTAGs" title="B-52's" />
+			<area class="Police" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="850,33,910,47" href="https://www.youtube.com/watch?v=OMOGaugKpzs" title="The Police" />
+			<area class="Blondie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="810,47,880,61" href="https://www.youtube.com/watch?v=WGU_4-5RaxU" title="Blondie" />
+			<area class="Costello" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="790,61,880,75" href="https://www.youtube.com/watch?v=O040xuq2FR0" title="Elvis Costello" />
+			<area class="Nirvana" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,136,830,150" href="https://www.youtube.com/watch?v=hTWKbfoikeg" title="Nirvana" />
+			<area class="Pearl" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,150,830,164" href="https://www.youtube.com/watch?v=CxKWTzr-k6s" title="Pearl Jam" />
+			<area class="Mudhoney" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,164,830,178" href="https://www.youtube.com/watch?v=_nGsT_qFMBs" title="Mudhoney" />
+			<area class="Soundgarden" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,178,840,192" href="https://www.youtube.com/watch?v=3mbBbFH9fAg" title="Soundgarden" />
+			<area class="AliceChains" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,192,850,206" href="https://www.youtube.com/watch?v=Nco_kh8xJDs" title="Alice in Chains" />
+			<area class="Motorhead" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="880,105,970,119" href="https://www.youtube.com/watch?v=pWB5JZRGl0U" title="Motörhead" />
+			<area class="Sabbath" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="880,119,970,133" href="https://www.youtube.com/watch?v=0qanF-91aJo" title="Black Sabbath" />
+			<area class="Dio" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="950,145,1000,158" href="https://www.youtube.com/watch?v=EhGEGIBGLu8" title="Dio" />
+			<area class="Priest" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="885,172,970,186" href="https://www.youtube.com/watch?v=nM__lPTWThU" title="Judas Priest" />
+			<area class="Maiden" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="885,186,970,200" href="https://www.youtube.com/watch?v=2G5rfPISIwo" title="Iron Maiden" />
+			<area class="Metallica" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="885,200,970,214" href="https://www.youtube.com/watch?v=2G5rfPISIwo" title="Metallica" />
+			<area class="Pistols" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="830,232,910,246" href="https://www.youtube.com/watch?v=yqrAPOZxgzU" title="Sex Pistols" />
+			<area class="Ramones" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="835,246,910,260" href="https://www.youtube.com/watch?v=iymtpePP8I8" title="Ramones" />
+			<area class="Clash" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="840,260,920,274" href="https://www.youtube.com/watch?v=BN1WwnEDWAM" title="The Clash" />
+			<area class="Patti" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,260,840,274" href="https://www.youtube.com/watch?v=c_BcivBprM0" title="Patti Smith" />
+			<area class="Buzzcocks" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,274,840,288" href="https://www.youtube.com/watch?v=51OB2YoC4sg" title="Buzzcocks" />
+			<area class="Richard" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,288,840,302" href="https://www.youtube.com/watch?v=JsK8fHPjav0" title="Richard Hell" />
+			<area class="Siouxsie" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="760,302,840,326" href="https://www.youtube.com/watch?v=amR6-neQBPE" title="Siouxsie And the Banshees" />
+			<area class="Dead" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,403,1000,417" href="https://www.youtube.com/watch?v=-KTsXHXMkJA" title="Dead Kennedys" />
+			<area class="Replacements" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,417,1000,431" href="https://www.youtube.com/watch?v=fl9KQ1Mub6Q" title="The Replacements" />
+			<area class="Minutemen" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,431,1000,444" href="https://www.youtube.com/watch?v=jlxmKsTvcLg" title="Minutemen" />
+			<area class="Sonic" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,444,1000,457" href="https://www.youtube.com/watch?v=rP3ovD8ZSS4" title="Sonic Youth" />
+			<area class="Butthole" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,457,1000,471" href="https://www.youtube.com/watch?v=CNAkbbKycCM" title="Butthole Surfers" />
+			<area class="Husker" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,471,1000,485" href="https://www.youtube.com/watch?v=eoKeH7JYE48" title="Husker Du" />
+			<area class="Meat" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,485,1000,499" href="https://www.youtube.com/watch?v=9-HFbNhTTKQ" title="Meat Puppets" />
+			<area class="Fugazi" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="898,499,1000,513" href="https://www.youtube.com/watch?v=cMOAXm94VWo" title="Fugazi" />		
+			<area class="Rock" onmouseover='myHover(this);' onmouseout='myLeave();' shape="rect" coords="135,500,245,514" href="https://www.youtube.com/watch?v=3PsUJFEBC74" title="Rock" />
 			
 		</map>
-		https://weheartit.com/entry/53550025
-    </div>
-  </div>
-  <div class="rightcolumn2">
-    <div class="card">
-      <p align="center" id="frame"></p>
-    </div>
-  </div>
-</div>
+		<a href='https://weheartit.com/entry/53550025'>Source: https://weheartit.com/entry/53550025</a>
+    </p>
 
 <script type="text/javascript">
 
-$(document).ready(function() {
-	
-   document.getElementById("frame").innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/6ZfuNTqbHE8'></iframe>"; 
+$(document).ready(function() {	
+   document.getElementById("frame").innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/gj0Rz-uP4Mk'></iframe>"; 
 });
 
 $(".Kingston").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/VhXuO4Gz3Wo'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/VhXuO4Gz3Wo'></iframe>";
 });
 $(".Joan").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/1ST9TZBb9v8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/1ST9TZBb9v8'></iframe>";
 });
 $(".Peter").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Ld6fAO4idaI'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Ld6fAO4idaI'></iframe>";
 });
 $(".Bob").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/PYF8Y47qZQY'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/PYF8Y47qZQY'></iframe>";
 });
 $(".Carl").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/DRNyvO4QouY'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/DRNyvO4QouY'></iframe>";
 });
 $(".Gene").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Dp-0-xgGzLM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Dp-0-xgGzLM'></iframe>";
 });
 $(".Elvis").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/gj0Rz-uP4Mk'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/gj0Rz-uP4Mk'></iframe>";
 });
 $(".Everly").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/lTYe9eDqxe8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/lTYe9eDqxe8'></iframe>";
 });
 $(".Buddy").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/bfu_gfPBPWc'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/bfu_gfPBPWc'></iframe>";
 });
 $(".Roy").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/lvR1YgT7QYs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/lvR1YgT7QYs'></iframe>";
 });
 $(".Eddie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Qadw2rFiaJc'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Qadw2rFiaJc'></iframe>";
 });
 $(".Fats").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/bQQCPrwKzdo'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/bQQCPrwKzdo'></iframe>";
 });
 $(".Little").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/eFFgbc5Vcbw'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/eFFgbc5Vcbw'></iframe>";
 });
 $(".Chuck").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/T38v3-SSGcM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/T38v3-SSGcM'></iframe>";
 });
 $(".Ray").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Q8Tiz6INF7I'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Q8Tiz6INF7I'></iframe>";
 });
 $(".Bo").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/yeZHB3ozglQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/yeZHB3ozglQ'></iframe>";
 });
 $(".Ike").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/hzQnPz6TpGc'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/hzQnPz6TpGc'></iframe>";
 });
 $(".Platters").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/3FygIKsnkCw'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/3FygIKsnkCw'></iframe>";
 });
 $(".Coasters").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Kahp_kmOFzQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Kahp_kmOFzQ'></iframe>";
 });
 $(".Drifters").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/EPEqRMVnZNU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/EPEqRMVnZNU'></iframe>";
 });
 $(".Temptations").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/pJV2pWFyfn4'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/pJV2pWFyfn4'></iframe>";
 });
 $(".Parliament").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/JOKn33-q4Ao'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/JOKn33-q4Ao'></iframe>";
 });
 $(".ConFunkShun").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/8mPho_BlN6M'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/8mPho_BlN6M'></iframe>";
 });
 $(".Prince").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/TvnYmWpD_T8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/TvnYmWpD_T8'></iframe>";
 });
 $(".Isley").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/WMdBs7uTLHw'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/WMdBs7uTLHw'></iframe>";
 });
 $(".Rick").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/QYHxGBH6o4M'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/QYHxGBH6o4M'></iframe>";
 });
 $(".Gladys").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/A0F9lh8TiSM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/A0F9lh8TiSM'></iframe>";
 });
 $(".Otis").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/rTVjnBo96Ug'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/rTVjnBo96Ug'></iframe>";
 });
 $(".Sam").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/wEBlaMOmKV4'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/wEBlaMOmKV4'></iframe>";
 });
 $(".Marvin").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/x6QZn9xiuOE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/x6QZn9xiuOE'></iframe>";
 });
 $(".Stevie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/0CFuCYNx-1g'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/0CFuCYNx-1g'></iframe>";
 });
 $(".Diana").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Nm-ISatLDG0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Nm-ISatLDG0'></iframe>";
 });
 $(".James").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/U5TqIdff_DQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/U5TqIdff_DQ'></iframe>";
 });
 $(".Aretha").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/KtBbyglq37E'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/KtBbyglq37E'></iframe>";
 });
 $(".Isaac").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Q429AOpL_ds'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Q429AOpL_ds'></iframe>";
 });
 $(".Al").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/COiIC3A0ROM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/COiIC3A0ROM'></iframe>";
 });
 $(".Sly").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/YUUhDoCx8zc'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/YUUhDoCx8zc'></iframe>";
 });
 $(".Beatles").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/2Q_ZzBGPdqE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/2Q_ZzBGPdqE'></iframe>";
 });
 $(".Kinks").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/fTTsY-oz6Go'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/fTTsY-oz6Go'></iframe>";
 });
 $(".Rolling").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/nrIPxlFzDi0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/nrIPxlFzDi0'></iframe>";
 });
 $(".Animals").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/4-43lLKaqBQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/4-43lLKaqBQ'></iframe>";
 });
 $(".Yardbirds").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/HU5zqidlxMQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/HU5zqidlxMQ'></iframe>";
 });
 $(".Cream").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/zt51rITH3EA'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/zt51rITH3EA'></iframe>";
 });
 $(".Go").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/r3kQlzOi27M'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/r3kQlzOi27M'></iframe>";
 });
 $(".Fleetwood").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/JDG2m5hN1vo'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/JDG2m5hN1vo'></iframe>";
 });
 $(".Iggy").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/hLhN__oEHaw'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/hLhN__oEHaw'></iframe>";
 });
 $(".Janis").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/guKoNCQFAFk'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/guKoNCQFAFk'></iframe>";
 });
 $(".Van").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/UfmkgQRmmeE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/UfmkgQRmmeE'></iframe>";
 });
 $(".Dave").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/p8_FOQ7-P30'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/p8_FOQ7-P30'></iframe>";
 });
 $(".Creedence").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Gu2pVPWGYMQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Gu2pVPWGYMQ'></iframe>";
 });
 $(".Jackson").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/d3bUg8wsgVE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/d3bUg8wsgVE'></iframe>";
 });
 $(".Simon").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/L-JQ1q-13Ek'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/L-JQ1q-13Ek'></iframe>";
 });
 $(".Neil").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Eh44QPT1mPE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Eh44QPT1mPE'></iframe>";
 });
 $(".Crosby").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/EkaKwXddT_I'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/EkaKwXddT_I'></iframe>";
 });
 $(".Byrds").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/W4ga_M5Zdn4'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/W4ga_M5Zdn4'></iframe>";
 });
 $(".Doors").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/iv8GW1GaoIc'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/iv8GW1GaoIc'></iframe>";
 });
 $(".Jefferson").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/WANNqr-vcx0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/WANNqr-vcx0'></iframe>";
 });
 $(".Greatful").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/671AgW9xSiA'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/671AgW9xSiA'></iframe>";
 });
 $(".Psychedelic").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/LGD9i718kBU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/LGD9i718kBU'></iframe>";
 });
 $(".Allman").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/TCRS4DRmf_w'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/TCRS4DRmf_w'></iframe>";
 });
 $(".Lyndyr").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/D0W1v0kOELA'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/D0W1v0kOELA'></iframe>";
 });
 $(".ZZ").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Vppbdf-qtGU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Vppbdf-qtGU'></iframe>";
 });
 $(".Rock").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/3PsUJFEBC74'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/3PsUJFEBC74'></iframe>";
 });
 $(".Ozark").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Qr0hcoksupQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Qr0hcoksupQ'></iframe>";
 });
 $(".Black").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/niinwPKcnr4'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/niinwPKcnr4'></iframe>";
 });
 $(".Molly").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/jTZHHQplIX8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/jTZHHQplIX8'></iframe>";
 });
 $(".Feat").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/3z-GwdaKrn8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/3z-GwdaKrn8'></iframe>";
 });
 $(".Bee").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/fNFzfwLM72c'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/fNFzfwLM72c'></iframe>";
 });
 $(".Village").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/CS9OO0S5w2k'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/CS9OO0S5w2k'></iframe>";
 });
 $(".Donna").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Nm-ISatLDG0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Nm-ISatLDG0'></iframe>";
 });
 $(".KC").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/_Ee3C2m3OXE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/_Ee3C2m3OXE'></iframe>";
 });
 $(".Bonnie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/nW9Cu6GYqxo'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/nW9Cu6GYqxo'></iframe>";
 });
 $(".Beach").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/2s4slliAtQU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/2s4slliAtQU'></iframe>";
 });
 $(".Kiss").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/ZhIsAZO5gl0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/ZhIsAZO5gl0'></iframe>";
 });
 $(".Elton").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/ZHwVBirqD2s'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/ZHwVBirqD2s'></iframe>";
 });
 $(".Diamond").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/1vhFnTjia_I'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/1vhFnTjia_I'></iframe>";
 });
 $(".Jimi").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/K38uTI0EHCI'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/K38uTI0EHCI'></iframe>";
 });
 $(".Dr").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/NuKP3CeFDJA'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/NuKP3CeFDJA'></iframe>";
 });
 $(".Geto").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/KutXyPEEbQs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/KutXyPEEbQs'></iframe>";
 });
 $(".Public").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/8PaoLy7PHwk'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/8PaoLy7PHwk'></iframe>";
 });
 $(".NWA").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/TMZi25Pq3T8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/TMZi25Pq3T8'></iframe>";
 });
 $(".LL").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/vimZj8HW0Kg'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/vimZj8HW0Kg'></iframe>";
 });
 $(".Run").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/l-O5IHVhWj0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/l-O5IHVhWj0'></iframe>";
 });
 $(".Beastie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/eBShN8qT4lk'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/eBShN8qT4lk'></iframe>";
 });
 
 $(".Ice").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/_nODi6OECzs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/_nODi6OECzs'></iframe>";
 });
 $(".Cube").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/h4UqMyldS7Q'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/h4UqMyldS7Q'></iframe>";
 });
 $(".Snoop").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Wa5B22KAkEk'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Wa5B22KAkEk'></iframe>";
 });
 $(".Ted").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/0c3d7QgZr7g'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/0c3d7QgZr7g'></iframe>";
 });
 $(".Grand").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/O7B5jXYRy3Q'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/O7B5jXYRy3Q'></iframe>";
 });
 $(".ACDC").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/v2AC41dglnM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/v2AC41dglnM'></iframe>";
 });
 $(".Who").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/x2KRpRMSu4g'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/x2KRpRMSu4g'></iframe>";
 });
 $(".Led").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/y8OtzJtp-EM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/y8OtzJtp-EM'></iframe>";
 });
 $(".Aerosmith").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/JkK8g6FMEXE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/JkK8g6FMEXE'></iframe>";
 });
 $(".Deep").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/LCnebZnysmI'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/LCnebZnysmI'></iframe>";
 });
 $(".Van").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/SwYN7mTi6HM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/SwYN7mTi6HM'></iframe>";
 });
 $(".Jethro").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/eSUdlUmtg3Q'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/eSUdlUmtg3Q'></iframe>";
 });
 $(".Rush").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/auLBLk4ibAk'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/auLBLk4ibAk'></iframe>";
 });
 $(".ELO").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Up4WjdabA2c'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Up4WjdabA2c'></iframe>";
 });
 $(".Yes").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/SVOuYquXuuc'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/SVOuYquXuuc'></iframe>";
 });
 $(".Pink").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/YR5ApYxkU-U'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/YR5ApYxkU-U'></iframe>";
 });
 $(".Genesis").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/sNJVFloPIVA'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/sNJVFloPIVA'></iframe>";
 });
 $(".Residents").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/hr-I6-gxecg'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/hr-I6-gxecg'></iframe>";
+});
+$(".DrJohn").on("click", function(e){
+    e.preventDefault();
+    
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/guUN-5Xpdt0'></iframe>";
 });
 $(".Crimson").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/FhKJgqxNDD8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/FhKJgqxNDD8'></iframe>";
 });
 $(".Bowie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/tRcPA7Fzebw'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/tRcPA7Fzebw'></iframe>";
 });
 $(".Alice").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Qq4j1LtCdww'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Qq4j1LtCdww'></iframe>";
 });
 $(".T-Rex").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/wZkTh_T75QY'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/wZkTh_T75QY'></iframe>";
 });
 $(".Roxy").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/kOnde5c7OG8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/kOnde5c7OG8'></iframe>";
 });
 $(".Zappa").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/qwIrXOtZyvQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/qwIrXOtZyvQ'></iframe>";
 });
 $(".Can").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/m5SyBIoMwsM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/m5SyBIoMwsM'></iframe>";
 });
 $(".Capt").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/LpHgG4jILa0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/LpHgG4jILa0'></iframe>";
 });
 $(".Salt").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/vCadcBR95oU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/vCadcBR95oU'></iframe>";
 });
 $(".Doug").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/bDkqz5C62SM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/bDkqz5C62SM'></iframe>";
 });
 $(".Sugar").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/rKTUAESacQM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/rKTUAESacQM'></iframe>";
 });
 $(".Eric").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/2TN-kDEKxF0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/2TN-kDEKxF0'></iframe>";
 });
 $(".Boogie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/h1vKOchATXs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/h1vKOchATXs'></iframe>";
 });
 $(".Talking").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/O52jAYa4Pm8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/O52jAYa4Pm8'></iframe>";
 });
 $(".Pretenders").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/radFwHzD-PM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/radFwHzD-PM'></iframe>";
 });
 $(".Eurythmics").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/qeMFqkcPYcg'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/qeMFqkcPYcg'></iframe>";
 });
 $(".Devo").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/j_QLzthSkfM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/j_QLzthSkfM'></iframe>";
 });
 $(".B52s").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/9SOryJvTAGs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/9SOryJvTAGs'></iframe>";
 });
 $(".Police").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/OMOGaugKpzs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/OMOGaugKpzs'></iframe>";
 });
 $(".Blondie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/WGU_4-5RaxU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/WGU_4-5RaxU'></iframe>";
 });
 $(".Costello").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/O040xuq2FR0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/O040xuq2FR0'></iframe>";
 });
 $(".Nirvana").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/hTWKbfoikeg'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/hTWKbfoikeg'></iframe>";
 });
 $(".Pearl").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/CxKWTzr-k6s'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/CxKWTzr-k6s'></iframe>";
 });
 $(".Mudhoney").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/_nGsT_qFMBs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/_nGsT_qFMBs'></iframe>";
 });
 $(".Soundgarden").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/3mbBbFH9fAg'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/3mbBbFH9fAg'></iframe>";
 });
 $(".AliceChains").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/Nco_kh8xJDs'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/Nco_kh8xJDs'></iframe>";
 });
 $(".Motorhead").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/pWB5JZRGl0U'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/pWB5JZRGl0U'></iframe>";
 });
 $(".Sabbath").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/0qanF-91aJo'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/0qanF-91aJo'></iframe>";
 });
 $(".Dio").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/EhGEGIBGLu8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/EhGEGIBGLu8'></iframe>";
 });
 $(".Priest").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/nM__lPTWThU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/nM__lPTWThU'></iframe>";
 });
 $(".Maiden").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/2G5rfPISIwo'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/2G5rfPISIwo'></iframe>";
 });
 $(".Metallica").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/tAGnKpE4NCI'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/tAGnKpE4NCI'></iframe>";
 });
 $(".Pistols").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/yqrAPOZxgzU'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/yqrAPOZxgzU'></iframe>";
 });
 $(".Ramones").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/iymtpePP8I8'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/iymtpePP8I8'></iframe>";
 });
 $(".Clash").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/BN1WwnEDWAM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/BN1WwnEDWAM'></iframe>";
 });
 $(".Patti").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/c_BcivBprM0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/c_BcivBprM0'></iframe>";
 });
 
 $(".Buzzcocks").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/51OB2YoC4sg'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/51OB2YoC4sg'></iframe>";
 });
 $(".Richard").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/JsK8fHPjav0'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/JsK8fHPjav0'></iframe>";
 });
 $(".Siouxsie").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/amR6-neQBPE'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/amR6-neQBPE'></iframe>";
 });
 $(".Dead").on("click", function(e){
     e.preventDefault();    
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/-KTsXHXMkJA'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/-KTsXHXMkJA'></iframe>";
 });
 $(".Replacements").on("click", function(e){
     e.preventDefault();    
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/fl9KQ1Mub6Q'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/fl9KQ1Mub6Q'></iframe>";
 });
 $(".Minutemen").on("click", function(e){
     e.preventDefault();    
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/jlxmKsTvcLg'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/jlxmKsTvcLg'></iframe>";
 });
 $(".Sonic").on("click", function(e){
     e.preventDefault();    
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/rP3ovD8ZSS4'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/rP3ovD8ZSS4'></iframe>";
 });
 $(".Butthole").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/CNAkbbKycCM'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/CNAkbbKycCM'></iframe>";
 });
 $(".Husker").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/eoKeH7JYE48'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/eoKeH7JYE48'></iframe>";
 });
 $(".Meat").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/9-HFbNhTTKQ'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/9-HFbNhTTKQ'></iframe>";
 });
 $(".Fugazi").on("click", function(e){
     e.preventDefault();
     
-    document.getElementById('frame').innerHTML = "<iframe id='frame' width='460' height='340' src='https://www.youtube.com/embed/cMOAXm94VWo'></iframe>";
+    document.getElementById('frame').innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/cMOAXm94VWo'></iframe>";
 });
 
+var hdc;
 
+function byId(e){return document.getElementById(e);}
 
+function drawRect(coOrdStr)
+{
+    var mCoords = coOrdStr.split(',');
+    var top, left, bot, right;
+    left = mCoords[0];
+    top = mCoords[1];
+    right = mCoords[2];
+    bot = mCoords[3];
+    hdc.strokeRect(left,top,right-left,bot-top); 
+}
+
+function myHover(element)
+{
+    var hoveredElement = element;
+    var coordStr = element.getAttribute('coords');
+    var areaType = element.getAttribute('shape');
+
+    switch (areaType)
+    {
+        case 'polygon':
+        case 'poly':
+            drawPoly(coordStr);
+            break;
+
+        case 'rect':
+            drawRect(coordStr);
+    }
+}
+
+function myLeave()
+{
+    var canvas = byId('myCanvas');
+    hdc.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function myInit()
+{
+    // get the target image
+    var img = byId('im');
+
+    var x,y, w,h;
+
+    // get it's position and width+height
+    x = img.offsetLeft;
+    y = img.offsetTop;
+    w = img.clientWidth;
+    h = img.clientHeight;
+
+    // move the canvas, so it's contained by the same parent as the image
+    var imgParent = img.parentNode;
+    var can = byId('myCanvas');
+    imgParent.appendChild(can);
+
+    // place the canvas in front of the image
+    can.style.zIndex = 1;
+
+    // position it over the image
+    can.style.left = x+'px';
+    can.style.top = y+'px';
+
+    // make same size as the image
+    can.setAttribute('width', w+'px');
+    can.setAttribute('height', h+'px');
+
+    // get it's context
+    hdc = can.getContext('2d');
+
+    // set the 'default' values for the colour/width of fill/stroke operations
+    hdc.fillStyle = 'black';
+    hdc.strokeStyle = 'black';
+    hdc.lineWidth = 2;
+}
 
 </script>
 </body>

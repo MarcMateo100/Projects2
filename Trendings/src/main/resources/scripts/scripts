@@ -1,3 +1,25 @@
+CREATE SEQUENCE table_twitter1w_id_seq;
+CREATE TABLE public.twitter1w
+(
+    id integer NOT NULL DEFAULT nextval('table_twitter1w_id_seq'),
+    title character varying(150) NOT NULL,
+	retweets character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_twitter1d_id_seq;
+CREATE TABLE public.twitter1d
+(
+    id integer NOT NULL DEFAULT nextval('table_twitter1d_id_seq'),
+    title character varying(150) NOT NULL,
+	retweets character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
 CREATE SEQUENCE table_twitter_id_seq;
 CREATE TABLE public.twitter
 (
@@ -7,6 +29,11 @@ CREATE TABLE public.twitter
     url character varying(150) NOT NULL,
     created_on timestamp without time zone NOT NULL,
     last_login timestamp without time zone NOT NULL
+)
+
+CREATE TABLE public.translate
+(
+    title character varying(250) NOT NULL
 )
 
 CREATE SEQUENCE table_twitter1h_id_seq;
@@ -203,6 +230,28 @@ CREATE SEQUENCE table_youtube30_id_seq;
 CREATE TABLE public.youtube30
 (
     id integer NOT NULL DEFAULT nextval('table_youtube30_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+	viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_youtube3m_id_seq;
+CREATE TABLE public.youtube3m
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube3m_id_seq'),
+    title character varying(150) NOT NULL,
+    url character varying(150) NOT NULL,
+	viewsCount character varying(150) NOT NULL,
+    created_on timestamp without time zone NOT NULL,
+    last_login timestamp without time zone NOT NULL
+)
+
+CREATE SEQUENCE table_youtube6m_id_seq;
+CREATE TABLE public.youtube6m
+(
+    id integer NOT NULL DEFAULT nextval('table_youtube6m_id_seq'),
     title character varying(150) NOT NULL,
     url character varying(150) NOT NULL,
 	viewsCount character varying(150) NOT NULL,

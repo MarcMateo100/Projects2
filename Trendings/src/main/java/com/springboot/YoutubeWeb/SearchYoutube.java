@@ -125,7 +125,6 @@ public class SearchYoutube {
       search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)");
       search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
       SearchListResponse searchResponse = search.execute();
-
       searchResultList = searchResponse.getItems();
       
     //Create URLs      
@@ -201,11 +200,13 @@ public List<String> select(String query){
 						 list.add(em);
 						 list.add("****");
 						 String em2 = rs.getString("title");
+						 em2 = em2.replaceAll("&quot","''");
 						 String strLineApp = em2.replaceAll("&"+ "#39", " "); 	
 				    	 em2 = strLineApp.replaceAll(";", ""); 
 						 list.add(em2);
 						 list.add("****");
 						 String em3 = rs.getString("viewsCount");
+						 em3 = em3.replaceAll("views","");
 						 list.add(em3);	
 						 list.add("****");
 						 String em4 = rs.getString("created_on");
@@ -219,10 +220,7 @@ public List<String> select(String query){
 					System.out.println("Got an exception! "); 
 		            System.out.println(e.getMessage());
 			}
-			     
-	  
-	  return list;
-	  
+	  return list;	  
   }
 
   public List<String> selectTwitter(String query){
@@ -283,6 +281,9 @@ public List<String> select(String query){
 						 String em3 = rs.getString("url");
 						 list.add(em3);
 						 list.add("****");
+						 String em4 = rs.getString("created_on");
+						 list.add(em4);	
+						 list.add("****");
 					}
 					sql.close();
 			    	System.out.println("Successfully selected");				
@@ -334,6 +335,17 @@ public List<String> youtube2017() {
 	 return select("SELECT * FROM YOUTUBE2017");		
 }
 
+public List<String> youtube3m() {
+
+	 return select("SELECT * FROM YOUTUBE3M");		
+}
+
+public List<String> youtube6m() {
+
+	 return select("SELECT * FROM YOUTUBE6M");		
+}
+
+
 public List<String> alltimes() {
 
 	 return select("SELECT * FROM ALLTRAILER");		
@@ -354,6 +366,16 @@ public List<String> getTwitterTrendDash1h() {
 	 return selectTwitter("SELECT * FROM TWITTER1H");		
 }
 
+public List<String> getTwitterTrendDash1d() {
+
+	 return selectTwitter("SELECT * FROM TWITTER1D");		
+}
+
+public List<String> getTwitterTrendDash1w() {
+
+	 return selectTwitter("SELECT * FROM TWITTER1W");		
+}
+
 public List<String> getTwitterTrendDash4h() {
 
 	 return selectTwitter("SELECT * FROM TWITTER4H");		
@@ -367,6 +389,11 @@ public String mostViewed() {
 public String getGoogleTrends() {
 
 	return RSSReadTest.getGoogleTrends();		
+}
+
+public String getGoogleTrendsList() {
+
+	return RSSReadTestList.getGoogleTrendsList();		
 }
 
 public String getGoogleTrends(int n) {
