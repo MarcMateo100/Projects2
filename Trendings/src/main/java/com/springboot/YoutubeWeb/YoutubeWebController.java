@@ -1,15 +1,11 @@
 package com.springboot.YoutubeWeb;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -186,12 +182,17 @@ public class YoutubeWebController {
 	    return "googleTrends";
 	    }
 	  
-	  @GetMapping("/twitter")
-	    public String twitter(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-		  model.addAttribute("name", search.getTwitterTrends());       
-	    return "twitter";
+	  @GetMapping("/twitter2")
+	    public String twitter2(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		  model.addAttribute("name", search.getTwitterTrends2());       
+	    return "twitter2";
 	    }
 	 
+	  @GetMapping("/twitter3")
+	    public String twitter3(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		  model.addAttribute("name", search.getTwitterTrends3());       
+	    return "twitter3";
+	    }
 	 
 	  
 	  public void addResourceHandlers(final ResourceHandlerRegistry registry) {

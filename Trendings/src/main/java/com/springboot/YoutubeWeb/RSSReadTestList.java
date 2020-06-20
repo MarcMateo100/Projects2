@@ -6,17 +6,9 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-
-
-import org.apache.log4j.Logger;
 
 public class RSSReadTestList {
 	
@@ -127,6 +119,7 @@ public class RSSReadTestList {
 				    		temp = temp.replaceAll("&amp;quot;", "''"); 	
 				    		temp = temp.replaceAll("â€ž", "„"); 	
 				    		temp = temp.replaceAll("â€œ", "''"); 
+				    		temp = temp.replaceAll("í£", "ã"); 
 				    		temp = temp.replaceAll("â€�", "''"); 				    		
 				    		temp = temp.replaceAll("Ã¼", "ü"); 
 				    		temp = temp.replaceAll("Ã¶", "ö"); 

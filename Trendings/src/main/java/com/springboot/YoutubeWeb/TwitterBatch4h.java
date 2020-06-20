@@ -3,12 +3,8 @@ package com.springboot.YoutubeWeb;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Trend;
@@ -17,6 +13,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
+
 /**
 *
 * @author Marc Mateo

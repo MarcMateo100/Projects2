@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class WPgetSourceCode {
@@ -199,21 +196,23 @@ public static String getWPTitles()  {
 									 int intIndex3 = txt.indexOf("/h2>");
 									 int beg=intIndex2+10;
 							    	 int end=intIndex3-1; 
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 
-									 txt3 = txt3.replaceAll("í³", "ó"); 	
-									 txt3 = txt3.replaceAll("íº", "ú");
-									 txt3 = txt3.replaceAll("í©", "é");	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-							    	 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									  
-									 txt2= txt2 + "*****" + "https://www.elmundo.es/" + "*****" + txt3 + "*****" + "<a href=\"https://elmundo.es/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://elmundo.es\"><img id=\"elmundo\" src=\"images/elmundo.png\" style=\"width:90px;height:18px;\"></img></a>";
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 
+										 txt3 = txt3.replaceAll("í³", "ó"); 	
+										 txt3 = txt3.replaceAll("íº", "ú");
+										 txt3 = txt3.replaceAll("í©", "é");	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+								    	 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										  
+										 txt2= txt2 + "*****" + "https://www.elmundo.es/" + "*****" + txt3 + "*****" + "<a href=\"https://elmundo.es/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://elmundo.es\"><img id=\"elmundo\" src=\"images/elmundo.png\" style=\"width:90px;height:18px;\"></img></a>";
+							    	 }
 									 System.out.println(txt2);
 									 flag=false;
 								 }		
@@ -231,30 +230,32 @@ public static String getWPTitles()  {
 								 int intIndex2 = txt.indexOf("</h2>");								
 									 int beg=intIndex+3;
 							    	 int end=intIndex2; 
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("&aacute;", "á"); 	
-									 txt3 = txt3.replaceAll("&iacute;", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&Eacute;", "É"); 		
-									 txt3 = txt3.replaceAll("&Iacute;", "Í"); 
-									 txt3 = txt3.replaceAll("&Oacute;", "Ó"); 
-									 txt3 = txt3.replaceAll("&Uacute;", "Ú"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("í³", "ó"); 	
-									 txt3 = txt3.replaceAll("íº", "ú");
-									 txt3 = txt3.replaceAll("í©", "é");									 
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("&ldquo;", "''");
-									 txt3 = txt3.replaceAll("&rdquo;", "''");
-									 txt3 = txt3.replaceAll("Â", "");                                              
-									 txt2= txt2 + "*****" + "https://www.clarin.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.clarin.com/\" data-toggle=\"tooltip\\\" data-placement=\"top\" title=\"https://www.clarin.com\"><img id=\"clarin\" src=\"images/clarin.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("&aacute;", "á"); 	
+										 txt3 = txt3.replaceAll("&iacute;", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&Eacute;", "É"); 		
+										 txt3 = txt3.replaceAll("&Iacute;", "Í"); 
+										 txt3 = txt3.replaceAll("&Oacute;", "Ó"); 
+										 txt3 = txt3.replaceAll("&Uacute;", "Ú"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("í³", "ó"); 	
+										 txt3 = txt3.replaceAll("íº", "ú");
+										 txt3 = txt3.replaceAll("í©", "é");									 
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("&ldquo;", "''");
+										 txt3 = txt3.replaceAll("&rdquo;", "''");
+										 txt3 = txt3.replaceAll("Â", "");                                              
+										 txt2= txt2 + "*****" + "https://www.clarin.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.clarin.com/\" data-toggle=\"tooltip\\\" data-placement=\"top\" title=\"https://www.clarin.com\"><img id=\"clarin\" src=\"images/clarin.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+								     System.out.println(txt2);
 									 flag=false;
 								 
 				      }
@@ -305,19 +306,21 @@ public static String getWPTitles()  {
 									 int intIndex3 = txt.indexOf("</h2>");
 									 int beg=intIndex2+6;
 							    	 int end=intIndex3; 
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("í©", "é");
-									 txt3 = txt3.replaceAll("íº", "ú");									 
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt2= txt2 + "*****" + "https://www.milenio.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.milenio.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.milenio.com/\"><img id=\"milenio\" src=\"images/milenio.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("í©", "é");
+										 txt3 = txt3.replaceAll("íº", "ú");									 
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt2= txt2 + "*****" + "https://www.milenio.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.milenio.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.milenio.com/\"><img id=\"milenio\" src=\"images/milenio.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
 									 System.out.println(txt2);
 									 flag=false;
 								 }		
@@ -337,22 +340,25 @@ public static String getWPTitles()  {
 									 int intIndex3 = txt22.indexOf("</a><div");
 									 int beg=intIndex2+6;
 							    	 int end=intIndex3; 
-							    	 String txt3= txt22.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€˜", "'");	
-									 txt3 = txt3.replaceAll("Â", "");
-									 txt3 = txt3.replaceAll("â€™", "'"); 	
-									 txt3 = txt3.replaceAll("í³", "ó"); 										 
-									 txt2= txt2 + "*****" + "https://www.elcomercio.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.elcomercio.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.elcomercio.com/\"><img id=\"elcomercio\" src=\"images/elcomercio.png\" style=\"width:90px;height:18px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt22.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 
+										 txt3 = txt3.replaceAll("í©;", "é");  
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€˜", "'");	
+										 txt3 = txt3.replaceAll("Â", "");
+										 txt3 = txt3.replaceAll("â€™", "'"); 	
+										 txt3 = txt3.replaceAll("í³", "ó"); 										 
+										 txt2= txt2 + "*****" + "https://www.elcomercio.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.elcomercio.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.elcomercio.com/\"><img id=\"elcomercio\" src=\"images/elcomercio.png\" style=\"width:90px;height:18px;\"></img></a>";
+										 System.out.println(txt2);
+							    	 }
 									 flag=false;
 								 }		
 				      }
@@ -410,25 +416,27 @@ public static String getWPTitles()  {
 										 intIndex3 = txt.indexOf("</a>");
 										 end=intIndex3; 
 									 }
-									 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 	
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 
-									 txt3 = txt3.replaceAll("íº", "ú"); 
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€œ", "''");
-									 txt3 = txt3.replaceAll("â€�", "''");
-									 txt3 = txt3.replaceAll("í©", "é");		
-									 txt3 = txt3.replaceAll("í³", "ó");	
-									 txt3 = txt3.replaceAll("â€˜", "ó");	
-									 txt3 = txt3.replaceAll("â€™", "ó");	
-
-									 txt2= txt2 + "*****" + "https://www.lavanguardia.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.lavanguardia.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.lavanguardia.com/\"><img id=\"lavanguardia\" src=\"images/lavan.png\" style=\"width:90px;height:18px;\"></img></a>";
+									 if(end!=-1) {
+										 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 	
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 
+										 txt3 = txt3.replaceAll("íº", "ú"); 
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€œ", "''");
+										 txt3 = txt3.replaceAll("â€�", "''");
+										 txt3 = txt3.replaceAll("í©", "é");		
+										 txt3 = txt3.replaceAll("í³", "ó");	
+										 txt3 = txt3.replaceAll("â€˜", "ó");	
+										 txt3 = txt3.replaceAll("â€™", "ó");	
+	
+										 txt2= txt2 + "*****" + "https://www.lavanguardia.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.lavanguardia.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.lavanguardia.com/\"><img id=\"lavanguardia\" src=\"images/lavan.png\" style=\"width:90px;height:18px;\"></img></a>";
+									 }
 									 //System.out.println(txt2);
 									 flag=false;
 								 }			 
@@ -448,19 +456,21 @@ public static String getWPTitles()  {
 									 int intIndex3 = txt.indexOf("\">");
 									 int beg=intIndex2+7;
 							    	 int end=intIndex3; 
-							    	 String txt3= txt.substring(beg,end);
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("&aacute;", "á");
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&iacute;", "í"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("&#039;", "'");									 
-									 txt2= txt2 + "*****" + "https://www.eldiario.es/" + "*****" + txt3 + "*****" + "<a href=\"https://www.eldiario.es/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.eldiario.es/\"><img id=\"eldiario\" src=\"images/eldiario.png\" style=\"width:90px;height:18px;\"></img></a>";
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("&aacute;", "á");
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&iacute;", "í"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("&#039;", "'");									 
+										 txt2= txt2 + "*****" + "https://www.eldiario.es/" + "*****" + txt3 + "*****" + "<a href=\"https://www.eldiario.es/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.eldiario.es/\"><img id=\"eldiario\" src=\"images/eldiario.png\" style=\"width:90px;height:18px;\"></img></a>";
+							    	 }
 									 System.out.println(txt2);
 									 //return txt2;
 									 flag=false;
@@ -481,19 +491,21 @@ public static String getWPTitles()  {
 									 int intIndex3 = txt.indexOf("\">");
 									 int beg=intIndex2+7;
 							    	 int end=intIndex3; 
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("í³", "ó"); 	
-									 txt3 = txt3.replaceAll("íº", "ú"); 	
-									 txt3 = txt3.replaceAll("í©", "é"); 	
-									 txt3 = txt3.replaceAll("â‚¬", "€");									 
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");					                        	
-									 txt2= txt2 + "*****" + "https://www.elperiodico.com/es/" + "*****" + txt3 + "*****" + "<a href=\"https://www.elperiodico.com/es/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.elperiodico.com/es/\"><img id=\"periodico\" src=\"images/periodico.png\" style=\"width:90px;height:18px;\"></img></a>";
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("í³", "ó"); 	
+										 txt3 = txt3.replaceAll("íº", "ú"); 	
+										 txt3 = txt3.replaceAll("í©", "é"); 	
+										 txt3 = txt3.replaceAll("â‚¬", "€");									 
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");					                        	
+										 txt2= txt2 + "*****" + "https://www.elperiodico.com/es/" + "*****" + txt3 + "*****" + "<a href=\"https://www.elperiodico.com/es/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.elperiodico.com/es/\"><img id=\"periodico\" src=\"images/periodico.png\" style=\"width:90px;height:18px;\"></img></a>";
+							    	 }
 									 System.out.println(txt2);
 									 flag=false;
 									 return txt2;
@@ -501,7 +513,7 @@ public static String getWPTitles()  {
 				    	  }
 				      }
 				}				
-			return txt2;	
+		    return txt2;	
 				 
 			}catch(MalformedURLException ioe) {
 				System.out.println(ioe);
@@ -531,20 +543,22 @@ public static String getWPTitles()  {
 								 if(intIndex2>0){
 									 int beg=intIndex+47;
 							    	 int end=intIndex2; 
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€˜", "'");
-									 txt3 = txt3.replaceAll("â€™", "'");                            
-									 txt2= "https://www.thesun.co.uk/" + "*****" + txt3 + "*****" + "<a href=\"https://www.thesun.co.uk/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.thesun.co.uk/\"><img id=\"thesun\" src=\"images/thesun.png\" style=\"width:75px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€˜", "'");
+										 txt3 = txt3.replaceAll("â€™", "'");                            
+										 txt2= "https://www.thesun.co.uk/" + "*****" + txt3 + "*****" + "<a href=\"https://www.thesun.co.uk/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.thesun.co.uk/\"><img id=\"thesun\" src=\"images/thesun.png\" style=\"width:75px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 									 //return txt2;
 								 }		
@@ -563,19 +577,21 @@ public static String getWPTitles()  {
 								 if(intIndex2>0){
 									 int beg=intIndex+1;
 							    	 int end=intIndex2; 
-							    	 String txt3= txtt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€™", "\'");                                         
-									 txt2= txt2 + "*****" + "https://www.wsj.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.wsj.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.wsj.com/\"><img id=\"wsj\" src=\"images/wsj.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txtt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€™", "\'");                                         
+										 txt2= txt2 + "*****" + "https://www.wsj.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.wsj.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.wsj.com/\"><img id=\"wsj\" src=\"images/wsj.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 									 //return txt2;
 								 }		
@@ -592,20 +608,22 @@ public static String getWPTitles()  {
 								 if(intIndex2>0){
 									 int beg=intIndex+16;
 							    	 int end=intIndex2; 
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("â€˜", "'"); 
-									 txt3 = txt3.replaceAll("â€™", "'"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");                                         
-									 txt2= txt2 + "*****" + "https://www.nytimes.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.nytimes.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.nytimes.com/\"><img id=\"nyt\" src=\"images/nyt.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("â€˜", "'"); 
+										 txt3 = txt3.replaceAll("â€™", "'"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");                                         
+										 txt2= txt2 + "*****" + "https://www.nytimes.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.nytimes.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.nytimes.com/\"><img id=\"nyt\" src=\"images/nyt.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 									 //return txt2;
 								 }		
@@ -626,18 +644,20 @@ public static String getWPTitles()  {
 									 if(intIndex2>0){
 										 int beg=intIndex3+6;
 								    	 int end=intIndex2; 
-								    	 String txt3= txt.substring(beg,end);
-								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-										 txt3 = txt3.replaceAll("Ã±", "ñ");
-										 txt3 = txt3.replaceAll("Ã", "í"); 
-										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-										 txt3 = txt3.replaceAll("&quot;", "''");												
-										 txt2= txt2 + "*****" + "http://global.chinadaily.com.cn/" + "*****" + txt3 + "*****" + "<a href=\"http://global.chinadaily.com.cn/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://global.chinadaily.com.cn/\"><img id=\"chinad\" src=\"images/chinad.png\" style=\"width:90px;height:20px;\"></img></a>";
-										 System.out.println(txt2);
+								    	 if(end!=-1) {
+									    	 String txt3= txt.substring(beg,end);
+									    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+											 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+											 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+											 txt3 = txt3.replaceAll("Ã±", "ñ");
+											 txt3 = txt3.replaceAll("Ã", "í"); 
+											 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+											 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+											 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+											 txt3 = txt3.replaceAll("&quot;", "''");												
+											 txt2= txt2 + "*****" + "http://global.chinadaily.com.cn/" + "*****" + txt3 + "*****" + "<a href=\"http://global.chinadaily.com.cn/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://global.chinadaily.com.cn/\"><img id=\"chinad\" src=\"images/chinad.png\" style=\"width:90px;height:20px;\"></img></a>";
+								    	 }
+								    	 System.out.println(txt2);
 										 flag=false;
 										 //return txt2;
 									 }
@@ -655,18 +675,20 @@ public static String getWPTitles()  {
 						 if(intIndex2>0){
 							 int beg=intIndex+11;
 						   	 int end=intIndex2; 
-						   	 String txt3= txt.substring(beg,end);
-						   	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-							 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-							 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-							 txt3 = txt3.replaceAll("Ã±", "ñ");
-							 txt3 = txt3.replaceAll("Ã", "í"); 
-							 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-							 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-							 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-							 txt3 = txt3.replaceAll("&quot;", "''");													
-							 txt2= txt2 + "*****" + "https://timesofindia.indiatimes.com" + "*****" + txt3 + "*****" + "<a href=\"https://timesofindia.indiatimes.com\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://timesofindia.indiatimes.com\"><img id=\"thimesI\" src=\"images/thimesI.png\" style=\"width:90px;height:20px;\"></img></a>";
-							 System.out.println(txt2);
+						   	if(end!=-1) {
+							   	 String txt3= txt.substring(beg,end);
+							   	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+								 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+								 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+								 txt3 = txt3.replaceAll("Ã±", "ñ");
+								 txt3 = txt3.replaceAll("Ã", "í"); 
+								 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+								 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+								 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+								 txt3 = txt3.replaceAll("&quot;", "''");													
+								 txt2= txt2 + "*****" + "https://timesofindia.indiatimes.com" + "*****" + txt3 + "*****" + "<a href=\"https://timesofindia.indiatimes.com\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://timesofindia.indiatimes.com\"><img id=\"thimesI\" src=\"images/thimesI.png\" style=\"width:90px;height:20px;\"></img></a>";
+						   	}
+						   	System.out.println(txt2);
 							 flag=false;
 							 //return txt2;
 						 }	
@@ -686,19 +708,21 @@ public static String getWPTitles()  {
 									 int beg=intIndex+24;
 							    	 int end=intIndex2; 
 							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("â€˜", "''");
-									 txt3 = txt3.replaceAll(" â€™", "''");								 
-									 
-									 txt3 = txt3.replaceAll("&quot;", "''");                                    
-									 txt2= txt2 + "*****" + "https://www.ft.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.ft.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.ft.com/\"><img id=\"finti\" src=\"images/finti.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("â€˜", "''");
+										 txt3 = txt3.replaceAll(" â€™", "''");								 
+										 
+										 txt3 = txt3.replaceAll("&quot;", "''");                                    
+										 txt2= txt2 + "*****" + "https://www.ft.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.ft.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.ft.com/\"><img id=\"finti\" src=\"images/finti.png\" style=\"width:90px;height:20px;\"></img></a>";
+										 System.out.println(txt2);
+							    	 }
 									 flag=false;
 									 //return txt2;
 								 }		
@@ -714,20 +738,22 @@ public static String getWPTitles()  {
 								 if(intIndex2>0){
 									 int beg=intIndex+15;
 							    	 int end=intIndex2; 
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€˜", "'");
-									 txt3 = txt3.replaceAll("â€™", "'");                                              
-									 txt2= txt2 + "*****" + "http://www.asahi.com/ajw//" + "*****" + txt3 + "*****" + "<a href=\"http://www.asahi.com/ajw/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://www.asahi.com/ajw/\"><img id=\"asahi\" src=\"images/asahi.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€˜", "'");
+										 txt3 = txt3.replaceAll("â€™", "'");                                              
+										 txt2= txt2 + "*****" + "http://www.asahi.com/ajw//" + "*****" + txt3 + "*****" + "<a href=\"http://www.asahi.com/ajw/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://www.asahi.com/ajw/\"><img id=\"asahi\" src=\"images/asahi.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 								 }		
 				      }
@@ -741,22 +767,24 @@ public static String getWPTitles()  {
 				    	  intIndex = txt.indexOf("'>", txt.indexOf("'>") + 1);
 							 int beg=intIndex+2;
 						   	 int end=txt.length(); 
-						   	 String txt3= txt.substring(beg,end);
-						   	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-							 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-							 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-							 txt3 = txt3.replaceAll("Ã±", "ñ");
-							 txt3 = txt3.replaceAll("Ã", "í"); 
-							 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-							 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-							 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-							 txt3 = txt3.replaceAll("&quot;", "''");
-							 txt3 = txt3.replaceAll("â€˜", "'");
-							 txt3 = txt3.replaceAll("â€™", "'");
-							 txt3 = txt3.replaceAll("Â", ""); 											
-							 txt2= txt2 + "*****" + "https://www.dawn.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.dawn.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.dawn.com/\"><img id=\"dawn\" src=\"images/dawn.png\" style=\"width:90px;height:20px;\"></img></a>";
-							 System.out.println(txt2);
-							 flag=false;
+						   	if(end!=-1) {
+							   	 String txt3= txt.substring(beg,end);
+							   	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+								 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+								 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+								 txt3 = txt3.replaceAll("Ã±", "ñ");
+								 txt3 = txt3.replaceAll("Ã", "í"); 
+								 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+								 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+								 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+								 txt3 = txt3.replaceAll("&quot;", "''");
+								 txt3 = txt3.replaceAll("â€˜", "'");
+								 txt3 = txt3.replaceAll("â€™", "'");
+								 txt3 = txt3.replaceAll("Â", ""); 											
+								 txt2= txt2 + "*****" + "https://www.dawn.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.dawn.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.dawn.com/\"><img id=\"dawn\" src=\"images/dawn.png\" style=\"width:90px;height:20px;\"></img></a>"; 
+						   	}
+						   	System.out.println(txt2);
+							flag=false;
 							 return txt2;
 				      }
 				}
@@ -904,28 +932,30 @@ public static String getWPTitlesFrench()  {
 								 if(intIndex2>0){
 									 int beg=intIndex+4;
 							    	 int end=intIndex2;
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("&#39;", "'");									 
-									 txt3 = txt3.replaceAll("í¨", "è");
-									 txt3 = txt3.replaceAll("í§", "ç");									 
-									 txt3 = txt3.replaceAll("í©", "é");
-									 txt3 = txt3.replaceAll("â€˜", "'");
-									 txt3 = txt3.replaceAll("â€™", "'");
-									 txt3 = txt3.replaceAll("í©", "ê");
-									 txt3 = txt3.replaceAll("í´", "ô");
-									 txt3 = txt3.replaceAll("Â´", "");     
-									 txt3 = txt3.replaceAll("Â", ""); 
-									 txt2= "https://www.liberation.fr/" + "*****" + txt3 + "*****" + "<a href=\"https://www.liberation.fr/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.liberation.fr/\"><img id=\"liberation\" src=\"images/liberation.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("&#39;", "'");									 
+										 txt3 = txt3.replaceAll("í¨", "è");
+										 txt3 = txt3.replaceAll("í§", "ç");									 
+										 txt3 = txt3.replaceAll("í©", "é");
+										 txt3 = txt3.replaceAll("â€˜", "'");
+										 txt3 = txt3.replaceAll("â€™", "'");
+										 txt3 = txt3.replaceAll("í©", "ê");
+										 txt3 = txt3.replaceAll("í´", "ô");
+										 txt3 = txt3.replaceAll("Â´", "");     
+										 txt3 = txt3.replaceAll("Â", ""); 
+										 txt2= "https://www.liberation.fr/" + "*****" + txt3 + "*****" + "<a href=\"https://www.liberation.fr/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.liberation.fr/\"><img id=\"liberation\" src=\"images/liberation.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 									 //return txt2;
 								 }		
@@ -942,27 +972,30 @@ public static String getWPTitlesFrench()  {
 								 if(intIndex2>0){
 									 int beg=intIndex+4;
 							    	 int end=intIndex2;
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("&#039;", "'");									 
-									 txt3 = txt3.replaceAll("í¨", "è");
-									 txt3 = txt3.replaceAll("í©", "é");
-									 txt3 = txt3.replaceAll("â€˜", "'");
-									 txt3 = txt3.replaceAll("â€™", "'");
-									 txt3 = txt3.replaceAll("í´", "ô");
-									 txt3 = txt3.replaceAll("íª", "ê");									 
-									 txt3 = txt3.replaceAll("í‰", "E");
-									 txt3 = txt3.replaceAll("â€", "...");                                              
-									 txt2= txt2 + "*****" + "http://www.francesoir.fr/" + "*****" + txt3 + "*****" +  "<a href=\"http://www.francesoir.fr/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://www.francesoir.fr/\"><img id=\"francese\" src=\"images/francese.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("&#039;", "'");									 
+										 txt3 = txt3.replaceAll("í¨", "è");
+										 txt3 = txt3.replaceAll("í©", "é");
+										 txt3 = txt3.replaceAll("â€˜", "'");
+										 txt3 = txt3.replaceAll("â€™", "'");
+										 txt3 = txt3.replaceAll("í´", "ô");
+										 txt3 = txt3.replaceAll("íª", "ê");									 
+										 txt3 = txt3.replaceAll("í‰", "E");
+										 txt3 = txt3.replaceAll("â€", "...");                                              
+										 txt2= txt2 + "*****" + "http://www.francesoir.fr/" + "*****" + txt3 + "*****" +  "<a href=\"http://www.francesoir.fr/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://www.francesoir.fr/\"><img id=\"francese\" src=\"images/francese.png\" style=\"width:90px;height:20px;\"></img></a>";
+										 
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 									 //return txt2;
 								 }		
@@ -983,25 +1016,27 @@ public static String getWPTitlesFrench()  {
 									 int intIndex3 = txt.indexOf(tx);
 									 int beg=intIndex3+2;
 							    	 int end=txt.length();
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€˜", "'");
-									 txt3 = txt3.replaceAll("â€™", "'");
-									 txt3 = txt3.replaceAll("í©", "é");
-									 txt3 = txt3.replaceAll("í¨", "è");
-									 txt3 = txt3.replaceAll("í´", "ô");     
-									 txt3 = txt3.replaceAll("í´", "ï"); 
-									 txt3 = txt3.replaceAll("Â´", ""); 	 
-									 txt2= txt2 + "*****" + "http://aujourdhui.ma/" + "*****" + txt3 + "*****" + "<a href=\"http://aujourdhui.ma/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://aujourdhui.ma/\"><img id=\"auj\" src=\"images/auj.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€˜", "'");
+										 txt3 = txt3.replaceAll("â€™", "'");
+										 txt3 = txt3.replaceAll("í©", "é");
+										 txt3 = txt3.replaceAll("í¨", "è");
+										 txt3 = txt3.replaceAll("í´", "ô");     
+										 txt3 = txt3.replaceAll("í´", "ï"); 
+										 txt3 = txt3.replaceAll("Â´", ""); 	 
+										 txt2= txt2 + "*****" + "http://aujourdhui.ma/" + "*****" + txt3 + "*****" + "<a href=\"http://aujourdhui.ma/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://aujourdhui.ma/\"><img id=\"auj\" src=\"images/auj.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;								
 								 }		
 				      }
@@ -1017,25 +1052,27 @@ public static String getWPTitlesFrench()  {
 								 if(intIndex2>0){
 									 int beg=intIndex+4;
 							    	 int end=intIndex2;
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€˜", "'");
-									 txt3 = txt3.replaceAll("â€™", "'");
-									 txt3 = txt3.replaceAll("í©", "é");
-									 txt3 = txt3.replaceAll("í¨", "è");
-									 txt3 = txt3.replaceAll("í´", "ô");
-									 txt3 = txt3.replaceAll("â€œ", "''");	
-									 txt3 = txt3.replaceAll("íª", "ê");                                                   
-									 txt2= txt2 + "*****" + "http://www.liberte-algerie.com/" + "*****" + txt3 + "*****" + "<a href=\"http://www.liberte-algerie.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://www.liberte-algerie.com/\"><img id=\"liberte\" src=\"images/liberte.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€˜", "'");
+										 txt3 = txt3.replaceAll("â€™", "'");
+										 txt3 = txt3.replaceAll("í©", "é");
+										 txt3 = txt3.replaceAll("í¨", "è");
+										 txt3 = txt3.replaceAll("í´", "ô");
+										 txt3 = txt3.replaceAll("â€œ", "''");	
+										 txt3 = txt3.replaceAll("íª", "ê");                                                   
+										 txt2= txt2 + "*****" + "http://www.liberte-algerie.com/" + "*****" + txt3 + "*****" + "<a href=\"http://www.liberte-algerie.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"http://www.liberte-algerie.com/\"><img id=\"liberte\" src=\"images/liberte.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 									 //return txt2;
 								 }		
@@ -1060,26 +1097,28 @@ public static String getWPTitlesFrench()  {
 									 if(intIndex2>0){
 										 int beg=intIndex+4;
 								    	 int end=intIndex2;
-								    	 String txt3= txt.substring(beg,end);
-								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-										 txt3 = txt3.replaceAll("Ã±", "ñ");
-										 txt3 = txt3.replaceAll("Ã", "í"); 
-										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-										 txt3 = txt3.replaceAll("&quot;", "''");
-										 txt3 = txt3.replaceAll("â€˜", "'");
-										 txt3 = txt3.replaceAll("â€™", "'");
-										 txt3 = txt3.replaceAll("í©", "é");
-										 txt3 = txt3.replaceAll("í¨", "è");
-										 txt3 = txt3.replaceAll("í´", "ô");
-										 txt3 = txt3.replaceAll("â€œ", "''");	
-										 txt3 = txt3.replaceAll("íª", "ê"); 
-										 txt3 = txt3.replaceAll("í¯", "ï"); 									 
-										 txt2= txt2 + "*****" + "https://www.ledevoir.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.ledevoir.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.ledevoir.com/\"><img id=\"ledev\" src=\"images/ledev.png\" style=\"width:90px;height:20px;\"></img></a>";
-										 System.out.println(txt2);
+								    	 if(end!=-1) {
+									    	 String txt3= txt.substring(beg,end);
+									    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+											 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+											 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+											 txt3 = txt3.replaceAll("Ã±", "ñ");
+											 txt3 = txt3.replaceAll("Ã", "í"); 
+											 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+											 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+											 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+											 txt3 = txt3.replaceAll("&quot;", "''");
+											 txt3 = txt3.replaceAll("â€˜", "'");
+											 txt3 = txt3.replaceAll("â€™", "'");
+											 txt3 = txt3.replaceAll("í©", "é");
+											 txt3 = txt3.replaceAll("í¨", "è");
+											 txt3 = txt3.replaceAll("í´", "ô");
+											 txt3 = txt3.replaceAll("â€œ", "''");	
+											 txt3 = txt3.replaceAll("íª", "ê"); 
+											 txt3 = txt3.replaceAll("í¯", "ï"); 									 
+											 txt2= txt2 + "*****" + "https://www.ledevoir.com/" + "*****" + txt3 + "*****" + "<a href=\"https://www.ledevoir.com/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.ledevoir.com/\"><img id=\"ledev\" src=\"images/ledev.png\" style=\"width:90px;height:20px;\"></img></a>";
+								    	 }
+								    	 System.out.println(txt2);
 										 flag=false;
 										//return txt2;
 									 }
@@ -1100,27 +1139,29 @@ public static String getWPTitlesFrench()  {
 								 if(intIndex2>0){ 
 									 int beg=intIndex+2;
 							    	 int end=intIndex2;
-							    	 String txt3= txt.substring(beg,end);
-							    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
-									 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
-									 txt3 = txt3.replaceAll("&eacute;", "é"); 	
-									 txt3 = txt3.replaceAll("Ã±", "ñ");
-									 txt3 = txt3.replaceAll("Ã", "í"); 
-									 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
-									 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
-									 txt3 = txt3.replaceAll("&ntilde;", "ñ");
-									 txt3 = txt3.replaceAll("&quot;", "''");
-									 txt3 = txt3.replaceAll("â€˜", "'");
-									 txt3 = txt3.replaceAll("â€™", "'");
-									 txt3 = txt3.replaceAll("í©", "é");
-									 txt3 = txt3.replaceAll("í¨", "è");
-									 txt3 = txt3.replaceAll("í´", "ô");
-									 txt3 = txt3.replaceAll("â€œ", "''");	
-									 txt3 = txt3.replaceAll("íª", "ê"); 
-									 txt3 = txt3.replaceAll("í¯", "ï"); 	
-									 txt3 = txt3.replaceAll("aí®", "î");  
-									 txt2= txt2 + "*****" + "https://www.lecourrier.vn/" + "*****" + txt3 + "*****" + "<a href=\"https://www.lecourrier.vn/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.lecourrier.vn/\"><img id=\"lecou\" src=\"images/lecou.png\" style=\"width:90px;height:20px;\"></img></a>";
-									 System.out.println(txt2);
+							    	 if(end!=-1) {
+								    	 String txt3= txt.substring(beg,end);
+								    	 txt3 = txt3.replaceAll("Ã¡", "á"); 	
+										 txt3 = txt3.replaceAll("&Aacute;", "Á"); 	
+										 txt3 = txt3.replaceAll("&eacute;", "é"); 	
+										 txt3 = txt3.replaceAll("Ã±", "ñ");
+										 txt3 = txt3.replaceAll("Ã", "í"); 
+										 txt3 = txt3.replaceAll("&oacute;", "ó"); 	
+										 txt3 = txt3.replaceAll("&uacute;", "ú"); 	
+										 txt3 = txt3.replaceAll("&ntilde;", "ñ");
+										 txt3 = txt3.replaceAll("&quot;", "''");
+										 txt3 = txt3.replaceAll("â€˜", "'");
+										 txt3 = txt3.replaceAll("â€™", "'");
+										 txt3 = txt3.replaceAll("í©", "é");
+										 txt3 = txt3.replaceAll("í¨", "è");
+										 txt3 = txt3.replaceAll("í´", "ô");
+										 txt3 = txt3.replaceAll("â€œ", "''");	
+										 txt3 = txt3.replaceAll("íª", "ê"); 
+										 txt3 = txt3.replaceAll("í¯", "ï"); 	
+										 txt3 = txt3.replaceAll("aí®", "î");  
+										 txt2= txt2 + "*****" + "https://www.lecourrier.vn/" + "*****" + txt3 + "*****" + "<a href=\"https://www.lecourrier.vn/\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"https://www.lecourrier.vn/\"><img id=\"lecou\" src=\"images/lecou.png\" style=\"width:90px;height:20px;\"></img></a>";
+							    	 }
+							    	 System.out.println(txt2);
 									 flag=false;
 									// return txt2;
 								 }		

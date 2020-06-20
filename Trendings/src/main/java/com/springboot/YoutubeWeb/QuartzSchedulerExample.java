@@ -1,13 +1,9 @@
 package com.springboot.YoutubeWeb;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.Calendar;
-import java.util.Date;
-
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.CronScheduleBuilder;
-import org.quartz.DateBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -66,8 +62,6 @@ public class QuartzSchedulerExample implements ILatch {
 	        .startNow()
 	        .withSchedule(CronScheduleBuilder.cronSchedule("0 0 23 * * ?"))     
 	        .build();
-	        
-	         
 	         
 	        // Tell quartz to schedule the job using our trigger
 	        scheduler.scheduleJob(jobDetail, trigger);

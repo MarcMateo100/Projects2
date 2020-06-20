@@ -159,37 +159,29 @@
 <body onload='myInit()'>
 
 <div class="topnav" id="myTopnav">
-  <a href="/" class="active">Home</a>
-  <div class="dropdown">
-    <button class="dropbtn">Youtube
+  <a id="dropId" href="/" class="active">Home</a>
+  <div class="dropdown" >
+    <button class="dropbtn" id="dropId1">Youtube
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content">
-      <a href="/2019">2019 - Most Viewed Trailers</a>
-   	  <a href="/2018">2018 - Most Viewed Trailers</a>
-   	  <a href="/2017">2017 - Most Viewed Trailers</a>
-   	  <a href="/alltimes">Most Viewed Trailers</a>
-   	  <a href="/music">2019 - Most Viewed Music</a>
-   	  <a href="/music2018">2018 - Most Viewed Music</a>
-   	  <a href="/music2017">2017 - Most Viewed Music</a>
-   	  <a href="/alltimesmusic">Most Viewed Music</a>
-      <a href="/storyofrock">History of Rock</a>
+    <div class="dropdown-content" id="dropCId">
+      <a id="dropId2" href="/2019">2019 - Most Viewed Trailers</a>
+   	  <a id="dropId3" href="/2018">2018 - Most Viewed Trailers</a>
+   	  <a id="dropId4" href="/2017">2017 - Most Viewed Trailers</a>
+   	  <a id="dropId5" href="/alltimes">Most Viewed Trailers</a>
+   	  <a id="dropId6" href="/music">2019 - Most Viewed Music</a>
+   	  <a id="dropId7" href="/music2018">2018 - Most Viewed Music</a>
+   	  <a id="dropId8" href="/music2017">2017 - Most Viewed Music</a>
+   	  <a id="dropId9" href="/alltimesmusic">Most Viewed Music</a>
+      <a id="dropId10" href="/storyofrock">History of Rock</a>
     </div>
   </div> 
   <div class="dropdown">
-    <button class="dropbtn">Google 
+    <button class="dropbtn" id="dropId1T">Twitter 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="googleTrends">Google - Trends</a>
-    </div>
-  </div> 
-  <div class="dropdown">
-    <button class="dropbtn">Twitter 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="/twitter">Twitter - Most Retweets</a>
+      <a id="dropId2T" href="/twitter2">Twitter - Most Followers</a>
     </div>
   </div> 
   <div align=right>
@@ -369,6 +361,31 @@ Click the band's name in the below picture to select the most popular song of th
 <script type="text/javascript">
 
 $(document).ready(function() {	
+	
+	
+	var windowWidth = $(window).width();
+	//window.alert(windowWidth);
+	if(windowWidth<=1000){
+		
+		document.getElementById("myTopnav").style.height = "80px";
+		document.getElementById("dropCId").style.minWidth = "560px";
+		document.getElementById("dropId").style.fontSize = "45px";
+		document.getElementById("dropId1").style.fontSize = "45px";
+		document.getElementById("dropId2").style.fontSize = "38px";
+		document.getElementById("dropId3").style.fontSize = "38px";
+		document.getElementById("dropId4").style.fontSize = "38px";
+		document.getElementById("dropId5").style.fontSize = "38px";
+		document.getElementById("dropId6").style.fontSize = "38px";
+		document.getElementById("dropId7").style.fontSize = "38px";
+		document.getElementById("dropId8").style.fontSize = "38px";
+		document.getElementById("dropId9").style.fontSize = "38px";
+		document.getElementById("dropId10").style.fontSize = "38px";
+		document.getElementById("virus").style.width = "80px";
+		document.getElementById("virus").style.height = "80px";
+		document.getElementById("dropId1T").style.fontSize = "45px";
+		document.getElementById("dropId2T").style.fontSize = "38px";
+	}
+	
    document.getElementById("frame").innerHTML = "<iframe id='frame' width='260' height='170' src='https://www.youtube.com/embed/gj0Rz-uP4Mk'></iframe>"; 
 });
 

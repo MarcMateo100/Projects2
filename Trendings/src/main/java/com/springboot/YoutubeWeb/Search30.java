@@ -30,10 +30,8 @@ import com.google.api.services.youtube.model.Thumbnail;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoListResponse;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
@@ -201,24 +199,7 @@ public class Search30 {
     
   }
 
-  /*
-   * Returns a query term (String) from user via the terminal.
-   */
-  private static String getInputQuery() throws IOException {
-
-    String inputQuery = "";
-
-    System.out.print("Please enter a search term: ");
-    BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
-    inputQuery = bReader.readLine();
-
-    if (inputQuery.length() < 1) {
-      // If nothing is entered, defaults to "YouTube Developers Live."
-      inputQuery = "YouTube Developers Live";
-    }
-    return inputQuery;
-  }
-
+  
   /*
    * Prints out all SearchResults in the Iterator. Each printed line includes title, id, and
    * thumbnail.

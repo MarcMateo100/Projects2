@@ -450,5 +450,15 @@ public String mostViewedTitlesFrench() {
 
 	return WPgetSourceCode.getWPTitlesFrench();		
 }
+
+public String getTwitterTrends2() {
+
+	return TwitterRetweets.getTwitterAccount();		
+}
+
+public String getTwitterTrends3() {
+
+	return TwitterRetweets.getTwitterAccount();		
+}
   
 }
